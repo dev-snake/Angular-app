@@ -1,0 +1,45 @@
+<app-banner></app-banner>
+<section class="max-w-[1300px] mx-auto mt-6">
+  <p class="font-semibold uppercase text-center text-2xl">sản phẩm nổi bật</p>
+  <div class="grid grid-cols-layout-home gap-4 mt-4 max-sm:p-4">
+    @for (item of products; track $index) {
+    <div class="w-full bg-white rounded-2xl p-2">
+      <div class="relative">
+        @if(item.sale > 0){
+        <span
+          class="bg-[#FE3A30] text-white px-4 py-1 z-10 absolute tracking-[1.5px] rounded-2xl top-3"
+          >Sale</span
+        >
+        }
+        <img
+          [src]="item.image"
+          alt="ảnh lỗi"
+          class="h-[250px] mx-auto hover:scale-90 transition-all"
+        />
+        <a [routerLink]="['/products', item._id]">
+          <p class="font-medium text-[1rem]">
+            Tên sản phẩm : {{ item.name }}
+          </p></a
+        >
+        <p class="font-medium text-[1rem]">
+          Giá :
+          <span class="text-red-500 font-semibold"> {{ item.price }} VNĐ</span>
+        </p>
+        <button
+          class="text-white bg-[#2e86f1] w-full p-2 rounded-xl font-medium mt-2"
+          (click)="addToCart(item)"
+        >
+          Thêm vào giỏ hàng
+        </button>
+      </div>
+    </div>
+    }
+  </div>
+  <div class="w-full flex justify-center mt-8 mb-8">
+    <a
+      [routerLink]="['/products']"
+      class="px-4 py-2 font-semibold border-2 border-slate-300 rounded-xl outline outline-2 outline-offset-2 hover:outline-sky-500 transition-all outline-none"
+      >Xem tất cả sản phẩm</a
+    >
+  </div>
+</section>

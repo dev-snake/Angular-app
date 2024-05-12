@@ -1,0 +1,58 @@
+<section class="max-w-[1300px] mx-auto mt-4">
+  <div class="w-full max-sm:p-4 sm:grid sm:grid-cols-cols2-1 sm:gap-4">
+    <table class="bg-white p-4 rounded-2xl">
+      <thead class="">
+        <tr class="grid grid-cols-5 p-4">
+          <th class="">Sản phẩm</th>
+          <th class="">Giá</th>
+          <th class="">Số lượng</th>
+          <th class="">Tạm tính</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (item of carts; track item._id) {
+        <tr
+          class="grid grid-cols-5 items-center content-center justify-items-center"
+        >
+          <td>
+            <img [src]="item.image" alt="" class="w-[120px] p-4" />
+          </td>
+          <td class="font-medium tracking-[1.6px]">{{ item.price }} đ</td>
+          <td>
+            <input
+              type="number"
+              class="w-[100px] rounded-2xl p-2 border-2 outline-none"
+              min="1"
+              [value]="item.quantity"
+            />
+          </td>
+          <td class="font-medium tracking-[1.6px]">
+            {{ item.quantity && item.price && item.quantity * item.price }} đ
+          </td>
+          <td>
+            <i
+              class="bx bx-trash text-[#FE3A30] text-xl cursor-pointer"
+              (click)="deleteItemCart(item._id)"
+            ></i>
+          </td>
+        </tr>
+        }
+      </tbody>
+    </table>
+    <div class="w-full max-sm:mt-4">
+      <div class="bg-white p-4 rounded-2xl w-full">
+        <p class="font-medium text-xl mt-2">Tạm Tính : {{ total }} đ</p>
+        <p class="text-xl mt-2 font-medium">
+          Tổng : <strong>{{ total }} đ</strong>
+        </p>
+        <button
+          class="mt-2 p-2 bg-[#2e86f1] w-full rounded-xl text-white text-[1rem]"
+          [routerLink]="['/payment']"
+        >
+          Thanh toán
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
