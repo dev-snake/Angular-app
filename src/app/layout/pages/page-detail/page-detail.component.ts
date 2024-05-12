@@ -13,6 +13,7 @@ import { CartService } from '../page-cart/cart.service';
 export class PageDetailComponent implements OnInit {
   urlImage = '../../assets/images/m1wden.png';
   product: Products | undefined;
+  message: string = 'Đã thêm vào giỏ hàng';
   constructor(
     private route: ActivatedRoute,
     private data: AppRootService,
@@ -29,6 +30,22 @@ export class PageDetailComponent implements OnInit {
   }
   addToCart(product: Products) {
     this.cartService.addToCart(product);
+    const messageDiv = document.createElement('div');
+    messageDiv.textContent = this.message;
+    messageDiv.style.position = 'fixed';
+    messageDiv.style.top = '4rem';
+    messageDiv.style.right = '4rem';
+    messageDiv.style.backgroundColor = '#18c964';
+    messageDiv.style.color = 'white';
+    messageDiv.style.padding = '10px';
+    messageDiv.style.borderRadius = '1rem';
+    messageDiv.style.transition = 'all 0.5s ease-in-out';
+    messageDiv.style.fontWeight = '500';
+    messageDiv.style.fontFamily = 'Quicksand, sans-serif';
+    document.body.appendChild(messageDiv);
+    setTimeout(() => {
+      messageDiv.remove();
+    }, 1000);
   }
 
   ngOnInit(): void {}

@@ -23,8 +23,9 @@
             <input
               type="number"
               class="w-[100px] rounded-2xl p-2 border-2 outline-none"
-              min="1"
               [value]="item.quantity"
+              #value
+              (change)="updateQuantity(item._id, value && value.value)"
             />
           </td>
           <td class="font-medium tracking-[1.6px]">
@@ -46,12 +47,22 @@
         <p class="text-xl mt-2 font-medium">
           Tổng : <strong>{{ total }} đ</strong>
         </p>
+        @if(carts.length <= 0){
         <button
-          class="mt-2 p-2 bg-[#2e86f1] w-full rounded-xl text-white text-[1rem]"
+          [disabled]="carts.length <= 0"
+          class="mt-2 p-2 bg-[#2e86f1] w-full rounded-xl text-white text-[1rem] cursor-pointer"
           [routerLink]="['/payment']"
         >
           Thanh toán
         </button>
+        }@else {
+        <button
+          class="mt-2 p-2 bg-[#2e86f1] w-full rounded-xl text-white text-[1rem] cursor-pointer"
+          [routerLink]="['/payment']"
+        >
+          Thanh toán
+        </button>
+        }
       </div>
     </div>
   </div>

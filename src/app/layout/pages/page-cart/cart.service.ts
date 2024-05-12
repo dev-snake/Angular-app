@@ -34,4 +34,16 @@ export class CartService {
     this.saveCartToLocalStorage();
     return this.items;
   }
+  updateQuantity(_id: string, quantity: number) {
+    const existingItem = this.items.find((item) => item._id === _id);
+    if (existingItem) {
+      if (quantity <= 0) {
+        this.items = this.items.filter((item) => item._id !== _id);
+      } else {
+        existingItem.quantity = quantity;
+      }
+    }
+    this.saveCartToLocalStorage();
+    return this.items;
+  }
 }

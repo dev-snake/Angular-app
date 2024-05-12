@@ -33,4 +33,9 @@ export class PageCartComponent {
     this.loadCartFromLocalStorage();
     this.calculateTotal();
   }
+  updateQuantity(_id: string, quantity: any) {
+    this.cartService.updateQuantity(_id, Number(quantity));
+    this.loadCartFromLocalStorage();
+    this.calculateTotal();
+  }
 }
