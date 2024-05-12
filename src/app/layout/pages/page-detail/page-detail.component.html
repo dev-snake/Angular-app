@@ -1,0 +1,44 @@
+<section class="max-w-[1300px] mx-auto mt-4">
+  <div class="max-sm:p-4">
+    <div class="w-full bg-white p-4 rounded-2xl sm:flex sm:gap-20">
+      <div class="p-2">
+        <img
+          [src]="product?.image"
+          alt=""
+          class="w-full rounded-2x p-4 shadow-md rounded-2xl sm:max-h-[450px]"
+        />
+      </div>
+      <div class="mt-4 max-w-[600px]">
+        <div>
+          <h2 class="uppercase font-semibold text-2xl">{{ product?.name }}</h2>
+          <p class="mt-4 uppercase font-semibold">
+            Giá sản phẩm :
+            <strong class="text-[red] font-medium"
+              >{{ product?.price }} ₫</strong
+            >
+          </p>
+          <hr class="mt-4" />
+          <p class="font-semibold mt-4">{{ product?.title_description_1 }}</p>
+          <p class="font-semibold mt-4">{{ product?.title_description_2 }}</p>
+          <p class="mt-4">
+            {{ product?.description }}
+          </p>
+        </div>
+        <div class="mt-4">
+          <input
+            type="number"
+            class="transition-all rounded-xl p-3 shadow-md focus:outline-none focus:ring focus:ring-blue-400"
+            min="1"
+            value="1"
+          />
+          <button
+            class="bg-[#2e86f1] p-3 text-white rounded-xl ml-4 focus:ring"
+            (click)="product && addToCart(product)"
+          >
+            Thêm vào giỏ hàng
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

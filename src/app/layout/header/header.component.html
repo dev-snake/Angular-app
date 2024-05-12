@@ -1,0 +1,51 @@
+<header
+  class="flex max-w-[1300px] mx-auto justify-between p-4 items-center sticky top-0 bg-white rounded-xl mt-1 z-[100] shadow-md"
+>
+  <a routerLink="" class="font-semibold text-xl">hauDg</a>
+  <i
+    class="bx bx-menu block text-xl hover:cursor-pointer font-semibold sm:hidden"
+  ></i>
+  <ul class="hidden md:flex gap-2">
+    <li>
+      <a routerLink="" class="p-4 text-[1.1rem] font-semibold">Trang chủ</a>
+    </li>
+    <li>
+      <a routerLink="/products" class="p-4 text-[1.1rem] font-semibold"
+        >Sản phẩm
+      </a>
+    </li>
+    <li>
+      <a routerLink="/news" class="p-4 text-[1.1rem] font-semibold">Tin tức</a>
+    </li>
+  </ul>
+  <div>
+    <i
+      class="bx bx-search p-2 bg-[#eee] mr-2 rounded-xl font-medium hover:cursor-pointer"
+    ></i>
+    <a routerLink="cart">
+      <i
+        class="bx bx-cart-alt p-2 bg-[#eee] mr-2 rounded-xl font-medium hover:cursor-pointer"
+      ></i
+    ></a>
+    <i
+      class="bx bx-user p-2 bg-[#eee] rounded-xl font-medium hover:cursor-pointer"
+      (click)="toggle()"
+      #userBox
+    ></i>
+  </div>
+  <div
+    class="absolute right-0 bg-white top-20 transition-all p-4 rounded-md z-[100] hidden"
+    #showToast
+  >
+    <a
+      routerLink="login"
+      class="block px-2 py-1 mb-1 capitalize underline font-semibold tracking-[1.6px]"
+      >dang nhap</a
+    >
+    <a
+      routerLink="regsiter"
+      class="block px-2 py-1 capitalize underline font-semibold tracking-[1.6px]"
+      >dang ki</a
+    >
+  </div>
+</header>
