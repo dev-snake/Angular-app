@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { AppRootService } from '../../../app-root.service';
-import { Products } from '../../../products';
-import { Category } from '../../../products';
+import { Products } from '../../../interface';
+import { Category } from '../../../interface';
 import { RouterLink } from '@angular/router';
 import { CartService } from '../page-cart/cart.service';
 @Component({
@@ -12,8 +12,6 @@ import { CartService } from '../page-cart/cart.service';
   styleUrl: './page-product.component.css',
 })
 export class PageProductComponent {
-  urlBannerChild = '../../assets/images/banner.png';
-  urlBannerParent = '../../assets/images/keyboard1.png';
   data: Products[] = [];
   categrory: Category[] = [];
   message: string = 'Đã thêm vào giỏ hàng';
@@ -44,7 +42,7 @@ export class PageProductComponent {
     this.pageProductService
       .getProducts()
       .subscribe((data: any) => (this.data = data));
-    this.pageProductService.getCategory().subscribe((data: any) => {
+    this.pageProductService.getCategories().subscribe((data: any) => {
       this.categrory = data;
       console.log(data);
     });

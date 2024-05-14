@@ -6,8 +6,10 @@ import { PageCartComponent } from './layout/pages/page-cart/page-cart.component'
 import { PagePaymentComponent } from './layout/pages/page-payment/page-payment.component';
 import { LoginComponent } from './layout/pages/auth/login/login.component';
 import { RegsiterComponent } from './layout/pages/auth/regsiter/regsiter.component';
-// import { AuthGuard } from './core/guards/auth.guard';
 import { PageNotFoundComponent } from './layout/pages/page-not-found/page-not-found.component';
+import { PageProfileComponent } from './layout/pages/page-profile/page-profile.component';
+import { OrderHistoryComponent } from './layout/pages/page-profile/order-history/order-history.component';
+import { ChangePasswordComponent } from './layout/pages/page-profile/change-password/change-password.component';
 export const routes: Routes = [
   {
     path: '',
@@ -37,6 +39,10 @@ export const routes: Routes = [
   {
     path: 'regsiter',
     component: RegsiterComponent,
+  },
+  {
+    path: 'profile',
+    component: PageProfileComponent,
   },
   {
     path: '**',

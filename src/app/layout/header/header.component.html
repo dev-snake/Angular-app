@@ -1,7 +1,7 @@
 <header
   class="flex max-w-[1300px] mx-auto justify-between p-4 items-center sticky top-0 bg-white rounded-xl mt-1 z-[100] shadow-md"
 >
-  <a routerLink="" class="font-semibold text-xl">hauDg</a>
+  <a routerLink="" class="font-semibold text-xl">dev_snake</a>
   <i
     class="bx bx-menu block text-xl hover:cursor-pointer font-semibold sm:hidden"
   ></i>
@@ -37,15 +37,30 @@
     class="absolute right-0 bg-white top-20 transition-all p-4 rounded-md z-[100] hidden"
     #showToast
   >
+    @if(isLoggedIn()){
+    <a
+      routerLink=""
+      class="block px-2 py-1 mb-1 capitalize font-semibold tracking-[1.6px] text-[#ff0000]"
+      (click)="logout()"
+      >Đăng xuất</a
+    >
+    <a
+      routerLink="profile"
+      class="block px-2 py-1 capitalize font-semibold tracking-[1.6px]"
+      >Hồ sơ</a
+    >
+    }@else {
     <a
       routerLink="login"
-      class="block px-2 py-1 mb-1 capitalize underline font-semibold tracking-[1.6px]"
-      >dang nhap</a
+      class="block px-2 py-1 mb-1 capitalize font-semibold tracking-[1.6px]"
+      (click)="logout()"
+      >Đăng Nhập</a
     >
     <a
       routerLink="regsiter"
-      class="block px-2 py-1 capitalize underline font-semibold tracking-[1.6px]"
-      >dang ki</a
+      class="block px-2 py-1 capitalize font-semibold tracking-[1.6px]"
+      >Đăng kí</a
     >
+    }
   </div>
 </header>

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { from, Observable } from 'rxjs';
 import { AppRootService } from '../../app-root.service';
-import { Products } from '../../products';
+import { Products } from '../../interface';
 import { BannerComponent } from '../banner/banner.component';
 import { RouterLink } from '@angular/router';
 import { CartService } from '../pages/page-cart/cart.service';

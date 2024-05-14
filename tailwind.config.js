@@ -8,6 +8,9 @@ module.exports = {
         "layout-home": "repeat(auto-fit, minmax(245px, 1fr))",
         "cols2-1": "2fr 1fr",
       },
+      fontFamily: {
+        "quick-sand": ["Quicksand", "sans-serif"],
+      },
     },
   },
   plugins: [],

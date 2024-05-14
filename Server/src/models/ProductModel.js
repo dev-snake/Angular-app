@@ -10,6 +10,7 @@ const product = new Schema(
     title_description_2: { type: String },
     description: { type: String },
     sale: { type: Number },
+    comments: { type: Array, default: [] },
   },
   {
     timestamps: true,
