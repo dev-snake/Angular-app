@@ -24,7 +24,6 @@ export class OrderHistoryComponent {
       );
       if (this.user) {
         this.orderHistory = this.user.orders;
-        console.log(this.orderHistory);
       }
     });
   }
