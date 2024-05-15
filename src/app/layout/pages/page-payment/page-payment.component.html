@@ -1,5 +1,10 @@
 <section class="max-w-[1300px] mt-2 mx-auto mb-10">
-  <form class="w-full grid sm:grid-cols-2 gap-10 mt-10 max-sm:p-4">
+  <form
+    *ngIf="paymentForm"
+    class="w-full grid sm:grid-cols-2 gap-10 mt-10 max-sm:p-4"
+    [formGroup]="paymentForm"
+    (ngSubmit)="onSubmit()"
+  >
     <div class="w-full">
       <h2 class="uppercase font-semibold text-xl mb-4">Thông tin thanh toán</h2>
       <div>
@@ -9,6 +14,7 @@
             <input
               type="text"
               class="w-full p-2 rounded-xl outline-none focus:ring mt-2"
+              formControlName="firstName"
             />
           </div>
           <div>
@@ -16,6 +22,7 @@
             <input
               type="text"
               class="w-full p-2 rounded-xl outline-none focus:ring mt-2"
+              formControlName="lastName"
             />
           </div>
         </div>
@@ -24,6 +31,7 @@
           <input
             type="text"
             class="w-full p-2 rounded-xl outline-none focus:ring mt-2"
+            formControlName="address"
           />
         </div>
         <div class="mt-4">
@@ -33,6 +41,7 @@
           <input
             type="text"
             class="w-full p-2 rounded-xl outline-none focus:ring mt-2"
+            formControlName="phone"
           />
         </div>
         <div class="mt-4">
@@ -42,6 +51,7 @@
           <input
             type="email"
             class="w-full p-2 rounded-xl outline-none focus:ring"
+            formControlName="email"
           />
         </div>
       </div>
@@ -49,19 +59,25 @@
     <div>
       <h2 class="uppercase font-semibold text-xl mb-4">Đơn hàng của bạn</h2>
       <div class="bg-slate-200 p-8 rounded-2xl">
+        @for (item of cartList; track $index) {
         <div class="flex justify-between">
           <p>
-            Bàn phím cơ GE369R Hotswap, RGB <strong class="ml-3"> × 1</strong>
+            {{ item.name }} <strong class="ml-3"> × {{ item.quantity }}</strong>
           </p>
-          <p>996.000 ₫</p>
+          <p>{{ item.price }} ₫</p>
         </div>
+        }
         <div class="flex justify-between mt-4">
           <p><strong>Tạm tính</strong></p>
-          <p><strong>996.000 ₫</strong></p>
+          <p>
+            <strong class="tracking-[1.6px] text-[1rem]">{{ total }} ₫</strong>
+          </p>
         </div>
         <div class="flex justify-between mt-4">
           <p><strong>Tổng</strong></p>
-          <p><strong>996.000 ₫</strong></p>
+          <p>
+            <strong class="tracking-[1.6px] text-[1rem]">{{ total }} ₫</strong>
+          </p>
         </div>
         <div>
           <fieldset>
@@ -82,12 +98,11 @@
                 </svg>
                 Google Pay
                 <input
-                  name="payment_method"
                   id="apple"
                   value="google"
                   type="radio"
                   class="box-content h-1.5 w-1.5 appearance-none rounded-full border-[5px] border-white bg-white bg-clip-padding outline-none ring-1 ring-gray-950/10 checked:border-indigo-500 checked:ring-indigo-500"
-                  checked=""
+                  formControlName="paymentMethod"
                 />
               </label>
               <label
@@ -105,11 +120,11 @@
                 </svg>
                 Apple Pay
                 <input
-                  name="payment_method"
                   id="google"
                   value="apple"
                   type="radio"
                   class="box-content h-1.5 w-1.5 appearance-none rounded-full border-[5px] border-white bg-white bg-clip-padding outline-none ring-1 ring-gray-950/10 checked:border-indigo-500 checked:ring-indigo-500"
+                  formControlName="paymentMethod"
                 />
               </label>
               <label
@@ -132,17 +147,18 @@
                 </svg>
                 Credit Card
                 <input
-                  name="payment_method"
                   id="credit-card"
                   value="credit-card"
                   type="radio"
                   class="box-content h-1.5 w-1.5 appearance-none rounded-full border-[5px] border-white bg-white bg-clip-padding outline-none ring-1 ring-gray-950/10 checked:border-indigo-500 checked:ring-indigo-500"
+                  formControlName="paymentMethod"
                 />
               </label>
             </div>
           </fieldset>
           <button
             class="w-full bg-[#2e86f1] p-2 rounded-xl text-white mt-4 text-xl"
+            type="submit"
           >
             Đặt hàng
           </button>

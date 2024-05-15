@@ -4,6 +4,7 @@ import { Products } from '../../../interface';
 import { Category } from '../../../interface';
 import { RouterLink } from '@angular/router';
 import { CartService } from '../page-cart/cart.service';
+import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-page-product',
   standalone: true,
@@ -15,9 +16,12 @@ export class PageProductComponent {
   data: Products[] = [];
   categrory: Category[] = [];
   message: string = 'Đã thêm vào giỏ hàng';
+  dataFilter: any;
+  queryFiter: any;
   constructor(
     private pageProductService: AppRootService,
-    private cartService: CartService
+    private cartService: CartService,
+    private route: ActivatedRoute
   ) {}
   addToCart(product: Products) {
     this.cartService.addToCart(product);
@@ -39,12 +43,22 @@ export class PageProductComponent {
     }, 1000);
   }
   ngOnInit() {
+    this.route.queryParamMap.subscribe((params) => {
+      console.log(params.get('filter'));
+      this.pageProductService.getProducts().subscribe((data: any) => {
+        this.dataFilter = data.filter((product: any) => {
+          return product.category === Number(params.get('filter'));
+        });
+        this.queryFiter = params.get('filter');
+        console.log(this.queryFiter);
+        console.log(this.dataFilter);
+      });
+    });
     this.pageProductService
       .getProducts()
       .subscribe((data: any) => (this.data = data));
     this.pageProductService.getCategories().subscribe((data: any) => {
       this.categrory = data;
-      console.log(data);
     });
   }
 }

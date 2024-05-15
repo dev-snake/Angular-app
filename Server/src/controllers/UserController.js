@@ -6,7 +6,10 @@ class UserController {
   }
   async create(req, res) {
     const user = await userModule.create(req.body);
-    console.log(user);
+    return res.status(200).json(user);
+  }
+  async update(req, res) {
+    const user = await userModule.findByIdAndUpdate(id, user_id);
     return res.status(200).json(user);
   }
 }

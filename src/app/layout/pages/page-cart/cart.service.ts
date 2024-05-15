@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Products } from '../../../interface';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
 export class CartService {
   private storageKey = 'cart';
   items: Products[] = [];
-  constructor() {
+  constructor(private http: HttpClient) {
     this.loadCartFromLocalStorage();
   }
   private loadCartFromLocalStorage() {
@@ -45,5 +47,11 @@ export class CartService {
     }
     this.saveCartToLocalStorage();
     return this.items;
+  }
+  createOrder(order: any): Observable<any> {
+    return this.http.post('http://localhost:3000/create-order', order);
+  }
+  getOrders(): Observable<any> {
+    return this.http.get('http://localhost:3000/orders');
   }
 }

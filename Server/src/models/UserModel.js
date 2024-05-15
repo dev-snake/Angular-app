@@ -9,6 +9,7 @@ const user = new Schema(
     password: { type: String },
     role: { type: String, default: "user" },
     address: { type: String, default: "" },
+    orders: { type: Array, default: [] },
   },
   {
     timestamps: true,

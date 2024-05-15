@@ -5,7 +5,7 @@ export interface Products {
   sale: number;
   description: string;
   image: string;
-  quantity?: number;
+  quantity: number;
   category: number;
   rating?: number;
   title_description_1: string;
@@ -26,6 +26,7 @@ export interface User {
   lastName: string;
   address: string;
   role: number;
+  orders: any[];
 }
 export interface Comment {
   username_customer: string;

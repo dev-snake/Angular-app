@@ -1,8 +1,6 @@
-const { request } = require("express");
 const productModel = require("../models/ProductModel");
-const {
-  log,
-} = require("@angular-devkit/build-angular/src/builders/ssr-dev-server");
+const orderModel = require("../models/OrderModel");
+const userModel = require("../models/UserModel");
 class ProductController {
   async getAllProducts(req, res) {
     try {
@@ -52,6 +50,19 @@ class ProductController {
     );
     return res.status(200).json(updatedProduct);
   }
+  async createOrder(req, res) {
+    try {
+      const { userId } = req.body;
+      const user = await userModel.findById(userId);
+      if (user) {
+        user.orders.push(req.body);
+        await user.save();
+      }
+      const newOrder = await orderModel(req.body).save();
+      return res.status(201).json(newOrder);
+    } catch (error) {
+      return res.status(400).json({ message: error.message });
+    }
+  }
 }
-8;
 module.exports = new ProductController();

@@ -1,31 +1,37 @@
 <section class="max-w-[1300px] mt-10 mx-auto mb-10">
   <div class="w-full grid md:flex gap-8">
     <div class="md:max-w-[360px] w-full max-sm:p-4">
-      <div class="bg-white p-4 rounded-2xl w-full">
+      <div class="bg-white p-4 rounded-2xl w-full" *ngIf="isLoggedIn">
         <p class="capitalize font-semibold text-2xl text-center">Profile</p>
-        <p class="text-xl font-medium text-center">Nguyễn Văn A</p>
+        <p class="text-xl font-medium text-center">
+          {{ getUser?.lastName }} {{ getUser?.firstName }}
+        </p>
         <div class="flex justify-between mt-4">
           <p class="font-semibold">username:</p>
-          <p>nguyenvana</p>
+          <p class="font-medium">{{ getUser?.username }}</p>
         </div>
         <div class="flex justify-between">
           <p class="font-semibold">email:</p>
-          <p>dangvanhau&#64;gmail.com</p>
+          <p class="font-medium">{{ getUser?.email }}</p>
         </div>
       </div>
       <div class="w-full grid">
         <a
+          [routerLink]="['/profile']"
+          [queryParams]="{ isOrderHistory: true }"
           class="p-4 bg-white rounded-2xl mt-2 font-semibold capitalize text-[1rem] flex items-centern cursor-pointer"
         >
           <i class="bx bx-time-five mr-4 font-medium"></i>
           <span> Lịch sử Mua hàng</span>
         </a>
         <a
-          routerLink="change-password"
+          [routerLink]="['/profile']"
+          [queryParams]="{ isChangePassword: true }"
           class="p-4 bg-white rounded-2xl mt-2 font-semibold capitalize text-[1rem]"
           ><i class="bx bx-rotate-left mr-3 font-medium"></i> Đổi mật khẩu</a
         >
         <span
+          (click)="logout()"
           class="p-4 bg-white rounded-2xl mt-2 font-semibold capitalize text-[1rem] text-[#ff0000]"
           ><i class="bx bx-log-out mr-4 font-medium"></i> Đăng xuất</span
         >
@@ -33,9 +39,13 @@
     </div>
     <div class="max-sm:p-4 w-full">
       <div class="w-full bg-white rounded-2xl p-4">
-        @if(isOrderHistory){
-        <app-order-history></app-order-history>
-        }
+        <app-order-history *ngIf="isOrderHistory"></app-order-history>
+        <app-change-password *ngIf="isChangePassword"></app-change-password>
+        <app-view-order-details
+          *ngIf="isViewOrderDetails"
+          [dataOrderDetails]="dataOrderDetails"
+          [dataOrderPayment]="dataOrderPayment"
+        ></app-view-order-details>
       </div>
     </div>
   </div>

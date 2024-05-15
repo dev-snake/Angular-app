@@ -34,7 +34,8 @@ export class LoginComponent {
       db.forEach((user: User) => {
         if (user.username === username && user.password === password) {
           this.userFound = true;
-          this.authService.saveLoginFromLocalStorage(user.username);
+          this.authService.saveLoginFromLocalStorage(user.username, user._id);
+          console.log('Login success!');
           this.router.navigate(['/']);
         }
         if (!this.userFound) {

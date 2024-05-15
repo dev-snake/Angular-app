@@ -6,13 +6,15 @@ import { Observable } from 'rxjs';
 })
 export class AuthService {
   constructor(private http: HttpClient) {}
-  saveLoginFromLocalStorage(username_customer: string) {
+  saveLoginFromLocalStorage(username_customer: string, user_id: string) {
     localStorage.setItem('isLoggedIn', 'true');
     localStorage.setItem('username_customer', username_customer);
+    localStorage.setItem('user_id', user_id);
   }
   saveLogoutFromLocalStorage() {
     localStorage.setItem('isLoggedIn', 'false');
     localStorage.setItem('username_customer', '');
+    localStorage.setItem('user_id', '');
   }
   getUsername() {
     return localStorage.getItem('username_customer');

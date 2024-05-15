@@ -10,14 +10,21 @@
     </tr>
   </thead>
   <tbody class="text-center">
+    @for(item of orderHistoryList; track $index){
     <tr class="h-10">
-      <td class="border-b border-slate-100 p-2">1</td>
-      <td class="border-b border-slate-100 p-2">123456</td>
-      <td class="border-b border-slate-100 p-2">12/12/2024</td>
-      <td class="border-b border-slate-100 p-2">Đã giao</td>
+      <td class="border-b border-slate-100 p-2">{{ $index + 1 }}</td>
+      <td class="border-b border-slate-100 p-2">{{ item.code }}</td>
+      <td class="border-b border-slate-100 p-2">{{ item.date }}</td>
+      <td class="border-b border-slate-100 p-2">{{ item.status }}</td>
       <td class="border-b border-slate-100 p-2">
-        <button class="bg-[#ff0000] text-white p-2 rounded-lg">Xem</button>
+        <button
+          class="bg-[#ff0000] text-white p-2 rounded-lg"
+          (click)="viewOrderDetail(item.code)"
+        >
+          Xem
+        </button>
       </td>
     </tr>
+    }
   </tbody>
 </table>
