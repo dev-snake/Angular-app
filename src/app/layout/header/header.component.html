@@ -62,3 +62,27 @@
     }
   </div>
 </header>
+<div
+  class="shadow-2xl fixed left-1/2 transform -translate-x-1/2 w-full bottom-2 z-[1000] p-2 rounded-lg bg-white flex items-center justify-center gap-2 sm:hidden"
+>
+  <ul class="flex p-2 gap-10 text-[1rem] font-medium">
+    <li class="grid place-items-center">
+      <i class="bx bx-home text-blue-500" #icon_home></i
+      ><a routerLink="" #Tab (click)="activeTabHome()" class="text-blue-500"
+        >Trang chủ</a
+      >
+    </li>
+    <li class="grid place-items-center">
+      <i class="bx bxs-keyboard" #icon_keyboard></i
+      ><a routerLink="/products" (click)="activeTabProducts()" #tab_products
+        >Sản phẩm
+      </a>
+    </li>
+    <li class="grid place-items-center">
+      <i class="bx bx-news"></i><a routerLink="/news">Tin tức </a>
+    </li>
+    <li class="grid place-items-center">
+      <i class="bx bxs-user-account"></i><a routerLink="/profile">Tài khoản </a>
+    </li>
+  </ul>
+</div>
