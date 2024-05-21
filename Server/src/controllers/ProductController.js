@@ -1,6 +1,7 @@
 const productModel = require("../models/ProductModel");
 const orderModel = require("../models/OrderModel");
 const userModel = require("../models/UserModel");
+
 class ProductController {
   async getAllProducts(req, res) {
     try {
@@ -11,25 +12,18 @@ class ProductController {
     }
   }
   async createProduct(req, res) {
-    const product = new productModel({
-      name: "DUAL MODE",
-      price: 1900,
-      image: "../../assets/images/banphimcoblue.png",
-      category: 1,
-      sale: 1,
-      description: `[82 phím có LED Rainbow] Bàn phím chơi game 82 phím có thể tiết kiệm không gian bàn làm việc. Cáp Type-C có thể tháo rời và kích thước nhỏ giúp bạn dễ dàng mang theo khi sử dụng tại nhà/văn phòng hoặc đi công tác. Kết nối 3 chế độ : có dây Type C | 2.4Ghz | Bluetooth 3.0 & 5.0 dễ dàng dành cho bạn. Bàn phím cơ chơi game có đèn nền LED Rainbow + Keycap Doubleshot xuyên Led cùng keycap màu trắng mang đến cho bạn những hiệu ứng hình ảnh thú vị. Nó được trang bị 6 màu đèn nền và 20 chế độ đèn nền để cá nhân hóa diện mạo bàn phím cơ của bạn.
-      [Switch Hotswap] Chức năng có thể thay thế nóng có thể cho phép bạn tùy chỉnh bàn phím cơ của mình với bố cục kết hợp khác nhau trên keycaps và công tắc 3 chân. Red Switch có đặc điểm là tuyến tính và mượt mà hơn, âm thanh phím nhẹ với lực cản tối thiểu nhưng thao tác nhanh mà không cần một cảm giác xúc giác; dễ dàng chạm vào bàn phím chơi game。
-      
-       
-        `,
-      title_description_1:
-        "Bàn phím cơ Dual Mode Mechanical Gaming Newmen GM326 75%, 82 phím",
-      title_description_2: "THỜI THƯỢNG HƠN NEWMEN GE369RGB.",
+    const newProduct = new productModel({
+      name: req.body.name,
+      price: Number(req.body.price),
+      category: +req.body.category,
+      image: req.body.image,
+      description: req.body.description || "",
     });
     try {
-      const newProduct = await product.save();
+      await newProduct.save();
       res.status(201).json(newProduct);
     } catch (error) {
+      console.log(error);
       res.status(400).json({ message: error.message });
     }
   }

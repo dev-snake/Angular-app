@@ -12,6 +12,11 @@ import { OrderHistoryComponent } from './layout/pages/page-profile/order-history
 import { ChangePasswordComponent } from './layout/pages/page-profile/change-password/change-password.component';
 export const routes: Routes = [
   {
+    path: 'admin',
+    loadChildren: () =>
+      import('./admin/admin.module').then((m) => m.AdminModule),
+  },
+  {
     path: '',
     component: HomeComponent,
   },

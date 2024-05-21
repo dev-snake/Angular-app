@@ -1,0 +1,150 @@
+<div class="w-full">
+  <button
+    class="p-3 bg-blue-400 rounded-xl text-white mb-4 mt-4 float-right mr-4 font-semibold"
+    (click)="showToastAdd()"
+  >
+    Thêm sản phẩm
+  </button>
+  <div class="p-4">
+    <table class="w-full text-center bg-slate-50 rounded-xl">
+      <thead>
+        <tr>
+          <th class="p-3 border-b-2">Product Name</th>
+          <th class="p-3 border-b-2">Price</th>
+          <th class="p-3 border-b-2">Category</th>
+          <th class="p-3 border-b-2">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of products">
+          <td class="p-2 font-medium">{{ product.name }}</td>
+          <td class="p-2 font-medium">{{ product.price }} đ</td>
+          <td class="p-2">
+            {{
+              product.category === 1
+                ? "Bàn phím cơ"
+                : product.category === 2
+                ? "Keyboard"
+                : product.category === 3
+                ? "Switch"
+                : product.category === 4
+                ? "Phụ kiện khác"
+                : "Lỗi"
+            }}
+          </td>
+          <td class="p-2">
+            <button
+              (click)="editProduct(product._id)"
+              class="p-2 font-semibold"
+            >
+              <i class="bx bx-edit"></i> Edit
+            </button>
+            <button
+              (click)="deleteProduct(product._id)"
+              class="p-2 text-red-500 font-semibold"
+            >
+              <i class="bx bx-trash"></i> Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div
+    class="w-[600px] p-4 rounded-xl fixed left-[50%] top-[40%] transform translate-x-[-50%] translate-y-[-50%] transition-all duration-300 ease-in-out"
+  >
+    <form
+      class="w-full hidden bg-slate-200 p-5 rounded-xl transition-all duration-300 ease-in-out"
+      [formGroup]="productForm"
+      (ngSubmit)="addProduct()"
+      #form_add
+    >
+      <label for="">Tên sản phẩm</label>
+      <input
+        type="text"
+        class="p-2 rounded-xl w-full mb-2 outline-none"
+        placeholder="Nhập tên sản phẩm"
+        formControlName="name"
+      />
+      <label for="">Nhập giá</label>
+      <input
+        type="text"
+        placeholder="Nhập giá "
+        class="p-2 rounded-xl w-full mb-2 outline-none"
+        formControlName="price"
+      />
+      <label for="">Chọn danh mục</label>
+      <select
+        name=""
+        id=""
+        class="p-2 rounded-xl w-full mb-2 outline-none"
+        formControlName="category"
+      >
+        <option value="">Chọn danh mục</option>
+        <option *ngFor="let item of categories" [value]="item.category_id">
+          {{ item.category_name }}
+        </option>
+      </select>
+      <label for="">Hình ảnh</label>
+      <input
+        type="text"
+        class="p-2 rounded-xl w-full mb-2 outline-none"
+        placeholder="Nhập hình ảnh"
+        formControlName="image"
+      />
+      <button
+        class="p-2 bg-blue-400 text-white rounded-xl w-full cursor-pointer mt-4 font-semibold"
+        type="submit"
+      >
+        Thêm sản phẩm
+      </button>
+    </form>
+    <form
+      class="w-full hidden bg-slate-200 p-5 rounded-xl transition-all duration-300 ease-in-out"
+      [formGroup]="productFormUpdate"
+      (ngSubmit)="updateProduct()"
+      #form_edit
+    >
+      <label for="">Tên sản phẩm</label>
+      <input
+        type="text"
+        class="p-2 rounded-xl w-full mb-2 outline-none"
+        placeholder="Nhập tên sản phẩm"
+        formControlName="name"
+      />
+      <label for="">Nhập giá</label>
+      <input
+        type="text"
+        placeholder="Nhập giá "
+        class="p-2 rounded-xl w-full mb-2 outline-none"
+        formControlName="price"
+      />
+      <label for="">Chọn danh mục</label>
+      <select
+        name=""
+        id=""
+        class="p-2 rounded-xl w-full mb-2 outline-none"
+        formControlName="category"
+      >
+        <option value="">Chọn danh mục</option>
+        <option *ngFor="let item of categories" [value]="item.category_id">
+          {{ item.category_name }}
+        </option>
+      </select>
+      <label for="">Hình ảnh</label>
+      <input
+        type="text"
+        class="p-2 rounded-xl w-full mb-2 outline-none"
+        placeholder="Nhập hình ảnh"
+        formControlName="image"
+      />
+      <button
+        class="p-2 bg-blue-400 text-white rounded-xl w-full cursor-pointer mt-4 font-semibold"
+        type="submit"
+        [disabled]="!productFormUpdate.valid"
+      >
+        Cập nhật sản phẩm
+      </button>
+    </form>
+  </div>
+</div>

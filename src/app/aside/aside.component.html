@@ -1,0 +1,30 @@
+<aside class="p-2 shadow-inner bg-white rounded-2xl">
+  <ul>
+    <li
+      *ngFor="let item of sidebar"
+      class="text-[1rem] capitalize font-medium border-2 rounded-xl mb-2 p-3 transition duration-300 ease-in-out hover:bg-blue-100 cursor-pointer"
+      (click)="changeActive(item.id)"
+      [ngClass]="{ 'border-blue-200 border-2 ': item.id === activeItemId }"
+    >
+      <i
+        class="{{ item.icon }}"
+        [ngClass]="{ 'text-blue-500': item.id === activeItemId }"
+        #icon_dashboard
+      ></i>
+      <a
+        href="{{ item.url }}"
+        class="inline-block p-1"
+        [ngClass]="{
+          'text-blue-500 font-semibold': item.id === activeItemId
+        }"
+        >{{ item.title }}</a
+      >
+    </li>
+  </ul>
+</aside>
+<!-- <section class="max-w-[1300px] mx-auto mt-4 grid grid-cols-cols1-2 gap-10">
+  <app-aside></app-aside>
+  <article class="p-2 shadow-inner bg-white rounded-2xl">
+    <router-outlet></router-outlet>
+  </article>
+</section> -->
