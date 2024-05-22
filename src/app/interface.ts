@@ -27,6 +27,7 @@ export interface User {
   address: string;
   role: number;
   orders: any[];
+  active: number;
 }
 export interface Comment {
   username_customer: string;

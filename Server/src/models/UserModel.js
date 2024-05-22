@@ -10,6 +10,7 @@ const user = new Schema(
     role: { type: String, default: "user" },
     address: { type: String, default: "" },
     orders: { type: Array, default: [] },
+    active: { type: Number, default: 0 },
   },
   {
     timestamps: true,

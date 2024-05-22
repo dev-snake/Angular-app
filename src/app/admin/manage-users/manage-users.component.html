@@ -1,1 +1,59 @@
-<p>manage-users works!</p>
+<div class="p-4">
+  <table class="w-full text-center">
+    <thead>
+      <tr class="border-b-2">
+        <th class="p-2">Username</th>
+        <th class="p-2">Fullname</th>
+        <th class="p-2">Role</th>
+        <th class="p-2">Date create</th>
+        <th class="p-2">State</th>
+        <th class="p-2">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users" class="border-b-2">
+        <td class="p-4 font-semibold tracking-[1.6px] shadow">
+          {{ user.username }}
+        </td>
+        <td class="p-4">{{ user.lastName }} {{ user.firstName }}</td>
+        <td class="p-4">{{ user.role }}</td>
+        <td class="p-4">{{ user.createdAt }}</td>
+        <td class="p-4">
+          <span
+            class="rounded-3xl w-36 h-9 inline-block font-medium text-center p-2 relative"
+            [ngClass]="
+              user.active === 0
+                ? 'bg-green-100 text-green-400 font-semibold'
+                : 'bg-red-100 text-red-500 font-semibold '
+            "
+          >
+            <i
+              class="animate-ping absolute w-2 h-2 bg-green-500 rounded-3xl right-1 top-0 inline-block"
+              *ngIf="user.active === 0"
+            ></i>
+            {{ user.active === 0 ? "Đang hoạt động" : "Đang bị khóa " }}</span
+          >
+        </td>
+        <td class="p-4">
+          @if(user.active === 0){
+
+          <button
+            class="bg-red-400 text-white px-4 py-2 rounded-3xl capitalize tracking-[1.6px] font-medium w-32"
+            (click)="lockUser(user._id)"
+          >
+            <i class="bx bx-lock-alt"></i> khóa
+          </button>
+          }@else {
+          <button
+            class="bg-green-400 text-white px-4 py-2 rounded-3xl capitalize tracking-[1.6px] font-medium"
+            (click)="unlockUser(user._id)"
+          >
+            <i class="bx bx-lock-open-alt"></i> mở khóa
+          </button>
+
+          }
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
