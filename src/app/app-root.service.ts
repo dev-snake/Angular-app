@@ -10,9 +10,6 @@ export class AppRootService {
   getProducts(): Observable<Products[]> {
     return this.http.get<Products[]>('http://localhost:3000/data');
   }
-  getCategories(): Observable<Category[]> {
-    return this.http.get<Category[]>('http://localhost:3000/category');
-  }
 
   updateProduct(product: Products): Observable<Products[]> {
     return this.http.put<Products[]>(

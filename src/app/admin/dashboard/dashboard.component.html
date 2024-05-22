@@ -15,7 +15,8 @@
           [routerLink]="item.url"
           class="inline-block p-1"
           [ngClass]="{
-            'text-blue-500 font-semibold': item.id === activeItemId
+            'text-blue-500 font-semibold': item.id === activeItemId,
+            'text-red-500': item.id === activeItemId && item.url === '/logout'
           }"
           >{{ item.title }}</a
         >

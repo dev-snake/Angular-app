@@ -1,1 +1,87 @@
-<p>manage-category works!</p>
+<div class="w-full">
+  <button
+    class="p-3 bg-blue-400 rounded-xl text-white mb-4 mt-4 float-right mr-4 font-semibold"
+    (click)="addToastCategory()"
+  >
+    Thêm Danh mục
+  </button>
+  <div class="p-4">
+    <table class="w-full text-center bg-slate-50 rounded-xl">
+      <thead>
+        <tr>
+          <th class="p-3 border-b-2">ID Danh muc</th>
+          <th class="p-3 border-b-2">Tên DM</th>
+          <th class="p-3 border-b-2">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let category of dataCategories">
+          <td class="p-2 font-medium">{{ category.category_id }}</td>
+          <td class="p-2 font-medium">{{ category.category_name }}</td>
+          <td class="p-2">
+            <button
+              class="p-2 rounded-xl mr-2 font-semibold"
+              (click)="editCategory(category.category_id)"
+            >
+              <i class="bx bx-edit"></i>
+              Edit
+            </button>
+            <button
+              class="p-2 font-semibold bg-red-400 rounded-xl text-white ml-2"
+              (click)="deleteCategory(category.category_id)"
+            >
+              <i class="bx bx-trash"></i>
+              Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div
+    class="w-[600px] p-4 rounded-xl fixed left-[50%] top-[30%] transform translate-x-[-50%] translate-y-[-50%] transition-all duration-300 ease-in-out"
+  >
+    <form
+      class="w-full hidden bg-slate-200 p-5 rounded-xl transition-all duration-300 ease-in-out"
+      [formGroup]="formAddCategory"
+      (ngSubmit)="addCategory()"
+      #categoryForm
+    >
+      <label for="">Tên danh muc</label>
+      <input
+        type="text"
+        class="p-2 rounded-xl w-full mb-2 outline-none"
+        placeholder="Nhập tên Danh mục"
+        formControlName="category_name"
+      />
+
+      <button
+        class="p-2 bg-blue-400 text-white rounded-xl w-full cursor-pointer mt-4 font-semibold"
+        type="submit"
+      >
+        Thêm danh mục
+      </button>
+    </form>
+    <form
+      [formGroup]="formEditCategory"
+      class="w-full hidden bg-slate-200 p-5 rounded-xl transition-all duration-300 ease-in-out"
+      #editCategoryForm
+      (ngSubmit)="editCategorySubmit()"
+    >
+      <label for="">Tên Danh muc</label>
+      <input
+        type="text"
+        class="p-2 rounded-xl w-full mb-2 outline-none"
+        placeholder="Nhập tên sản phẩm"
+        formControlName="category_name"
+      />
+
+      <button
+        class="p-2 bg-blue-400 text-white rounded-xl w-full cursor-pointer mt-4 font-semibold"
+        type="submit"
+      >
+        Cập nhật danh mục
+      </button>
+    </form>
+  </div>
+</div>

@@ -18,6 +18,9 @@ class ProductController {
       category: +req.body.category,
       image: req.body.image,
       description: req.body.description || "",
+      title_description_1: req.body.description,
+      title_description_2: req.body.description,
+      sale: req.body.sale || 0,
     });
     try {
       await newProduct.save();
@@ -57,6 +60,17 @@ class ProductController {
     } catch (error) {
       return res.status(400).json({ message: error.message });
     }
+  }
+  async getProductById(req, res) {
+    const { category_id } = req.params;
+    const getProducts = await productModel.find({
+      category: Number(category_id),
+    });
+    return res.json(getProducts);
+  }
+  async getLimitedProducts(req, res) {
+    const getProducts = await productModel.find().limit(10);
+    return res.json(getProducts);
   }
 }
 module.exports = new ProductController();

@@ -9,9 +9,9 @@
     <table class="w-full text-center bg-slate-50 rounded-xl">
       <thead>
         <tr>
-          <th class="p-3 border-b-2">Product Name</th>
-          <th class="p-3 border-b-2">Price</th>
-          <th class="p-3 border-b-2">Category</th>
+          <th class="p-3 border-b-2">Tên SP</th>
+          <th class="p-3 border-b-2">Giá</th>
+          <th class="p-3 border-b-2">Danh mục</th>
           <th class="p-3 border-b-2">Actions</th>
         </tr>
       </thead>
@@ -24,9 +24,9 @@
               product.category === 1
                 ? "Bàn phím cơ"
                 : product.category === 2
-                ? "Keyboard"
+                ? "Mouse"
                 : product.category === 3
-                ? "Switch"
+                ? "Lót chuột"
                 : product.category === 4
                 ? "Phụ kiện khác"
                 : "Lỗi"
@@ -41,7 +41,7 @@
             </button>
             <button
               (click)="deleteProduct(product._id)"
-              class="p-2 text-red-500 font-semibold"
+              class="p-2 font-semibold bg-red-400 rounded-xl text-white ml-2"
             >
               <i class="bx bx-trash"></i> Delete
             </button>
@@ -72,6 +72,27 @@
         placeholder="Nhập giá "
         class="p-2 rounded-xl w-full mb-2 outline-none"
         formControlName="price"
+      />
+      <label for="">Nhập Mô tả</label>
+      <input
+        type="text"
+        placeholder="Nhập Mô tả "
+        class="p-2 rounded-xl w-full mb-2 outline-none"
+        formControlName="description"
+      />
+      <label for="">Nhập tiêu đề 1</label>
+      <input
+        type="text"
+        placeholder="Nhập Tiêu đề 1 "
+        class="p-2 rounded-xl w-full mb-2 outline-none"
+        formControlName="title_description_1"
+      />
+      <label for="">Nhập tiêu đề 2</label>
+      <input
+        type="text"
+        placeholder="Nhập Tiêu đề 2"
+        class="p-2 rounded-xl w-full mb-2 outline-none"
+        formControlName="title_description_2"
       />
       <label for="">Chọn danh mục</label>
       <select
@@ -118,6 +139,27 @@
         placeholder="Nhập giá "
         class="p-2 rounded-xl w-full mb-2 outline-none"
         formControlName="price"
+      />
+      <label for="">Nhập Mô tả</label>
+      <input
+        type="text"
+        placeholder="Nhập Mô tả "
+        class="p-2 rounded-xl w-full mb-2 outline-none"
+        formControlName="description"
+      />
+      <label for="">Nhập tiêu đề 1</label>
+      <input
+        type="text"
+        placeholder="Nhập Tiêu đề 1 "
+        class="p-2 rounded-xl w-full mb-2 outline-none"
+        formControlName="title_description_1"
+      />
+      <label for="">Nhập tiêu đề 2</label>
+      <input
+        type="text"
+        placeholder="Nhập Tiêu đề 2"
+        class="p-2 rounded-xl w-full mb-2 outline-none"
+        formControlName="title_description_2"
       />
       <label for="">Chọn danh mục</label>
       <select

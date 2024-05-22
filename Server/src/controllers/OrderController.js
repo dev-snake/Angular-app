@@ -4,7 +4,7 @@ class OrderController {
   async index(req, res) {
     try {
       const orders = await OrderModel.find();
-      res.status(200).json({ orders });
+      res.status(200).json(orders);
     } catch (error) {
       res.status(400).json({ error: error.message });
     }

@@ -1,1 +1,27 @@
-<p>manage-orders works!</p>
+<div>
+  <table class="w-full text-center mt-4">
+    <thead>
+      <tr>
+        <th class="p-2">Mã đơn hàng</th>
+        <th class="p-2">userId</th>
+        <th class="p-2">Ngày đặt</th>
+        <th class="p-2">Trạng thái</th>
+        <th class="p-2">Tổng tiền</th>
+        <th class="p-2">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let order of orders">
+        <td class="p-3">{{ order.code }}</td>
+        <td class="p-3">{{ order.userId }}</td>
+        <td class="p-3">{{ order.date }}</td>
+        <td class="p-3">{{ order.status }}</td>
+        <td class="p-3">{{ order.total }} đ</td>
+        <td class="p-3">
+          <button class="p-1">View</button>
+          <button class="p-1">Edit</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

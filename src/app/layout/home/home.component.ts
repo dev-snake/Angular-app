@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { from, Observable } from 'rxjs';
-import { AppRootService } from '../../app-root.service';
+import { HomeService } from './home.service';
 import { Products } from '../../interface';
 import { BannerComponent } from '../banner/banner.component';
 import { RouterLink } from '@angular/router';
@@ -14,7 +13,7 @@ import { CartService } from '../pages/page-cart/cart.service';
 })
 export class HomeComponent {
   constructor(
-    private homeService: AppRootService,
+    private homeService: HomeService,
     private cartService: CartService
   ) {}
   message: string = 'Đã thêm vào giỏ hàng';

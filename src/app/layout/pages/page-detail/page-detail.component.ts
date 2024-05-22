@@ -3,7 +3,12 @@ import { ActivatedRoute } from '@angular/router';
 import { Products, Comment } from '../../../interface';
 import { AppRootService } from '../../../app-root.service';
 import { CartService } from '../page-cart/cart.service';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { AuthService } from '../auth/auth.service';
 import { HttpParams } from '@angular/common/http';
 @Component({
@@ -47,7 +52,7 @@ export class PageDetailComponent implements OnInit {
     const fullTime = `${date}/${month}/${year} ${time}:0${minute}:${second}`;
     this.formComment = new FormGroup({
       username_customer: new FormControl(this.authService.getUsername()),
-      content: new FormControl(''),
+      content: new FormControl('', [Validators.required]),
       date: new FormControl(fullTime),
     });
   }
@@ -81,9 +86,9 @@ export class PageDetailComponent implements OnInit {
       if (this.product) {
         this.product?.comments.push(this.formComment.value);
         console.log(this.product);
-        this.data
-          .updateProduct(this.product)
-          .subscribe((res) => console.log(res));
+        this.data.updateProduct(this.product).subscribe((res) => {
+          this.commentList = this.product?.comments || [];
+        });
       }
     });
   }

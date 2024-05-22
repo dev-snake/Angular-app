@@ -8,19 +8,20 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { Category } from '../../interface';
 
 @Component({
   selector: 'app-manage-product',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, FormsModule],
   templateUrl: './manage-product.component.html',
-  styleUrls: ['./manage-product.component.css'], // Sửa thành styleUrls
+  styleUrls: ['./manage-product.component.css'],
 })
 export class ManageProductComponent implements OnInit {
   @ViewChild('form_add') form_add!: ElementRef;
   @ViewChild('form_edit') form_edit!: ElementRef;
   products: any[] = [];
-  categories: any[] = [];
+  categories: any;
   productForm: FormGroup;
   productFormUpdate: FormGroup;
   currentProductId: number | null = null;
@@ -34,6 +35,9 @@ export class ManageProductComponent implements OnInit {
       ]),
       image: new FormControl(''),
       category: new FormControl('', [Validators.required]),
+      description: new FormControl('', [Validators.required]),
+      title_description_1: new FormControl('', [Validators.required]),
+      title_description_2: new FormControl('', [Validators.required]),
     });
 
     this.productFormUpdate = new FormGroup({
@@ -41,6 +45,9 @@ export class ManageProductComponent implements OnInit {
       price: new FormControl('', [Validators.required]),
       image: new FormControl(''),
       category: new FormControl('', [Validators.required]),
+      description: new FormControl('', [Validators.required]),
+      title_description_1: new FormControl('', [Validators.required]),
+      title_description_2: new FormControl('', [Validators.required]),
     });
   }
 
@@ -56,7 +63,7 @@ export class ManageProductComponent implements OnInit {
   }
 
   getCategories() {
-    this.manage.getCategory().subscribe((categories) => {
+    this.manage.getCategories().subscribe((categories) => {
       this.categories = categories;
     });
   }

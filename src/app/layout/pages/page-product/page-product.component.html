@@ -70,6 +70,103 @@
         </button>
       </div>
     </div>
-    } }
+    }}
   </div>
+  <hr class="mt-4" />
+  <div>
+    <p class="uppercase font-semibold text-xl mt-4 p-2">Bàn phím cơ</p>
+    <div class="w-full rounded-2xl p-2 grid grid-cols-layout-home gap-4">
+      <div
+        class="relative bg-white p-4 rounded-xl"
+        *ngFor="let item of mechanical_keyboard"
+      >
+        <span
+          class="bg-[#FE3A30] text-white px-4 py-1 z-10 absolute tracking-[1.5px] rounded-2xl top-3"
+          >Sale</span
+        >
+        <img
+          [src]="item.image"
+          alt=""
+          class="h-[250px] mx-auto hover:scale-90 transition-all"
+        />
+        <a [routerLink]="['/products', item._id]">
+          <p class="font-medium text-[1rem]">Tên sản phẩm : {{ item.name }}</p>
+        </a>
+        <p class="font-medium text-[1rem]">
+          Giá :
+          <span class="text-red-500 font-semibold"> {{ item.price }} VNĐ</span>
+        </p>
+        <button
+          class="text-white bg-[#2e86f1] w-full p-2 rounded-xl font-medium mt-2"
+          (click)="addToCart(item)"
+        >
+          Thêm vào giỏ hàng
+        </button>
+      </div>
+    </div>
+  </div>
+  <hr class="mt-4" />
+  <div>
+    <p class="uppercase font-semibold text-xl mt-4 p-2">Mouse</p>
+    <div class="w-full rounded-2xl p-2 grid grid-cols-layout-home gap-4">
+      <div class="relative bg-white p-4 rounded-xl" *ngFor="let item of mouse">
+        <span
+          class="bg-[#FE3A30] text-white px-4 py-1 z-10 absolute tracking-[1.5px] rounded-2xl top-3"
+          >Sale</span
+        >
+        <img
+          [src]="item.image"
+          alt=""
+          class="h-[250px] mx-auto hover:scale-90 transition-all"
+        />
+        <a [routerLink]="['/products', item._id]">
+          <p class="font-medium text-[1rem]">Tên sản phẩm : {{ item.name }}</p>
+        </a>
+        <p class="font-medium text-[1rem]">
+          Giá :
+          <span class="text-red-500 font-semibold"> {{ item.price }} VNĐ</span>
+        </p>
+        <button
+          class="text-white bg-[#2e86f1] w-full p-2 rounded-xl font-medium mt-2"
+          (click)="addToCart(item)"
+        >
+          Thêm vào giỏ hàng
+        </button>
+      </div>
+    </div>
+  </div>
+  <hr class="mt-4" />
+  <div>
+    <p class="uppercase font-semibold text-xl mt-4 p-2">Lót chuột</p>
+    <div class="w-full rounded-2xl p-2 grid grid-cols-layout-home gap-4">
+      <div
+        class="relative bg-white p-4 rounded-xl"
+        *ngFor="let item of mouse_pads"
+      >
+        <span
+          class="bg-[#FE3A30] text-white px-4 py-1 z-10 absolute tracking-[1.5px] rounded-2xl top-3"
+          >Sale</span
+        >
+        <img
+          [src]="item.image"
+          alt=""
+          class="h-[250px] mx-auto hover:scale-90 transition-all"
+        />
+        <a [routerLink]="['/products', item._id]">
+          <p class="font-medium text-[1rem]">Tên sản phẩm : {{ item.name }}</p>
+        </a>
+        <p class="font-medium text-[1rem]">
+          Giá :
+          <span class="text-red-500 font-semibold"> {{ item.price }} VNĐ</span>
+        </p>
+        <button
+          class="text-white bg-[#2e86f1] w-full p-2 rounded-xl font-medium mt-2"
+          (click)="addToCart(item)"
+        >
+          Thêm vào giỏ hàng
+        </button>
+      </div>
+    </div>
+  </div>
+  <div></div>
 </section>

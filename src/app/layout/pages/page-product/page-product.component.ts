@@ -1,27 +1,34 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AppRootService } from '../../../app-root.service';
 import { Products } from '../../../interface';
 import { Category } from '../../../interface';
 import { RouterLink } from '@angular/router';
 import { CartService } from '../page-cart/cart.service';
 import { ActivatedRoute } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { PageProductService } from './page-product.service';
 @Component({
   selector: 'app-page-product',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, CommonModule],
   templateUrl: './page-product.component.html',
   styleUrl: './page-product.component.css',
 })
-export class PageProductComponent {
+export class PageProductComponent implements OnInit {
   data: Products[] = [];
-  categrory: Category[] = [];
+  categrory: any;
   message: string = 'Đã thêm vào giỏ hàng';
   dataFilter: any;
   queryFiter: any;
+  mechanical_keyboard: any;
+  mouse: any;
+  mouse_pads: any;
+  otherAccessories: any;
   constructor(
     private pageProductService: AppRootService,
     private cartService: CartService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private productClassification: PageProductService
   ) {}
   addToCart(product: Products) {
     this.cartService.addToCart(product);
@@ -44,21 +51,56 @@ export class PageProductComponent {
   }
   ngOnInit() {
     this.route.queryParamMap.subscribe((params) => {
-      console.log(params.get('filter'));
       this.pageProductService.getProducts().subscribe((data: any) => {
         this.dataFilter = data.filter((product: any) => {
           return product.category === Number(params.get('filter'));
         });
         this.queryFiter = params.get('filter');
-        console.log(this.queryFiter);
-        console.log(this.dataFilter);
       });
     });
     this.pageProductService
       .getProducts()
       .subscribe((data: any) => (this.data = data));
-    this.pageProductService.getCategories().subscribe((data: any) => {
-      this.categrory = data;
-    });
+    this.productClassification
+      .getCategories()
+      .subscribe((categories: Category) => {
+        this.categrory = categories;
+      });
+    this.getCategory_One();
+    this.getProductsTwo();
+    this.getProductsThree();
+    this.getProductsFour();
+  }
+  getCategory_One() {
+    this.productClassification
+      .getProductCategoryOne()
+      .subscribe((data: any) => {
+        this.mechanical_keyboard = data;
+      });
+    return this.mechanical_keyboard;
+  }
+  getProductsTwo() {
+    return this.productClassification
+      .getProductCategoryTwo()
+      .subscribe((data) => {
+        this.mouse = data;
+        return data;
+      });
+  }
+  getProductsThree() {
+    return this.productClassification
+      .getProductCategoryThree()
+      .subscribe((data) => {
+        this.mouse_pads = data;
+        return data;
+      });
+  }
+  getProductsFour() {
+    return this.productClassification
+      .getProductCategoryFour()
+      .subscribe((data) => {
+        this.otherAccessories = data;
+        return data;
+      });
   }
 }
