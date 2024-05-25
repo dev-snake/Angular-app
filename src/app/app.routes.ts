@@ -8,8 +8,7 @@ import { LoginComponent } from './layout/pages/auth/login/login.component';
 import { RegsiterComponent } from './layout/pages/auth/regsiter/regsiter.component';
 import { PageNotFoundComponent } from './layout/pages/page-not-found/page-not-found.component';
 import { PageProfileComponent } from './layout/pages/page-profile/page-profile.component';
-import { OrderHistoryComponent } from './layout/pages/page-profile/order-history/order-history.component';
-import { ChangePasswordComponent } from './layout/pages/page-profile/change-password/change-password.component';
+import { PersonalInformationComponent } from './layout/pages/page-profile/personal-information/personal-information.component';
 export const routes: Routes = [
   {
     path: 'admin',
@@ -48,6 +47,12 @@ export const routes: Routes = [
   {
     path: 'profile',
     component: PageProfileComponent,
+    children: [
+      {
+        path: 'personal-information',
+        component: PersonalInformationComponent,
+      },
+    ],
   },
   {
     path: '**',

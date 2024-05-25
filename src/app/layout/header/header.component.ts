@@ -21,6 +21,7 @@ export class HeaderComponent {
   @ViewChild('icon_home') icon_home!: ElementRef;
   @ViewChild('tab_products') tab_products!: ElementRef;
   @ViewChild('icon_keyboard') icon_keyboard!: ElementRef;
+  @ViewChild('showSearch') showSearch!: ElementRef;
   constructor(private authService: AuthService) {}
   @HostListener('window:scroll', ['$event'])
   onWindowScroll(): void {
@@ -46,5 +47,8 @@ export class HeaderComponent {
     this.icon_keyboard.nativeElement.classList.add('text-blue-500');
     this.Tab.nativeElement.classList.remove('text-blue-500');
     this.icon_home.nativeElement.classList.remove('text-blue-500');
+  }
+  toggleSearch() {
+    this.showSearch.nativeElement.classList.toggle('hidden');
   }
 }

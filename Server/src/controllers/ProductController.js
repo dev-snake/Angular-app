@@ -1,7 +1,9 @@
 const productModel = require("../models/ProductModel");
 const orderModel = require("../models/OrderModel");
 const userModel = require("../models/UserModel");
-
+const nodemailer = require("nodemailer");
+const juice = require("juice");
+require("dotenv").config();
 class ProductController {
   async getAllProducts(req, res) {
     try {
@@ -48,15 +50,73 @@ class ProductController {
     return res.status(200).json(updatedProduct);
   }
   async createOrder(req, res) {
+    const generateInlineCss = async (html) => {
+      const result = await postcss([tailwindcss]).process(html, {
+        from: undefined,
+      });
+      return juice(result.css + html);
+    };
     try {
-      const { userId } = req.body;
+      const { userId, email, products, total } = req.body;
+      console.log(products);
       const user = await userModel.findById(userId);
+      const transporter = nodemailer.createTransport({
+        service: "gmail",
+        auth: {
+          user: process.env.EMAIL,
+          pass: process.env.PASSWORD_EMAIL,
+        },
+      });
+      const htmlContent = `
+      <div >
+        <h2 >Đơn hàng của bạn</h2>
+        <table border='1'>
+          <thead>
+            <tr>
+              <th >Tên</th>
+              <th >Số lượng</th>
+              <th >Giá</th>
+              <th >Tổng tiền</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${products
+              .map(
+                (item) => `
+              <tr>
+                <td >${item.name}</td>
+                <td >${item.quantity}</td>
+                <td >${item.price}</td>
+                <td >${item.quantity * item.price}</td>
+              </tr>
+            `
+              )
+              .join("")}
+          </tbody>
+        </table>
+        <p>Tổng tiền: ${total}</p>
+      </div>
+    `;
+
+      const mailOptions = {
+        from: "danvanhaufpt2019@gmail.com",
+        to: email,
+        subject: "Thông tin đặt hàng",
+        html: htmlContent,
+      };
+      transporter.sendMail(mailOptions, (err, infor) => {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log("Email sent : ", infor.response);
+        }
+      });
       if (user) {
         user.orders.push(req.body);
         await user.save();
       }
-      const newOrder = await orderModel(req.body).save();
-      return res.status(201).json(newOrder);
+      await orderModel(req.body).save();
+      return res.status(201).json("ordered Successfully");
     } catch (error) {
       return res.status(400).json({ message: error.message });
     }

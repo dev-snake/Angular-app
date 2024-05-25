@@ -5,6 +5,8 @@ import { ManageProductComponent } from './manage-product/manage-product.componen
 import { ManageUsersComponent } from './manage-users/manage-users.component';
 import { ManageOrdersComponent } from './manage-orders/manage-orders.component';
 import { ManageCategoryComponent } from './manage-category/manage-category.component';
+import { OrderDetailComponent } from './order-detail/order-detail.component';
+import { ManageStatisticComponent } from './manage-statistic/manage-statistic.component';
 const routes: Routes = [
   {
     path: '',
@@ -14,6 +16,14 @@ const routes: Routes = [
       { path: 'manage-users', component: ManageUsersComponent },
       { path: 'manage-orders', component: ManageOrdersComponent },
       { path: 'manage-category', component: ManageCategoryComponent },
+      {
+        path: 'manage-orders/:id/order-detail',
+        component: OrderDetailComponent,
+      },
+      {
+        path: 'manage-statistic',
+        component: ManageStatisticComponent,
+      },
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
     ],
   },

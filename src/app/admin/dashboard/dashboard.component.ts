@@ -16,7 +16,7 @@ export class DashboardComponent {
       id: 1,
       title: 'Dashboard',
       icon: 'bx bxs-category inline-block p-1 rounded-sm',
-      url: '',
+      url: '/admin',
     },
     {
       id: 2,
@@ -44,6 +44,12 @@ export class DashboardComponent {
     },
     {
       id: 6,
+      title: 'Thống kê',
+      icon: 'bx bx-stats inline-block p-1 rounded-sm',
+      url: 'manage-statistic',
+    },
+    {
+      id: 7,
       title: 'Đăng xuất',
       icon: 'bx bx-log-out inline-block p-1 rounded-sm',
       url: '/logout',

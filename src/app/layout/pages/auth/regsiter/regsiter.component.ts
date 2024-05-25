@@ -5,7 +5,6 @@ import {
   ReactiveFormsModule,
   FormGroup,
   Validators,
-  FormBuilder,
 } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
@@ -83,7 +82,6 @@ export class RegsiterComponent {
         return;
       }
       this.auth.register(this.registerForm.value).subscribe((res) => {
-        console.log(res);
         const messageDiv = document.createElement('div');
         messageDiv.textContent = this.messageSuccess;
         messageDiv.style.position = 'fixed';

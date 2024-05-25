@@ -52,7 +52,7 @@ export class PagePaymentComponent {
           phone: new FormControl('', [Validators.required]),
           paymentMethod: new FormControl('', [Validators.required]),
           date: new FormControl(fullTime, [Validators.required]),
-          status: new FormControl('Đang chờ xử lý', [Validators.required]),
+          status: new FormControl(0, [Validators.required]),
         });
       }
     });
@@ -80,6 +80,7 @@ export class PagePaymentComponent {
         products: this.cartList,
         total: this.total,
         userId: this.user?._id,
+        userOrder: this.user?.lastName + ' ' + this.user?.firstName,
       };
       this.cartService.createOrder(order).subscribe((data) => {
         const messageDiv = document.createElement('div');

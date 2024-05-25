@@ -7,6 +7,7 @@ import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '../auth/auth.service';
 import { User } from '../../../interface';
 import { ViewOrderDetailsComponent } from './view-order-details/view-order-details.component';
+import { PersonalInformationComponent } from './personal-information/personal-information.component';
 @Component({
   selector: 'app-page-profile',
   standalone: true,
@@ -16,6 +17,7 @@ import { ViewOrderDetailsComponent } from './view-order-details/view-order-detai
     RouterLink,
     CommonModule,
     ViewOrderDetailsComponent,
+    PersonalInformationComponent,
   ],
   templateUrl: './page-profile.component.html',
   styleUrl: './page-profile.component.css',
@@ -27,6 +29,7 @@ export class PageProfileComponent implements OnInit {
   getUser: User | undefined;
   dataOrderDetails: any;
   dataOrderPayment?: any[];
+  isPersonalInformation: boolean = false;
   constructor(
     private route: ActivatedRoute,
     private authService: AuthService,

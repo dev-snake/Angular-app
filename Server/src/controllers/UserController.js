@@ -1,21 +1,21 @@
-const userModule = require("../models/UserModel");
+const userModel = require("../models/UserModel");
 class UserController {
   async index(req, res) {
-    const users = await userModule.find();
+    const users = await userModel.find();
     return res.status(200).json(users);
   }
   async create(req, res) {
-    const user = await userModule.create(req.body);
+    const user = await userModel.create(req.body);
     return res.status(200).json(user);
   }
   async update(req, res) {
-    const user = await userModule.findByIdAndUpdate(id, user_id);
+    const user = await userModel.findByIdAndUpdate(id, user_id);
     return res.status(200).json(user);
   }
   async lockUser(req, res) {
     try {
       const { id } = req.params;
-      const user = await userModule.findByIdAndUpdate(id, { active: 1 });
+      const user = await userModel.findByIdAndUpdate(id, { active: 1 });
       return res.status(200).json(user);
     } catch (error) {
       console.log(error);
@@ -25,7 +25,7 @@ class UserController {
   async unlockUser(req, res) {
     try {
       const { id } = req.params;
-      await userModule.findByIdAndUpdate(id, { active: 0 });
+      await userModel.findByIdAndUpdate(id, { active: 0 });
       return res.status(200).json({ message: "User unlocked" });
     } catch (error) {
       console.log(error);

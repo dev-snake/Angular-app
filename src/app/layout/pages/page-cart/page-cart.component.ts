@@ -27,7 +27,6 @@ export class PageCartComponent {
       (acc, curr) => acc + curr.price * (curr.quantity ?? 0),
       0
     );
-    console.log(this.carts);
   }
   deleteItemCart(_id: string) {
     this.cartService.deleteItemCart(_id);

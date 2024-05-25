@@ -4,7 +4,7 @@ const order = new Schema(
   {
     userId: { type: String },
     products: { type: Array, default: [] },
-    status: { type: String, default: "Đang chờ xử lý" },
+    status: { type: Number, default: 0 },
     total: { type: Number, default: 0 },
     date: { type: String, default: "" },
     code: { type: String },
@@ -12,6 +12,7 @@ const order = new Schema(
     address: { type: String },
     phone: { type: String },
     email: { type: String },
+    userOrder: { type: String, default: "" },
   },
   {
     timestamps: true,

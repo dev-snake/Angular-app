@@ -1,0 +1,109 @@
+<div>
+  <p class="uppercase text-xl font-semibold p-2">Thông tin đơn hàng</p>
+  <div class="mb-4">
+    <div class="p-2">
+      <div class="flex justify-between">
+        <p class="uppercase font-semibold">Mã đơn hàng:</p>
+        <p class="font-semibold p-2">{{ orderDetails?.code }}</p>
+      </div>
+      <div class="flex justify-between">
+        <p class="uppercase font-semibold">Người đặt:</p>
+        <p class="font-semibold p-2">{{ orderDetails?.userOrder }}</p>
+      </div>
+      <div class="flex justify-between">
+        <p class="uppercase font-semibold">Phương thức thanh toán:</p>
+        <p class="font-semibold p-2">{{ orderDetails?.paymentMethod }}</p>
+      </div>
+      <div class="flex justify-between">
+        <p class="uppercase font-semibold">Email :</p>
+        <p class="font-semibold p-2">{{ orderDetails?.email }}</p>
+      </div>
+      <div class="flex justify-between">
+        <p class="uppercase font-semibold">Ngày đặt hàng :</p>
+        <p class="font-semibold p-2">{{ orderDetails?.date }}</p>
+      </div>
+      <div class="flex justify-between">
+        <p class="uppercase font-semibold">Trạng thái :</p>
+        <p class="font-semibold p-2">
+          <span
+            [ngClass]="
+              orderDetails?.status === 0
+                ? 'bg-yellow-100 text-orange-500 p-2 rounded-2xl font-semibold'
+                : orderDetails?.status === 1
+                ? 'bg-green-100 text-green-500 p-2 rounded-2xl font-semibold'
+                : 'bg-blue-100 text-blue-500 p-2 rounded-2xl font-semibold'
+            "
+            >{{
+              orderDetails?.status === 0
+                ? "Đang chờ xử lí"
+                : orderDetails?.status === 1
+                ? "Đã xác nhận"
+                : "Đang vận chuyển"
+            }}</span
+          >
+        </p>
+      </div>
+      <div class="flex justify-between">
+        <p class="uppercase font-semibold">Thay đổi trạng thái đơn hàng :</p>
+        <select
+          name=""
+          id=""
+          class="p-2 rounded-2xl outline-none bg-slate-100"
+          (change)="
+            OnchangeStatusOrder(
+              $event,
+              orderDetails._id,
+              orderDetails.userId,
+              orderDetails.code
+            )
+          "
+        >
+          <option>Thay đổi trạng thái</option>
+          <option value="0">Đang chờ xử lí</option>
+          <option value="1">Đã xác nhận</option>
+          <option value="2">Đang vận chuyển</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <table class="border-collapse table-auto w-full text-sm relative">
+    <thead>
+      <tr class="h-10">
+        <th>STT</th>
+        <th>Hình ảnh</th>
+        <th>Tên</th>
+        <th>Số lượng</th>
+        <th>Tổng tiền</th>
+        <th>Thanh toán</th>
+      </tr>
+    </thead>
+    <tbody class="text-center">
+      <tr
+        class="h-10"
+        *ngFor="let product of listOfProductsBuyed; let i = index"
+      >
+        <td class="border-b border-slate-100 p-2">{{ i + 1 }}</td>
+        <td class="border-b border-slate-100 p-2">
+          <img
+            [src]="product.image"
+            alt="ảnh Lỗi"
+            class="max-w-[100px] text-center inline-block"
+          />
+        </td>
+        <td class="border-b border-slate-100 p-2">{{ product.name }}</td>
+        <td class="border-b border-slate-100 p-2">{{ product.quantity }}</td>
+        <td class="border-b border-slate-100 p-2">
+          {{ product.quantity * product.price }} đ
+        </td>
+        <td class="border-b border-slate-100 p-2">
+          {{ orderDetails.paymentMethod }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="w-full flex justify-end items-center p-2 mt-3">
+    <p class="font-semibold text-[1rem]">
+      Tổng tiền đơn hàng: {{ orderDetails?.total }} đ
+    </p>
+  </div>
+</div>

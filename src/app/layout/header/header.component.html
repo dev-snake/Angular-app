@@ -19,6 +19,7 @@
   <div>
     <i
       class="bx bx-search p-2 bg-[#eee] mr-2 rounded-xl font-medium hover:cursor-pointer"
+      (click)="toggleSearch()"
     ></i>
     <a routerLink="cart">
       <i
@@ -32,7 +33,7 @@
     ></i>
   </div>
   <div
-    class="absolute right-0 bg-white top-20 transition-all p-4 rounded-md z-[100] hidden"
+    class="absolute right-0 bg-white top-20 p-4 rounded-md z-[100] hidden shadow-md transition-all duration-300"
     #showToast
   >
     @if(isLoggedIn()){
@@ -60,6 +61,19 @@
       >Đăng kí</a
     >
     }
+  </div>
+  <div
+    class="absolute top-20 right-2 bg-slate-50 p-2 rounded-xl shadow-sm hidden transition-all duration-300 ease-in-out"
+    #showSearch
+  >
+    <input
+      type="text"
+      class="p-2 outline-none rounded-xl mr-2 shadow-xl w-60"
+      placeholder="Nhập tên sản phẩm . . ."
+    />
+    <i
+      class="bx bx-search inline-block p-2 bg-blue-500 text-white rounded-xl cursor-pointer"
+    ></i>
   </div>
 </header>
 <div
