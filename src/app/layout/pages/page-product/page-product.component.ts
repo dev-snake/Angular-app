@@ -61,31 +61,31 @@ export class PageProductComponent implements OnInit {
     this.api.getCategories().subscribe((categories: Category) => {
       this.category = categories;
     });
-    this.getCategory_One();
-    this.getProductsTwo();
-    this.getProductsThree();
-    this.getProductsFour();
+    this.getProductsKeyboard();
+    this.getProductsMouse();
+    this.getProductsMousePads();
+    this.getOtherAccs();
   }
-  getCategory_One() {
-    this.api.getProductCategoryOne().subscribe((data: any) => {
+  getProductsKeyboard() {
+    this.api.getProductCategoryKeyboard().subscribe((data: any) => {
       this.mechanical_keyboard = data;
     });
     return this.mechanical_keyboard;
   }
-  getProductsTwo() {
-    return this.api.getProductCategoryTwo().subscribe((data) => {
+  getProductsMouse() {
+    return this.api.getProductCategoryMouse().subscribe((data) => {
       this.mouse = data;
       return data;
     });
   }
-  getProductsThree() {
-    return this.api.getProductCategoryThree().subscribe((data) => {
+  getProductsMousePads() {
+    return this.api.getProductCategoryMousePads().subscribe((data) => {
       this.mouse_pads = data;
       return data;
     });
   }
-  getProductsFour() {
-    return this.api.getProductCategoryFour().subscribe((data) => {
+  getOtherAccs() {
+    return this.api.getOtherAccs().subscribe((data) => {
       this.otherAccessories = data;
     });
   }

@@ -19,16 +19,16 @@ export class ApiService {
   getCategories(): Observable<Category> {
     return this.http.get<Category>(`http://localhost:3000/categories`);
   }
-  getProductCategoryOne(): Observable<Category> {
+  getProductCategoryKeyboard(): Observable<Category> {
     return this.http.get<Category>(`http://localhost:3000/data/1`);
   }
-  getProductCategoryTwo(): Observable<Category> {
+  getProductCategoryMouse(): Observable<Category> {
     return this.http.get<Category>(`http://localhost:3000/data/2`);
   }
-  getProductCategoryThree(): Observable<Category> {
+  getProductCategoryMousePads(): Observable<Category> {
     return this.http.get<Category>(`http://localhost:3000/data/3`);
   }
-  getProductCategoryFour(): Observable<Category> {
+  getOtherAccs(): Observable<Category> {
     return this.http.get<Category>(`http://localhost:3000/data/4`);
   }
   updateProduct(product: Products): Observable<Products[]> {
