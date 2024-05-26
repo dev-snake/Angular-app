@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Products } from '../../../interface';
+import { Order, Products } from '../../../interface';
 import { AuthService } from '../../../service/auth/auth.service';
 import { User } from '../../../interface';
 import { CommonModule } from '@angular/common';
@@ -19,10 +19,10 @@ import {
   styleUrl: './page-payment.component.css',
 })
 export class PagePaymentComponent {
-  user: User | undefined;
-  isLoggedIn: boolean = false;
-  paymentForm!: FormGroup;
-  message: string = 'Đã đặt hàng thành công';
+  public user: User | undefined;
+  public isLoggedIn: boolean = false;
+  public paymentForm!: FormGroup;
+  public message: string = 'Đã đặt hàng thành công';
   constructor(
     private cartService: CartApiService,
     private authService: AuthService,
@@ -82,7 +82,7 @@ export class PagePaymentComponent {
         userId: this.user?._id,
         userOrder: this.user?.lastName + ' ' + this.user?.firstName,
       };
-      this.cartService.createOrder(order).subscribe((data) => {
+      this.cartService.createOrder(order).subscribe((order: Order) => {
         const messageDiv = document.createElement('div');
         messageDiv.textContent = this.message;
         messageDiv.style.position = 'fixed';

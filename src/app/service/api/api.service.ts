@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { User, Products, Order, Category } from '../../interface';
+import { Products, Category } from '../../interface';
 @Injectable({
   providedIn: 'root',
 })
@@ -35,7 +35,7 @@ export class ApiService {
   updateProduct(product: Products): Observable<Products[]> {
     return this.http.put<Products[]>(
       `http://localhost:3000/data/${product._id}`,
-      product
+      this.httpOptions
     );
   }
 }

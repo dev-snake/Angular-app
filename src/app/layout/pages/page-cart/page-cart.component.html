@@ -25,7 +25,7 @@
               class="w-[100px] rounded-2xl p-2 border-2 outline-none"
               [value]="item.quantity"
               #value
-              (change)="updateQuantity(item._id, value && value.value)"
+              (change)="updateQuantity(item._id, +value.value)"
             />
           </td>
           <td class="font-medium tracking-[1.6px]">

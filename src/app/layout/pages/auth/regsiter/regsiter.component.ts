@@ -17,10 +17,10 @@ import { User } from '../../../../interface';
   styleUrl: './regsiter.component.css',
 })
 export class RegsiterComponent {
-  message: string = 'Vui lòng nhập đầy đủ thông tin';
-  messageExist: string = 'Username hoặc email đã tồn tại';
-  messageSuccess: string = 'Đăng ký thành công';
-  registerForm: FormGroup;
+  public message: string = 'Vui lòng nhập đầy đủ thông tin';
+  public messageExist: string = 'Username hoặc email đã tồn tại';
+  public messageSuccess: string = 'Đăng ký thành công';
+  public registerForm: FormGroup;
   constructor(private auth: AuthService, private router: Router) {
     this.registerForm = new FormGroup({
       firstName: new FormControl('', Validators.required),
@@ -57,9 +57,9 @@ export class RegsiterComponent {
       }, 1000);
       return;
     }
-    this.auth.getUsers().subscribe((Exits) => {
+    this.auth.getUsers().subscribe((users: User[]) => {
       const { username, email } = this.registerForm.value;
-      const checkExits = Exits.find(
+      const checkExits = users.find(
         (exist: User) => exist.username === username || exist.email === email
       );
       if (checkExits) {
@@ -81,7 +81,7 @@ export class RegsiterComponent {
         }, 1000);
         return;
       }
-      this.auth.register(this.registerForm.value).subscribe((res) => {
+      this.auth.register(this.registerForm.value).subscribe((users: User) => {
         const messageDiv = document.createElement('div');
         messageDiv.textContent = this.messageSuccess;
         messageDiv.style.position = 'fixed';

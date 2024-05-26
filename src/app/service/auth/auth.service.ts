@@ -29,8 +29,8 @@ export class AuthService {
   isLoggedIn(): boolean {
     return JSON.parse(localStorage.getItem('isLoggedIn') || 'false');
   }
-  getUsers(): Observable<any> {
-    return this.http.get<any>(`http://localhost:3000/users`);
+  getUsers(): Observable<User[]> {
+    return this.http.get<User[]>(`http://localhost:3000/users`);
   }
   register(user: User): Observable<User> {
     return this.http.post<User>(
@@ -39,6 +39,6 @@ export class AuthService {
     );
   }
   postComment(data: any): Observable<any> {
-    return this.http.post('http://localhost:3000/comments', data);
+    return this.http.post('http://localhost:3000/comments', this.httpOptions);
   }
 }

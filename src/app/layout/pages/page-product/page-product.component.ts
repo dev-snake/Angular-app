@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-
 import { Products } from '../../../interface';
 import { Category } from '../../../interface';
 import { RouterLink } from '@angular/router';

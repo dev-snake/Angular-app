@@ -10,9 +10,9 @@ import { RouterLink } from '@angular/router';
   styleUrl: './page-cart.component.css',
 })
 export class PageCartComponent {
-  private storageKey = 'cart';
-  carts: Products[] = [];
-  total = 0;
+  private storageKey: string = 'cart';
+  public carts: Products[] = [];
+  public total: number = 0;
   constructor(private cartService: CartApiService) {
     this.carts = this.cartService.getItems();
     this.loadCartFromLocalStorage();
@@ -33,8 +33,8 @@ export class PageCartComponent {
     this.loadCartFromLocalStorage();
     this.calculateTotal();
   }
-  updateQuantity(_id: string, quantity: any) {
-    this.cartService.updateQuantity(_id, Number(quantity));
+  updateQuantity(_id: string, quantity: number) {
+    this.cartService.updateQuantity(_id, quantity);
     this.loadCartFromLocalStorage();
     this.calculateTotal();
   }

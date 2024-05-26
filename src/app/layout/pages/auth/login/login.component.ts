@@ -12,8 +12,8 @@ import { User } from '../../../../interface';
   styleUrl: './login.component.css',
 })
 export class LoginComponent {
-  loginForm: FormGroup;
-  userFound: boolean = false;
+  public loginForm: FormGroup;
+  public userFound: boolean = false;
   constructor(private authService: AuthService, private router: Router) {
     this.loginForm = new FormGroup({
       username: new FormControl('', Validators.required),
@@ -24,7 +24,7 @@ export class LoginComponent {
     if (this.loginForm.invalid) {
       return;
     }
-    this.authService.getUsers().subscribe((users: any) => {
+    this.authService.getUsers().subscribe((users: User[]) => {
       const { username, password } = this.loginForm.value;
       this.userFound = false;
       users.forEach((user: User) => {
