@@ -15,15 +15,15 @@ import { ApiService } from '../../../service/api/api.service';
   styleUrl: './page-product.component.css',
 })
 export class PageProductComponent implements OnInit {
-  data: Products[] = [];
-  category: any;
-  message: string = 'Đã thêm vào giỏ hàng';
-  dataFilter: any;
-  queryFiter: any;
-  mechanical_keyboard: any;
-  mouse: any;
-  mouse_pads: any;
-  otherAccessories: any;
+  public renderList: Products[] = [];
+  public category: Category[] = [];
+  public message: string | null = 'Đã thêm vào giỏ hàng';
+  public dataFilter: Products[] = [];
+  public queryFiter: string | null = null;
+  public mechanical_keyboard: Products[] = [];
+  public mouse: Products[] = [];
+  public mouse_pads: Products[] = [];
+  public otherAccessories: Products[] = [];
   constructor(
     private cartService: CartApiService,
     private route: ActivatedRoute,
@@ -50,15 +50,19 @@ export class PageProductComponent implements OnInit {
   }
   ngOnInit() {
     this.route.queryParamMap.subscribe((params) => {
-      this.api.getProducts().subscribe((data: any) => {
-        this.dataFilter = data.filter((product: any) => {
+      this.api.getProducts().subscribe((products: Products[]) => {
+        this.dataFilter = products.filter((product: Products) => {
           return product.category === Number(params.get('filter'));
         });
         this.queryFiter = params.get('filter');
       });
     });
-    this.api.getProducts().subscribe((data: any) => (this.data = data));
-    this.api.getCategories().subscribe((categories: Category) => {
+    this.api
+      .getProducts()
+      .subscribe(
+        (products: Products[]) => (this.renderList = products.slice(0, 10))
+      );
+    this.api.getCategories().subscribe((categories: Category[]) => {
       this.category = categories;
     });
     this.getProductsKeyboard();
@@ -67,26 +71,28 @@ export class PageProductComponent implements OnInit {
     this.getOtherAccs();
   }
   getProductsKeyboard() {
-    this.api.getProductCategoryKeyboard().subscribe((data: any) => {
-      this.mechanical_keyboard = data;
+    this.api.getProductCategoryKeyboard().subscribe((products: Products[]) => {
+      this.mechanical_keyboard = products;
     });
     return this.mechanical_keyboard;
   }
   getProductsMouse() {
-    return this.api.getProductCategoryMouse().subscribe((data) => {
-      this.mouse = data;
-      return data;
-    });
+    return this.api
+      .getProductCategoryMouse()
+      .subscribe((products: Products[]) => {
+        this.mouse = products;
+      });
   }
   getProductsMousePads() {
-    return this.api.getProductCategoryMousePads().subscribe((data) => {
-      this.mouse_pads = data;
-      return data;
-    });
+    return this.api
+      .getProductCategoryMousePads()
+      .subscribe((products: Products[]) => {
+        this.mouse_pads = products;
+      });
   }
   getOtherAccs() {
-    return this.api.getOtherAccs().subscribe((data) => {
-      this.otherAccessories = data;
+    return this.api.getOtherAccs().subscribe((products: Products[]) => {
+      this.otherAccessories = products;
     });
   }
 }

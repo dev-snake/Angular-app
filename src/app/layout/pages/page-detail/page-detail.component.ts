@@ -19,10 +19,10 @@ import { HttpParams } from '@angular/common/http';
   styleUrl: './page-detail.component.css',
 })
 export class PageDetailComponent implements OnInit {
-  product: Products | undefined;
-  message: string = 'Đã thêm vào giỏ hàng';
-  formComment: FormGroup;
-  commentList: Comment[] = [];
+  public product: Products | undefined;
+  public message: string = 'Đã thêm vào giỏ hàng';
+  public formComment: FormGroup;
+  public commentList: Comment[] = [];
   constructor(
     private route: ActivatedRoute,
     private cartService: CartApiService,
@@ -31,7 +31,7 @@ export class PageDetailComponent implements OnInit {
   ) {
     const routeParams = this.route.snapshot.paramMap;
     const productIdFromRoute = String(routeParams.get('productId'));
-    this.apiProducts.getProducts().subscribe((products: any) => {
+    this.apiProducts.getProducts().subscribe((products: Products[]) => {
       this.product = products.find(
         (product: Products) => product._id === productIdFromRoute
       );
@@ -76,7 +76,7 @@ export class PageDetailComponent implements OnInit {
   onSubmit() {
     const getUrl = new HttpParams().set('productId', this.product?._id || '');
     const productId = getUrl.get('productId');
-    this.apiProducts.getProducts().subscribe((products: any) => {
+    this.apiProducts.getProducts().subscribe((products: Products[]) => {
       this.product = products.find(
         (product: Products) => product._id === productId
       );

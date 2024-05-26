@@ -11,6 +11,7 @@ const product = new Schema(
     description: { type: String, default: " " },
     sale: { type: Number, default: 0 },
     comments: { type: Array, default: [] },
+    views: { type: Number, default: 0 },
   },
   {
     timestamps: true,

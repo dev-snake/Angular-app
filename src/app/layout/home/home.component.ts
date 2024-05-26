@@ -38,8 +38,8 @@ export class HomeComponent {
     }, 1000);
   }
   ngOnInit() {
-    this.apiService
-      .getProducts()
-      .subscribe((data: any) => (this.products = data));
+    this.apiService.getProducts().subscribe((products: Products[]) => {
+      this.products = products.slice(0, 10);
+    });
   }
 }

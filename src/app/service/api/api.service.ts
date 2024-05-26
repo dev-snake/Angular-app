@@ -12,24 +12,25 @@ export class ApiService {
       Authorization: 'my-auth-token',
     }),
   };
+
   constructor(private http: HttpClient) {}
   getProducts(): Observable<Products[]> {
-    return this.http.get<Products[]>('http://localhost:3000/dataLimit');
+    return this.http.get<Products[]>('http://localhost:3000');
   }
-  getCategories(): Observable<Category> {
-    return this.http.get<Category>(`http://localhost:3000/categories`);
+  getCategories(): Observable<Category[]> {
+    return this.http.get<Category[]>(`http://localhost:3000/categories`);
   }
-  getProductCategoryKeyboard(): Observable<Category> {
-    return this.http.get<Category>(`http://localhost:3000/data/1`);
+  getProductCategoryKeyboard(): Observable<Products[]> {
+    return this.http.get<Products[]>(`http://localhost:3000/data/1`);
   }
-  getProductCategoryMouse(): Observable<Category> {
-    return this.http.get<Category>(`http://localhost:3000/data/2`);
+  getProductCategoryMouse(): Observable<Products[]> {
+    return this.http.get<Products[]>(`http://localhost:3000/data/2`);
   }
-  getProductCategoryMousePads(): Observable<Category> {
-    return this.http.get<Category>(`http://localhost:3000/data/3`);
+  getProductCategoryMousePads(): Observable<Products[]> {
+    return this.http.get<Products[]>(`http://localhost:3000/data/3`);
   }
-  getOtherAccs(): Observable<Category> {
-    return this.http.get<Category>(`http://localhost:3000/data/4`);
+  getOtherAccs(): Observable<Products[]> {
+    return this.http.get<Products[]>(`http://localhost:3000/data/4`);
   }
   updateProduct(product: Products): Observable<Products[]> {
     return this.http.put<Products[]>(
