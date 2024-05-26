@@ -18,8 +18,8 @@ export class HomeComponent {
   ) {}
   message: string = 'Đã thêm vào giỏ hàng';
   products: Products[] = [];
-  addToCart(products: Products) {
-    this.cartService.addToCart(products);
+  addToCart(products: Products, quantity: number) {
+    this.cartService.addToCart(products, quantity);
     const messageDiv = document.createElement('div');
     messageDiv.textContent = this.message;
     messageDiv.style.position = 'fixed';

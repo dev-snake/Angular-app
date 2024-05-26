@@ -28,8 +28,8 @@ export class PageProductComponent implements OnInit {
     private route: ActivatedRoute,
     private api: ApiService
   ) {}
-  addToCart(product: Products) {
-    this.cartService.addToCart(product);
+  addToCart(product: Products, quantity: number) {
+    this.cartService.addToCart(product, quantity);
     const messageDiv = document.createElement('div');
     messageDiv.textContent = this.message;
     messageDiv.style.position = 'fixed';

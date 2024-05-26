@@ -1,1 +1,94 @@
-<p>personal-information works!</p>
+<div class="">
+  <p class="text-xl font-semibold">Thông tin tài khoản</p>
+  <div class="p-2">
+    <form
+      [formGroup]="updateAccount"
+      (ngSubmit)="updateUser()"
+      class="max-w-[500px] mx-auto"
+    >
+      <div class="flex items-center gap-10 justify-between">
+        <label for="" class="text-[1rem] font-medium">Họ và tên : </label>
+        <input
+          type="text"
+          class="border-2 p-2 rounded-xl max-w-[350px] w-full"
+        />
+      </div>
+      <div class="flex gap-10 mt-2">
+        <label for="" class="text-[1rem] font-medium">Giới tính : </label>
+        <div class="flex gap-10 ml-10">
+          <div class="flex items-center gap-2">
+            <label for="male">Nam</label>
+            <input type="radio" formControlName="sex" value="1" />
+          </div>
+          <div class="flex items-center gap-2">
+            <label for="female">Nữ</label>
+            <input type="radio" formControlName="sex" value="2" />
+          </div>
+        </div>
+      </div>
+      <div class="mt-2 flex gap-10 items-center justify-between">
+        <label for="phonenumber" class="text-[1rem] font-medium"
+          >Số điện thoại</label
+        >
+        <input
+          type="text"
+          class="border-2 p-2 rounded-xl max-w-[350px] w-full"
+          formControlName="phonenumber"
+        />
+      </div>
+      <div class="mt-2 flex gap-10 items-center justify-between">
+        <label for="email" class="text-[1rem] font-medium">Email : </label>
+        <input
+          type="email"
+          class="border-2 p-2 rounded-xl max-w-[350px] w-full"
+          formControlName="email"
+        />
+      </div>
+      <div class="mt-2 flex gap-10 items-center justify-between">
+        <label for="dateOfBirth" class="text-[1rem] font-medium"
+          >Ngày sinh</label
+        >
+        <div class="w-[70%] flex justify-between">
+          <select
+            formControlName="date"
+            id=""
+            class="border-2 p-2 rounded-xl outline-none"
+          >
+            <option value="">ngày sinh</option>
+            <option *ngFor="let date of getDaysArray()" [value]="date">
+              {{ date }}
+            </option>
+          </select>
+          <select
+            formControlName="month"
+            id=""
+            class="border-2 p-2 rounded-xl outline-none"
+          >
+            <option value="">Tháng sinh</option>
+            <option *ngFor="let month of getMonthsArray()" [value]="month">
+              {{ month }}
+            </option>
+          </select>
+          <select
+            name="years"
+            id=""
+            class="border-2 p-2 rounded-xl outline-none"
+          >
+            <option value="">Năm sinh</option>
+            <option *ngFor="let year of getYearsArray()" [value]="year">
+              {{ year }}
+            </option>
+          </select>
+        </div>
+      </div>
+      <div class="ml-2">
+        <button
+          class="bg-blue-400 p-2 rounded-xl text-white font-semibold w-52 mt-2 ml-36"
+          type="submit"
+        >
+          Lưu thay đổi
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -32,10 +32,11 @@
             class="transition-all rounded-xl p-3 shadow-md focus:outline-none focus:ring focus:ring-blue-400"
             min="1"
             value="1"
+            #quantity
           />
           <button
             class="bg-[#2e86f1] p-3 text-white rounded-xl ml-4 focus:ring"
-            (click)="product && addToCart(product)"
+            (click)="product && addToCart(product, +quantity.value)"
           >
             Thêm vào giỏ hàng
           </button>

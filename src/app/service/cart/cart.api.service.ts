@@ -13,46 +13,46 @@ export class CartApiService {
     }),
   };
   public storageKey = 'cart';
-  public items: Products[] = [];
+  public carts: Products[] = [];
   constructor(private http: HttpClient) {
     this.loadCartFromLocalStorage();
   }
   private loadCartFromLocalStorage() {
     const savedCart = JSON.parse(localStorage.getItem(this.storageKey) || '[]');
-    this.items = savedCart;
+    this.carts = savedCart;
   }
   private saveCartToLocalStorage() {
-    localStorage.setItem(this.storageKey, JSON.stringify(this.items));
+    localStorage.setItem(this.storageKey, JSON.stringify(this.carts));
   }
-  addToCart(product: Products) {
-    const existingItem = this.items.find((item) => item._id === product._id);
+  addToCart(product: Products, quantity: number) {
+    const existingItem = this.carts.find((cart) => cart._id === product._id);
     if (existingItem) {
       existingItem.quantity = (existingItem.quantity ?? 0) + 1;
     } else {
-      this.items.push({ ...product, quantity: 1 });
+      this.carts.push({ ...product, quantity: quantity || 1 });
     }
     this.saveCartToLocalStorage();
   }
 
   getItems() {
-    return this.items;
+    return this.carts;
   }
   deleteItemCart(_id: string) {
-    this.items = this.items.filter((item) => item._id !== _id);
+    this.carts = this.carts.filter((cart) => cart._id !== _id);
     this.saveCartToLocalStorage();
-    return this.items;
+    return this.carts;
   }
   updateQuantity(_id: string, quantity: number) {
-    const existingItem = this.items.find((item) => item._id === _id);
+    const existingItem = this.carts.find((cart) => cart._id === _id);
     if (existingItem) {
       if (quantity <= 0) {
-        this.items = this.items.filter((item) => item._id !== _id);
+        this.carts = this.carts.filter((cart) => cart._id !== _id);
       } else {
         existingItem.quantity = quantity;
       }
     }
     this.saveCartToLocalStorage();
-    return this.items;
+    return this.carts;
   }
   createOrder(order: any): Observable<any> {
     return this.http.post('http://localhost:3000/create-order', order);
