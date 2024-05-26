@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { AuthService } from '../pages/auth/auth.service';
+import { AuthService } from '../../service/auth/auth.service';
 @Component({
   selector: 'app-header',
   standalone: true,

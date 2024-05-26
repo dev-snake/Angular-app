@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { CartService } from '../page-cart/cart.service';
 import { Products } from '../../../interface';
-import { AuthService } from '../auth/auth.service';
+import { AuthService } from '../../../service/auth/auth.service';
 import { User } from '../../../interface';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { CartApiService } from '../../../service/cart/cart.api.service';
 import {
   ReactiveFormsModule,
   FormGroup,
@@ -24,7 +24,7 @@ export class PagePaymentComponent {
   paymentForm!: FormGroup;
   message: string = 'Đã đặt hàng thành công';
   constructor(
-    private cartService: CartService,
+    private cartService: CartApiService,
     private authService: AuthService,
     private router: Router
   ) {

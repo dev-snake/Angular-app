@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Products, Comment } from '../../../interface';
-import { AppRootService } from '../../../app-root.service';
-import { CartService } from '../page-cart/cart.service';
+import { CartApiService } from '../../../service/cart/cart.api.service';
+import { ApiService } from '../../../service/api/api.service';
 import {
   FormControl,
   FormGroup,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { AuthService } from '../auth/auth.service';
+import { AuthService } from '../../../service/auth/auth.service';
 import { HttpParams } from '@angular/common/http';
 @Component({
   selector: 'app-page-detail',
@@ -19,27 +19,24 @@ import { HttpParams } from '@angular/common/http';
   styleUrl: './page-detail.component.css',
 })
 export class PageDetailComponent implements OnInit {
-  urlImage = '../../assets/images/m1wden.png';
   product: Products | undefined;
   message: string = 'Đã thêm vào giỏ hàng';
   formComment: FormGroup;
   commentList: Comment[] = [];
-
   constructor(
     private route: ActivatedRoute,
-    private data: AppRootService,
-    private cartService: CartService,
-    private authService: AuthService
+    private cartService: CartApiService,
+    private authService: AuthService,
+    private apiProducts: ApiService
   ) {
     const routeParams = this.route.snapshot.paramMap;
     const productIdFromRoute = String(routeParams.get('productId'));
-    this.data.getProducts().subscribe((products: any) => {
+    this.apiProducts.getProducts().subscribe((products: any) => {
       this.product = products.find(
         (product: Products) => product._id === productIdFromRoute
       );
       if (this.product) {
         this.commentList = this.product.comments;
-        console.log(this.commentList);
       }
     });
     const day = new Date();
@@ -79,14 +76,13 @@ export class PageDetailComponent implements OnInit {
   onSubmit() {
     const getUrl = new HttpParams().set('productId', this.product?._id || '');
     const productId = getUrl.get('productId');
-    this.data.getProducts().subscribe((products: any) => {
+    this.apiProducts.getProducts().subscribe((products: any) => {
       this.product = products.find(
         (product: Products) => product._id === productId
       );
       if (this.product) {
         this.product?.comments.push(this.formComment.value);
-        console.log(this.product);
-        this.data.updateProduct(this.product).subscribe((res) => {
+        this.apiProducts.updateProduct(this.product).subscribe((res) => {
           this.commentList = this.product?.comments || [];
         });
       }

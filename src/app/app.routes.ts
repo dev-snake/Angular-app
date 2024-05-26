@@ -7,13 +7,19 @@ import { PagePaymentComponent } from './layout/pages/page-payment/page-payment.c
 import { LoginComponent } from './layout/pages/auth/login/login.component';
 import { RegsiterComponent } from './layout/pages/auth/regsiter/regsiter.component';
 import { PageNotFoundComponent } from './layout/pages/page-not-found/page-not-found.component';
-import { PageProfileComponent } from './layout/pages/page-profile/page-profile.component';
-import { PersonalInformationComponent } from './layout/pages/page-profile/personal-information/personal-information.component';
+
 export const routes: Routes = [
   {
     path: 'admin',
     loadChildren: () =>
       import('./admin/admin.module').then((m) => m.AdminModule),
+  },
+  {
+    path: 'profile',
+    loadChildren: () =>
+      import('../app/layout/pages/profile/profile.module').then(
+        (m) => m.ProfileModule
+      ),
   },
   {
     path: '',
@@ -43,16 +49,6 @@ export const routes: Routes = [
   {
     path: 'regsiter',
     component: RegsiterComponent,
-  },
-  {
-    path: 'profile',
-    component: PageProfileComponent,
-    children: [
-      {
-        path: 'personal-information',
-        component: PersonalInformationComponent,
-      },
-    ],
   },
   {
     path: '**',

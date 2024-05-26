@@ -1,6 +1,6 @@
 <section class="max-w-[1300px] mx-auto mt-6">
   <div class="flex justify-center gap-4">
-    @for (item of categrory; track item._id) {
+    @for (item of category; track item._id) {
     <a
       [routerLink]="['/products']"
       [queryParams]="{ filter: item.category_id }"

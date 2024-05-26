@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { OrdersService } from './orders.service';
+import { ApiService } from '../service/api/api.service';
 import { RouterLink } from '@angular/router';
-import { Router } from '@angular/router';
+import { Order } from '../../interface';
 @Component({
   selector: 'app-manage-orders',
   standalone: true,
@@ -11,14 +11,11 @@ import { Router } from '@angular/router';
   styleUrl: './manage-orders.component.css',
 })
 export class ManageOrdersComponent implements OnInit {
-  orders: any = [];
-  constructor(private ordersService: OrdersService) {}
+  orders: Order[] | undefined;
+  constructor(private apiOrders: ApiService) {}
   ngOnInit() {
-    this.ordersService.getOrders().subscribe((orders) => {
+    this.apiOrders.getOrders().subscribe((orders: Order[]) => {
       this.orders = orders;
     });
-  }
-  editOrder(value: string) {
-    console.log(value);
   }
 }

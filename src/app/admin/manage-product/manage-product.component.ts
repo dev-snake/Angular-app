@@ -1,6 +1,7 @@
 import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ManageProductService } from './manage-product.service';
+import { CrudService as CRUD_SERVICE_PRODUCT } from '../service/crud-product/crud.service';
+import { CrudService as CRUD_SERVICE_CATEGORY } from '../service/crud-category/crud.service';
 import {
   FormControl,
   FormGroup,
@@ -8,10 +9,9 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { Category } from '../../interface';
 
 @Component({
-  selector: 'app-manage-product',
+  selector: 'app-CRUD_PRODUCT-product',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, FormsModule],
   templateUrl: './manage-product.component.html',
@@ -26,7 +26,10 @@ export class ManageProductComponent implements OnInit {
   productFormUpdate: FormGroup;
   currentProductId: number | null = null;
 
-  constructor(private manage: ManageProductService) {
+  constructor(
+    private CRUD_PRODUCT: CRUD_SERVICE_PRODUCT,
+    private CRUD_CATEGORY: CRUD_SERVICE_CATEGORY
+  ) {
     this.productForm = new FormGroup({
       name: new FormControl('', [Validators.required]),
       price: new FormControl('', [
@@ -57,13 +60,13 @@ export class ManageProductComponent implements OnInit {
   }
 
   getProducts() {
-    this.manage.getProducts().subscribe((products) => {
+    this.CRUD_PRODUCT.getProducts().subscribe((products) => {
       this.products = products;
     });
   }
 
   getCategories() {
-    this.manage.getCategories().subscribe((categories) => {
+    this.CRUD_CATEGORY.getCategories().subscribe((categories) => {
       this.categories = categories;
     });
   }
@@ -81,13 +84,14 @@ export class ManageProductComponent implements OnInit {
 
   updateProduct() {
     if (this.productFormUpdate.valid && this.currentProductId) {
-      this.manage
-        .updateProduct(this.currentProductId, this.productFormUpdate.value)
-        .subscribe(() => {
-          this.getProducts();
-          this.form_edit.nativeElement.classList.add('hidden');
-          this.currentProductId = null;
-        });
+      this.CRUD_PRODUCT.updateProduct(
+        this.currentProductId,
+        this.productFormUpdate.value
+      ).subscribe(() => {
+        this.getProducts();
+        this.form_edit.nativeElement.classList.add('hidden');
+        this.currentProductId = null;
+      });
     }
   }
 
@@ -96,7 +100,7 @@ export class ManageProductComponent implements OnInit {
       'Bạn có chắc chắn muốn xóa sản phẩm này không?'
     );
     if (confirmed) {
-      this.manage.deleteProduct(id).subscribe(() => {
+      this.CRUD_PRODUCT.deleteProduct(id).subscribe(() => {
         this.getProducts();
       });
     }
@@ -107,7 +111,7 @@ export class ManageProductComponent implements OnInit {
   }
   addProduct() {
     if (this.productForm.valid) {
-      this.manage.createProduct(this.productForm.value).subscribe(() => {
+      this.CRUD_PRODUCT.createProduct(this.productForm.value).subscribe(() => {
         this.getProducts();
         this.productForm.reset();
         this.form_add.nativeElement.classList.add('hidden');

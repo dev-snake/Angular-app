@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { OrderDetailsService } from './order-details.service';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { OrdersService } from '../service/manage-orders/orders.service';
+import { ApiService } from '../service/api/api.service';
 @Component({
   selector: 'app-order-detail',
   standalone: true,
@@ -17,7 +18,8 @@ export class OrderDetailComponent implements OnInit {
   updateOrderList: any;
   constructor(
     private route: ActivatedRoute,
-    private ordersService: OrderDetailsService
+    private ordersService: OrdersService,
+    private apiOrders: ApiService
   ) {}
   ngOnInit(): void {
     this.getOrdersList();
@@ -25,7 +27,7 @@ export class OrderDetailComponent implements OnInit {
   getOrdersList() {
     this.route.params.subscribe((params) => {
       this.orderId = params['id'];
-      this.ordersService.getOrders().subscribe((orders: any) => {
+      this.apiOrders.getOrders().subscribe((orders: any) => {
         this.orderDetails = orders.find(
           (order: any) => order.code === this.orderId
         );
@@ -34,7 +36,7 @@ export class OrderDetailComponent implements OnInit {
     });
   }
   updateOrders() {
-    this.ordersService.getOrders().subscribe((orderList: any) => {
+    this.apiOrders.getOrders().subscribe((orderList: any) => {
       this.updateOrderList = orderList;
     });
   }

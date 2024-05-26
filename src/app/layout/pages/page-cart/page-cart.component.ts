@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Products } from '../../../interface';
-import { CartService } from './cart.service';
+import { CartApiService } from '../../../service/cart/cart.api.service';
 import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-page-cart',
@@ -13,7 +13,7 @@ export class PageCartComponent {
   private storageKey = 'cart';
   carts: Products[] = [];
   total = 0;
-  constructor(private cartService: CartService) {
+  constructor(private cartService: CartApiService) {
     this.carts = this.cartService.getItems();
     this.loadCartFromLocalStorage();
     this.calculateTotal();

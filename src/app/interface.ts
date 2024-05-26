@@ -25,12 +25,30 @@ export interface User {
   firstName: string;
   lastName: string;
   address: string;
-  role: number;
-  orders: any[];
+  role: string;
+  orders: Order[];
   active: number;
 }
 export interface Comment {
   username_customer: string;
   content: string;
   date: string;
+}
+export interface OrderHistory {
+  code: string;
+  date: string;
+  status: Number;
+}
+export interface Order {
+  _id: string;
+  userId: string;
+  status: Number;
+  total: Number;
+  date: string;
+  paymentMethod: string;
+  address: string;
+  phone: string;
+  email: string;
+  userOrder: string;
+  code: string;
 }

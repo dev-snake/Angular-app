@@ -1,13 +1,8 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../auth.service';
+import { AuthService } from '../../../../service/auth/auth.service';
 import { Router } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
-import {
-  FormBuilder,
-  FormGroup,
-  Validators,
-  FormControl,
-} from '@angular/forms';
+import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { User } from '../../../../interface';
 @Component({
   selector: 'app-login',
@@ -29,7 +24,7 @@ export class LoginComponent {
     if (this.loginForm.invalid) {
       return;
     }
-    this.authService.getUsers().subscribe((users) => {
+    this.authService.getUsers().subscribe((users: any) => {
       const { username, password } = this.loginForm.value;
       this.userFound = false;
       users.forEach((user: User) => {

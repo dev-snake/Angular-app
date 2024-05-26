@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { HomeService } from './home.service';
+import { ApiService } from '../../service/api/api.service';
 import { Products } from '../../interface';
 import { BannerComponent } from '../banner/banner.component';
 import { RouterLink } from '@angular/router';
-import { CartService } from '../pages/page-cart/cart.service';
+import { CartApiService } from '../../service/cart/cart.api.service';
 @Component({
   selector: 'app-home',
   standalone: true,
@@ -13,8 +13,8 @@ import { CartService } from '../pages/page-cart/cart.service';
 })
 export class HomeComponent {
   constructor(
-    private homeService: HomeService,
-    private cartService: CartService
+    private apiService: ApiService,
+    private cartService: CartApiService
   ) {}
   message: string = 'Đã thêm vào giỏ hàng';
   products: Products[] = [];
@@ -38,18 +38,7 @@ export class HomeComponent {
     }, 1000);
   }
   ngOnInit() {
-    // const data = from(
-    //   fetch('http://localhost:3000/data').then((response) => response.json())
-    // );
-    // data.subscribe({
-    //   next(response) {
-    //     console.log(response);
-    //   },
-    //   error(err) {
-    //     console.log(err);
-    //   },
-    // });
-    this.homeService
+    this.apiService
       .getProducts()
       .subscribe((data: any) => (this.products = data));
   }

@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { ManagerUserService } from './manager-user.service';
+import { UserService as LOCK_AND_UNLOCK_USER } from '../service/lock-unlock-user/user.service';
+import { ApiService } from '../service/api/api.service';
 import { User } from '../../interface';
 import { CommonModule } from '@angular/common';
 @Component({
@@ -11,24 +12,26 @@ import { CommonModule } from '@angular/common';
 })
 export class ManageUsersComponent implements OnInit {
   @ViewChild('active') active: ElementRef | undefined;
-  users: any;
-  constructor(private managerUserService: ManagerUserService) {}
+  users: User | any = [];
+  constructor(
+    private manageUser: LOCK_AND_UNLOCK_USER,
+    private apiUser: ApiService
+  ) {}
   ngOnInit(): void {
     this.getUser();
   }
   getUser() {
-    this.managerUserService.getUsers().subscribe((user) => {
+    this.apiUser.getUsers().subscribe((user: User[]) => {
       this.users = user;
-      console.log(this.users);
     });
   }
   lockUser(userId: string) {
-    this.managerUserService.lockUser(userId).subscribe((user) => {
+    this.manageUser.lockUser(userId).subscribe((user: User) => {
       this.getUser();
     });
   }
   unlockUser(userId: string) {
-    this.managerUserService.unlockUser(userId).subscribe((user) => {
+    this.manageUser.unlockUser(userId).subscribe((user: User) => {
       this.getUser();
     });
   }
