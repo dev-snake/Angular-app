@@ -18,11 +18,10 @@ export class HomeComponent {
     private cartService: CartApiService,
     private toastService: ToastService
   ) {}
-  message: string = 'Đã thêm vào giỏ hàng';
   products: Products[] = [];
   addToCart(products: Products, quantity: number) {
     this.cartService.addToCart(products, quantity);
-    this.toastService.showToast(this.message, '#17c964');
+    this.toastService.showToast('Đã thêm vào giỏ hàng', '#17c964');
   }
   ngOnInit() {
     this.apiService.getProducts().subscribe((products: Products[]) => {

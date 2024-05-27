@@ -6,6 +6,7 @@ import { CartApiService } from '../../../service/cart/cart.api.service';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ApiService } from '../../../service/api/api.service';
+import { ToastService } from '../../../service/toast/toast.service';
 @Component({
   selector: 'app-page-product',
   standalone: true,
@@ -16,7 +17,6 @@ import { ApiService } from '../../../service/api/api.service';
 export class PageProductComponent implements OnInit {
   public renderList: Products[] = [];
   public category: Category[] = [];
-  public message: string | null = 'Đã thêm vào giỏ hàng';
   public dataFilter: Products[] = [];
   public queryFiter: string | null = null;
   public mechanical_keyboard: Products[] = [];
@@ -26,26 +26,12 @@ export class PageProductComponent implements OnInit {
   constructor(
     private cartService: CartApiService,
     private route: ActivatedRoute,
-    private api: ApiService
+    private api: ApiService,
+    private toastService: ToastService
   ) {}
   addToCart(product: Products, quantity: number) {
     this.cartService.addToCart(product, quantity);
-    const messageDiv = document.createElement('div');
-    messageDiv.textContent = this.message;
-    messageDiv.style.position = 'fixed';
-    messageDiv.style.top = '4rem';
-    messageDiv.style.right = '4rem';
-    messageDiv.style.backgroundColor = '#18c964';
-    messageDiv.style.color = 'white';
-    messageDiv.style.padding = '10px';
-    messageDiv.style.borderRadius = '1rem';
-    messageDiv.style.transition = 'all 0.5s ease-in-out';
-    messageDiv.style.fontWeight = '500';
-    messageDiv.style.fontFamily = 'Quicksand, sans-serif';
-    document.body.appendChild(messageDiv);
-    setTimeout(() => {
-      messageDiv.remove();
-    }, 1000);
+    this.toastService.showToast('Đã thêm vào giỏ hàng', '#17c964');
   }
   ngOnInit() {
     this.route.queryParamMap.subscribe((params) => {

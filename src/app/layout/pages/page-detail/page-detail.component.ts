@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Products, Comment } from '../../../interface';
 import { CartApiService } from '../../../service/cart/cart.api.service';
 import { ApiService } from '../../../service/api/api.service';
+import { ToastService } from '../../../service/toast/toast.service';
 import {
   FormControl,
   FormGroup,
@@ -27,7 +28,8 @@ export class PageDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private cartService: CartApiService,
     private authService: AuthService,
-    private apiProducts: ApiService
+    private apiProducts: ApiService,
+    private toastService: ToastService
   ) {
     const routeParams = this.route.snapshot.paramMap;
     const productIdFromRoute = String(routeParams.get('productId'));
@@ -56,22 +58,7 @@ export class PageDetailComponent implements OnInit {
 
   addToCart(product: Products, quantity: number) {
     this.cartService.addToCart(product, quantity);
-    const messageDiv = document.createElement('div');
-    messageDiv.textContent = this.message;
-    messageDiv.style.position = 'fixed';
-    messageDiv.style.top = '4rem';
-    messageDiv.style.right = '4rem';
-    messageDiv.style.backgroundColor = '#18c964';
-    messageDiv.style.color = 'white';
-    messageDiv.style.padding = '10px';
-    messageDiv.style.borderRadius = '1rem';
-    messageDiv.style.transition = 'all 0.5s ease-in-out';
-    messageDiv.style.fontWeight = '500';
-    messageDiv.style.fontFamily = 'Quicksand, sans-serif';
-    document.body.appendChild(messageDiv);
-    setTimeout(() => {
-      messageDiv.remove();
-    }, 1000);
+    this.toastService.showToast('Đã thêm vào giỏ hàng', '#17c964');
   }
   onSubmit() {
     const getUrl = new HttpParams().set('productId', this.product?._id || '');
