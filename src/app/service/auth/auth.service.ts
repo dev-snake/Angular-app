@@ -33,12 +33,15 @@ export class AuthService {
     return this.http.get<User[]>(`http://localhost:3000/users`);
   }
   register(user: User): Observable<User> {
-    return this.http.post<User>(
-      'http://localhost:3000/users',
-      this.httpOptions
-    );
+    return this.http.post<User>('http://localhost:3000/users', user);
   }
   postComment(data: any): Observable<any> {
-    return this.http.post('http://localhost:3000/comments', this.httpOptions);
+    return this.http.post('http://localhost:3000/comments', data);
+  }
+  updateAccount(user: User, userId: string): Observable<User> {
+    return this.http.put<User>(
+      `http://localhost:3000/users/${userId}/updateAccount`,
+      user
+    );
   }
 }

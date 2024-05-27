@@ -1,11 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { AuthService } from '../../../../service/auth/auth.service';
 import {
   FormControl,
   ReactiveFormsModule,
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+import { User } from '../../../../interface';
+import { ToastService } from '../../../../service/toast/toast.service';
 @Component({
   selector: 'app-personal-information',
   standalone: true,
@@ -14,17 +17,40 @@ import { CommonModule } from '@angular/common';
   styleUrl: './personal-information.component.css',
 })
 export class PersonalInformationComponent {
+  public user: User | any;
   public updateAccount: FormGroup;
-  constructor() {
+  constructor(
+    private apiAuth: AuthService,
+    private toastService: ToastService
+  ) {
     this.updateAccount = new FormGroup({
-      fullname: new FormControl('', [Validators.required]),
+      lastname: new FormControl(this.user?.username, [Validators.required]),
+      firstname: new FormControl('', [Validators.required]),
       sex: new FormControl('', [Validators.required]),
       phonenumber: new FormControl('', [Validators.required]),
       email: new FormControl('', [Validators.required, Validators.email]),
       day: new FormControl(Number, [Validators.required]),
-      month: new FormControl(Number, [Validators.required]),
-      years: new FormControl(Number, [Validators.required]),
-      date: new FormControl(Number, [Validators.required]),
+      month: new FormControl('', [Validators.required]),
+      years: new FormControl('', [Validators.required]),
+      address: new FormControl('', [Validators.required]),
+    });
+    this.apiAuth.getUsers().subscribe((users: User[]) => {
+      this.user = users.find(
+        (user: User) => user.username === this.apiAuth.getUsername()
+      );
+      if (this.user) {
+        this.updateAccount.patchValue({
+          lastname: this.user.lastname,
+          firstname: this.user.firstname,
+          sex: this.user.sex,
+          phonenumber: this.user.phonenumber,
+          email: this.user.email,
+          address: this.user.address,
+          day: this.user.day || '',
+          month: this.user.month || '',
+          years: this.user.years || '',
+        });
+      }
     });
   }
   getDaysArray(): number[] {
@@ -41,7 +67,16 @@ export class PersonalInformationComponent {
       (_, i) => startYear + i
     );
   }
-  public updateUser() {
+  updateUser() {
+    if (this.updateAccount.invalid) {
+      return;
+    }
     console.log(this.updateAccount.value);
+    this.apiAuth
+      .updateAccount(this.updateAccount.value, this.user._id)
+      .subscribe((user: User) => {
+        console.log(user);
+        this.toastService.showToast('Cập nhật thành công', '#17c964');
+      });
   }
 }

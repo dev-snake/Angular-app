@@ -43,13 +43,15 @@ export class PagePaymentComponent {
       if (this.user) {
         this.isLoggedIn = true;
         this.paymentForm = new FormGroup({
-          firstName: new FormControl(this.user.firstName, [
+          firstname: new FormControl(this.user.firstname, [
             Validators.required,
           ]),
-          lastName: new FormControl(this.user.lastName, [Validators.required]),
+          lastname: new FormControl(this.user.lastname, [Validators.required]),
           email: new FormControl(this.user.email, [Validators.required]),
           address: new FormControl(this.user.address, [Validators.required]),
-          phone: new FormControl('', [Validators.required]),
+          phonenumber: new FormControl(this.user.phonenumber, [
+            Validators.required,
+          ]),
           paymentMethod: new FormControl('', [Validators.required]),
           date: new FormControl(fullTime, [Validators.required]),
           status: new FormControl(0, [Validators.required]),
@@ -80,7 +82,7 @@ export class PagePaymentComponent {
         products: this.cartList,
         total: this.total,
         userId: this.user?._id,
-        userOrder: this.user?.lastName + ' ' + this.user?.firstName,
+        userOrder: this.user?.lastname + ' ' + this.user?.firstname,
       };
       this.cartService.createOrder(order).subscribe((order: Order) => {
         const messageDiv = document.createElement('div');

@@ -12,14 +12,14 @@
       <input
         type="text"
         class="w-full border-2 p-2 rounded-xl outline-none outline-2 outline-offset-2 focus:outline-blue-500 transition-all duration-300 ease-in-out"
-        formControlName="lastName"
+        formControlName="lastname"
       />
       <div
         class="ml-1 text-[#ff0000] font-medium text-sm pt-1"
         *ngIf="
-          registerForm.controls['lastName'].invalid &&
-          (registerForm.controls['lastName'].touched ||
-            registerForm.controls['lastName'].dirty)
+          registerForm.controls['lastname'].invalid &&
+          (registerForm.controls['lastname'].touched ||
+            registerForm.controls['lastname'].dirty)
         "
       >
         Họ không được để trống
@@ -30,14 +30,14 @@
       <input
         type="text"
         class="w-full border-2 p-2 rounded-xl outline-none outline-2 outline-offset-2 focus:outline-blue-500 transition-all duration-300 ease-in-out"
-        formControlName="firstName"
+        formControlName="firstname"
       />
       <div
         class="ml-1 text-[#ff0000] font-medium text-sm pt-1"
         *ngIf="
-          registerForm.controls['firstName'].invalid &&
-          (registerForm.controls['firstName'].touched ||
-            registerForm.controls['firstName'].dirty)
+          registerForm.controls['firstname'].invalid &&
+          (registerForm.controls['firstname'].touched ||
+            registerForm.controls['firstname'].dirty)
         "
       >
         Tên không được để trống

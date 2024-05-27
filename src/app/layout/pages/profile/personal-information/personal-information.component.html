@@ -6,11 +6,20 @@
       (ngSubmit)="updateUser()"
       class="max-w-[500px] mx-auto"
     >
-      <div class="flex items-center gap-10 justify-between">
-        <label for="" class="text-[1rem] font-medium">Họ và tên : </label>
+      <div class="flex items-center gap-10 justify-between mb-2">
+        <label for="" class="text-[1rem] font-medium">Họ : </label>
         <input
           type="text"
           class="border-2 p-2 rounded-xl max-w-[350px] w-full"
+          formControlName="lastname"
+        />
+      </div>
+      <div class="flex items-center gap-10 justify-between">
+        <label for="" class="text-[1rem] font-medium">Tên : </label>
+        <input
+          type="text"
+          class="border-2 p-2 rounded-xl max-w-[350px] w-full"
+          formControlName="firstname"
         />
       </div>
       <div class="flex gap-10 mt-2">
@@ -22,7 +31,7 @@
           </div>
           <div class="flex items-center gap-2">
             <label for="female">Nữ</label>
-            <input type="radio" formControlName="sex" value="2" />
+            <input type="radio" formControlName="sex" value="0" />
           </div>
         </div>
       </div>
@@ -45,16 +54,24 @@
         />
       </div>
       <div class="mt-2 flex gap-10 items-center justify-between">
+        <label for="email" class="text-[1rem] font-medium">Địa chỉ : </label>
+        <input
+          type="email"
+          class="border-2 p-2 rounded-xl max-w-[350px] w-full"
+          formControlName="address"
+        />
+      </div>
+      <div class="mt-2 flex gap-10 items-center justify-between">
         <label for="dateOfBirth" class="text-[1rem] font-medium"
           >Ngày sinh</label
         >
         <div class="w-[70%] flex justify-between">
           <select
-            formControlName="date"
+            formControlName="day"
             id=""
             class="border-2 p-2 rounded-xl outline-none"
           >
-            <option value="">ngày sinh</option>
+            <option value="">Ngày sinh</option>
             <option *ngFor="let date of getDaysArray()" [value]="date">
               {{ date }}
             </option>
@@ -70,7 +87,7 @@
             </option>
           </select>
           <select
-            name="years"
+            formControlName="years"
             id=""
             class="border-2 p-2 rounded-xl outline-none"
           >
@@ -83,8 +100,9 @@
       </div>
       <div class="ml-2">
         <button
-          class="bg-blue-400 p-2 rounded-xl text-white font-semibold w-52 mt-2 ml-36"
+          class="bg-blue-400 p-2 rounded-xl text-white font-semibold w-52 mt-2 ml-36 cursor-pointer"
           type="submit"
+          [disabled]="updateAccount.invalid"
         >
           Lưu thay đổi
         </button>

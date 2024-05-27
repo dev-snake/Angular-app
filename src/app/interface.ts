@@ -22,12 +22,13 @@ export interface User {
   username: string;
   email: string;
   password: string;
-  firstName: string;
-  lastName: string;
+  firstname: string;
+  lastname: string;
   address: string;
   role: string;
   orders: Order[];
   active: number;
+  phonenumber: string;
 }
 export interface Comment {
   username_customer: string;

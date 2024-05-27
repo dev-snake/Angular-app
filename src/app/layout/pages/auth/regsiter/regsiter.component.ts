@@ -9,6 +9,7 @@ import {
 import { AuthService } from '../../../../service/auth/auth.service';
 import { Router } from '@angular/router';
 import { User } from '../../../../interface';
+import { ToastService } from '../../../../service/toast/toast.service';
 @Component({
   selector: 'app-regsiter',
   standalone: true,
@@ -21,10 +22,14 @@ export class RegsiterComponent {
   public messageExist: string = 'Username hoặc email đã tồn tại';
   public messageSuccess: string = 'Đăng ký thành công';
   public registerForm: FormGroup;
-  constructor(private auth: AuthService, private router: Router) {
+  constructor(
+    private auth: AuthService,
+    private router: Router,
+    private toastService: ToastService
+  ) {
     this.registerForm = new FormGroup({
-      firstName: new FormControl('', Validators.required),
-      lastName: new FormControl('', Validators.required),
+      firstname: new FormControl('', Validators.required),
+      lastname: new FormControl('', Validators.required),
       email: new FormControl('', [Validators.required, Validators.email]),
       username: new FormControl('', [
         Validators.required,
@@ -39,22 +44,7 @@ export class RegsiterComponent {
 
   onSubmit() {
     if (this.registerForm.invalid) {
-      const messageDiv = document.createElement('div');
-      messageDiv.textContent = this.message;
-      messageDiv.style.position = 'fixed';
-      messageDiv.style.top = '5rem';
-      messageDiv.style.right = '4rem';
-      messageDiv.style.backgroundColor = '#ff0000';
-      messageDiv.style.color = 'white';
-      messageDiv.style.padding = '10px';
-      messageDiv.style.borderRadius = '1rem';
-      messageDiv.style.transition = 'all 0.5s ease-in-out';
-      messageDiv.style.fontWeight = '500';
-      messageDiv.style.fontFamily = 'Quicksand, sans-serif';
-      document.body.appendChild(messageDiv);
-      setTimeout(() => {
-        messageDiv.remove();
-      }, 1000);
+      this.toastService.showToast(this.message, '#ff0000');
       return;
     }
     this.auth.getUsers().subscribe((users: User[]) => {
@@ -63,41 +53,11 @@ export class RegsiterComponent {
         (exist: User) => exist.username === username || exist.email === email
       );
       if (checkExits) {
-        const messageDiv = document.createElement('div');
-        messageDiv.textContent = this.messageExist;
-        messageDiv.style.position = 'fixed';
-        messageDiv.style.top = '5rem';
-        messageDiv.style.right = '4rem';
-        messageDiv.style.backgroundColor = '#ff0000';
-        messageDiv.style.color = 'white';
-        messageDiv.style.padding = '10px';
-        messageDiv.style.borderRadius = '1rem';
-        messageDiv.style.transition = 'all 0.5s ease-in-out';
-        messageDiv.style.fontWeight = '500';
-        messageDiv.style.fontFamily = 'Quicksand, sans-serif';
-        document.body.appendChild(messageDiv);
-        setTimeout(() => {
-          messageDiv.remove();
-        }, 1000);
+        this.toastService.showToast(this.messageExist, '#ff0000');
         return;
       }
       this.auth.register(this.registerForm.value).subscribe((users: User) => {
-        const messageDiv = document.createElement('div');
-        messageDiv.textContent = this.messageSuccess;
-        messageDiv.style.position = 'fixed';
-        messageDiv.style.top = '5rem';
-        messageDiv.style.right = '4rem';
-        messageDiv.style.backgroundColor = '#17c964';
-        messageDiv.style.color = 'white';
-        messageDiv.style.padding = '10px';
-        messageDiv.style.borderRadius = '1rem';
-        messageDiv.style.transition = 'all 0.5s ease-in-out';
-        messageDiv.style.fontWeight = '500';
-        messageDiv.style.fontFamily = 'Quicksand, sans-serif';
-        document.body.appendChild(messageDiv);
-        setTimeout(() => {
-          messageDiv.remove();
-        }, 1000);
+        this.toastService.showToast(this.messageSuccess, '#17c964');
         this.router.navigate(['/login']);
         return;
       });

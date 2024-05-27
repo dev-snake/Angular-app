@@ -4,6 +4,7 @@ import { Products } from '../../interface';
 import { BannerComponent } from '../banner/banner.component';
 import { RouterLink } from '@angular/router';
 import { CartApiService } from '../../service/cart/cart.api.service';
+import { ToastService } from '../../service/toast/toast.service';
 @Component({
   selector: 'app-home',
   standalone: true,
@@ -14,28 +15,14 @@ import { CartApiService } from '../../service/cart/cart.api.service';
 export class HomeComponent {
   constructor(
     private apiService: ApiService,
-    private cartService: CartApiService
+    private cartService: CartApiService,
+    private toastService: ToastService
   ) {}
   message: string = 'Đã thêm vào giỏ hàng';
   products: Products[] = [];
   addToCart(products: Products, quantity: number) {
     this.cartService.addToCart(products, quantity);
-    const messageDiv = document.createElement('div');
-    messageDiv.textContent = this.message;
-    messageDiv.style.position = 'fixed';
-    messageDiv.style.top = '4rem';
-    messageDiv.style.right = '4rem';
-    messageDiv.style.backgroundColor = '#17c964';
-    messageDiv.style.color = 'white';
-    messageDiv.style.padding = '10px';
-    messageDiv.style.borderRadius = '1rem';
-    messageDiv.style.transition = 'all 0.5s ease-in-out';
-    messageDiv.style.fontWeight = '500';
-    messageDiv.style.fontFamily = 'Quicksand, sans-serif';
-    document.body.appendChild(messageDiv);
-    setTimeout(() => {
-      messageDiv.remove();
-    }, 1000);
+    this.toastService.showToast(this.message, '#17c964');
   }
   ngOnInit() {
     this.apiService.getProducts().subscribe((products: Products[]) => {

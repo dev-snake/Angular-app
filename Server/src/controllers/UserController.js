@@ -32,5 +32,25 @@ class UserController {
       return res.status(400).json({ message: "Error unlocking user" });
     }
   }
+  async updateAccount(req, res) {
+    try {
+      const { years, month, day, sex, phonenumber, address } = req.body;
+      const { id } = req.params;
+      const newUpdate = {
+        firstname: req.body.firstname,
+        lastname: req.body.lastname,
+        email: req.body.email,
+        sex: sex === "1" ? "Nam" : "Nữ",
+        phonenumber,
+        dateOfBirth: `${day}/${month}/${years}`,
+        address,
+      };
+      await userModel.findOneAndUpdate({ _id: id }, newUpdate, { new: true });
+      return res.status(200).json("Updated user Successfully !");
+    } catch (error) {
+      console.log(error);
+      res.status(400).json(error);
+    }
+  }
 }
 module.exports = new UserController();
