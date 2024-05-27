@@ -20,6 +20,9 @@ export class ApiService {
   getCategories(): Observable<Category[]> {
     return this.http.get<Category[]>(`http://localhost:3000/categories`);
   }
+  getOrders(): Observable<any> {
+    return this.http.get('http://localhost:3000/order');
+  }
   getProductCategoryKeyboard(): Observable<Products[]> {
     return this.http.get<Products[]>(`http://localhost:3000/data/1`);
   }

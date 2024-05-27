@@ -9,7 +9,7 @@ export class ToastService {
     const messageDiv = document.createElement('div');
     messageDiv.textContent = message;
     messageDiv.style.position = 'fixed';
-    messageDiv.style.top = '4rem';
+    messageDiv.style.top = '5rem';
     messageDiv.style.right = '4rem';
     messageDiv.style.backgroundColor = color;
     messageDiv.style.color = 'white';

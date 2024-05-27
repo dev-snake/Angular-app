@@ -5,6 +5,7 @@ import { OrdersHistoryComponent } from './orders-history/orders-history.componen
 import { PersonalInformationComponent } from './personal-information/personal-information.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { OrdersDetailComponent } from './orders-detail/orders-detail.component';
+import { LookupOrdersComponent } from './lookup-orders/lookup-orders.component';
 const routes: Routes = [
   {
     path: '',
@@ -25,6 +26,10 @@ const routes: Routes = [
       {
         path: ':id/order-detail',
         component: OrdersDetailComponent,
+      },
+      {
+        path: 'lookup-orders',
+        component: LookupOrdersComponent,
       },
     ],
   },
