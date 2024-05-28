@@ -7,6 +7,7 @@ import { PagePaymentComponent } from './layout/pages/page-payment/page-payment.c
 import { LoginComponent } from './layout/pages/auth/login/login.component';
 import { RegsiterComponent } from './layout/pages/auth/regsiter/regsiter.component';
 import { PageNotFoundComponent } from './layout/pages/page-not-found/page-not-found.component';
+import { SearchComponent } from './layout/pages/search/search.component';
 
 export const routes: Routes = [
   {
@@ -49,6 +50,11 @@ export const routes: Routes = [
   {
     path: 'regsiter',
     component: RegsiterComponent,
+  },
+
+  {
+    path: 'search',
+    component: SearchComponent,
   },
   {
     path: '**',

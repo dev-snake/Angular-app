@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Products, Comment } from '../../../interface';
 import { CartApiService } from '../../../service/cart/cart.api.service';
 import { ApiService } from '../../../service/api/api.service';
@@ -15,11 +15,12 @@ import { HttpParams } from '@angular/common/http';
 @Component({
   selector: 'app-page-detail',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, RouterLink],
   templateUrl: './page-detail.component.html',
   styleUrl: './page-detail.component.css',
 })
 export class PageDetailComponent implements OnInit {
+  public isLogged: boolean = this.authService.isLoggedIn();
   public product: Products | undefined;
   public message: string = 'Đã thêm vào giỏ hàng';
   public formComment: FormGroup;

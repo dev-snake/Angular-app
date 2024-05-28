@@ -1,0 +1,45 @@
+<section class="max-w-[1300px] mx-auto mt-6 mb-6">
+  <p class="text-xl uppercase font-medium text-center mb-4">
+    <i class="bx bx-search-alt font-medium pt-1"></i> Kết quả tìm kiếm :
+  </p>
+  <div class="mt-4">
+    <div class="flex rounded-2xl p-2 transition gap-2 flex-wrap">
+      <div
+        class="relative bg-white p-4 rounded-2xl grow-[1] basis-[250px] transition-all"
+        *ngFor="let item of filterList"
+      >
+        @if(item.sale > 0){
+        <span
+          class="bg-[#FE3A30] text-white px-4 py-1 z-10 absolute tracking-[1.5px] rounded-2xl top-3"
+          >Sale</span
+        >
+        }
+        <img
+          [src]="item.image"
+          alt="ảnh lỗi"
+          class="h-[250px] mx-auto hover:scale-90 transition-all"
+        />
+        <a [routerLink]="['/products', item._id]">
+          <p class="font-medium text-[1rem]">
+            Tên sản phẩm : {{ item.name }}
+          </p></a
+        >
+        <p class="font-medium text-[1rem]">
+          Giá :
+          <span class="text-red-500 font-semibold"> {{ item.price }} VNĐ</span>
+        </p>
+        <button
+          class="text-white bg-[#2e86f1] w-full p-2 rounded-xl font-medium mt-2"
+          (click)="addToCart(item, 1)"
+        >
+          Thêm vào giỏ hàng
+        </button>
+      </div>
+    </div>
+    <div *ngIf="filterList.length <= 0" class="block">
+      <p class="text-center font-medium text-[1rem]">
+        Không tìm thấy sản phẩm 🫠 !
+      </p>
+    </div>
+  </div>
+</section>

@@ -1,13 +1,10 @@
-import {
-  Component,
-  ElementRef,
-  ViewChild,
-  HostListener,
-  viewChild,
-} from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Component, ElementRef, ViewChild, HostListener } from '@angular/core';
+import { RouterLink, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../service/auth/auth.service';
+import { ApiService } from '../../service/api/api.service';
+import { Products } from '../../interface';
+import { DataService } from '../../service/data/data.service';
 @Component({
   selector: 'app-header',
   standalone: true,
@@ -22,10 +19,17 @@ export class HeaderComponent {
   @ViewChild('tab_products') tab_products!: ElementRef;
   @ViewChild('icon_keyboard') icon_keyboard!: ElementRef;
   @ViewChild('showSearch') showSearch!: ElementRef;
-  constructor(private authService: AuthService) {}
+  public searchValue: Products[] = [];
+  constructor(
+    private authService: AuthService,
+    private route: Router,
+    private api: ApiService,
+    private data: DataService
+  ) {}
   @HostListener('window:scroll', ['$event'])
   onWindowScroll(): void {
     this.showToast.nativeElement.classList.add('hidden');
+    this.showSearch.nativeElement.classList.add('hidden');
   }
   toggle(): void {
     this.showToast.nativeElement.classList.toggle('hidden');
@@ -50,5 +54,14 @@ export class HeaderComponent {
   }
   toggleSearch() {
     this.showSearch.nativeElement.classList.toggle('hidden');
+  }
+  sendDatatoService(keyword: string) {
+    this.api.getProducts().subscribe((products: Products[]) => {
+      this.searchValue = products.filter((product) =>
+        product.name.toLowerCase().includes(keyword.toLowerCase())
+      );
+      this.data.changeMessage(this.searchValue);
+    });
+    this.route.navigate(['/search']);
   }
 }

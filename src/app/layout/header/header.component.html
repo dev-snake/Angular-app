@@ -69,10 +69,12 @@
     <input
       type="text"
       class="p-2 outline-none rounded-xl mr-2 shadow-xl w-60"
-      placeholder="Nhập tên sản phẩm . . ."
+      placeholder="Mày cần tìm gì ?"
+      #searchInput
     />
     <i
       class="bx bx-search inline-block p-2 bg-blue-500 text-white rounded-xl cursor-pointer"
+      (click)="sendDatatoService(searchInput.value)"
     ></i>
   </div>
 </header>
