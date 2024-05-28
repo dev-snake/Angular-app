@@ -50,15 +50,8 @@ class ProductController {
     return res.status(200).json(updatedProduct);
   }
   async createOrder(req, res) {
-    const generateInlineCss = async (html) => {
-      const result = await postcss([tailwindcss]).process(html, {
-        from: undefined,
-      });
-      return juice(result.css + html);
-    };
     try {
       const { userId, email, products, total } = req.body;
-      console.log(products);
       const user = await userModel.findById(userId);
       const transporter = nodemailer.createTransport({
         service: "gmail",

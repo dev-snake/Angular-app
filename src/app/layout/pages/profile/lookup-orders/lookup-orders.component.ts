@@ -40,14 +40,13 @@ export class LookupOrdersComponent {
         (order: Order) => order.code === code
       );
       if (!this.lookupOrderInfor) {
+        this.orderInfor.nativeElement.classList.add('hidden');
         this.toastService.showToast('Mã đơn hàng không đúng !', '#ff0000');
         return;
       }
       if (this.lookupOrderInfor) {
         this.text.nativeElement.classList.add('hidden');
         this.orderInfor.nativeElement.classList.remove('hidden');
-        console.log('Thông tin đơn hàng tra cứu : ');
-        console.log(this.lookupOrderInfor);
       }
     });
   }

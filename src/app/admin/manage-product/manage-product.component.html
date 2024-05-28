@@ -10,6 +10,7 @@
       <thead>
         <tr>
           <th class="p-3 border-b-2">Tên SP</th>
+          <th class="p-3 border-b-2">Số lượng đã bán</th>
           <th class="p-3 border-b-2">Giá</th>
           <th class="p-3 border-b-2">Danh mục</th>
           <th class="p-3 border-b-2">Actions</th>
@@ -18,6 +19,7 @@
       <tbody>
         <tr *ngFor="let product of products">
           <td class="p-2 font-medium">{{ product.name }}</td>
+          <td class="p-2 font-medium">{{ product.quantity_sold }}</td>
           <td class="p-2 font-medium">{{ product.price }} đ</td>
           <td class="p-2">
             {{

@@ -27,7 +27,7 @@ export class CartApiService {
   addToCart(product: Products, quantity: number) {
     const existingItem = this.carts.find((cart) => cart._id === product._id);
     if (existingItem) {
-      existingItem.quantity = (existingItem.quantity ?? 0) + 1;
+      existingItem.quantity = (existingItem.quantity ?? 0) + quantity || 1;
     } else {
       this.carts.push({ ...product, quantity: quantity || 1 });
     }

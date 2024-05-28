@@ -2,7 +2,9 @@
 <section class="max-w-[1300px] mx-auto mt-6">
   <p class="font-semibold uppercase text-center text-2xl">sản phẩm nổi bật</p>
   @defer () {
-  <div class="grid grid-cols-layout-home gap-4 mt-4 max-sm:p-4 transition-all">
+  <div
+    class="grid grid-cols-layout-home gap-4 mt-4 max-sm:p-4 transition-all max-xl:p-5"
+  >
     @for (item of products; track $index) {
     <div class="w-full bg-white rounded-2xl p-2 transition">
       <div class="relative">

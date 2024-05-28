@@ -57,6 +57,10 @@ export class PageDetailComponent implements OnInit {
   }
 
   addToCart(product: Products, quantity: number) {
+    if (quantity < 1) {
+      this.toastService.showToast('Thêm tối thiểu một sản phẩm ', '#ff0000');
+      return;
+    }
     this.cartService.addToCart(product, quantity);
     this.toastService.showToast('Đã thêm vào giỏ hàng', '#17c964');
   }

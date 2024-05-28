@@ -61,7 +61,7 @@ export class ManageProductComponent implements OnInit {
 
   getProducts() {
     this.CRUD_PRODUCT.getProducts().subscribe((products) => {
-      this.products = products;
+      this.products = products.reverse();
     });
   }
 

@@ -48,11 +48,25 @@ export class PagePaymentComponent {
             Validators.required,
           ]),
           lastname: new FormControl(this.user.lastname, [Validators.required]),
-          email: new FormControl(this.user.email, [Validators.required]),
+          email: new FormControl(this.user.email, [
+            Validators.required,
+            Validators.email,
+          ]),
           address: new FormControl(this.user.address, [Validators.required]),
           phonenumber: new FormControl(this.user.phonenumber, [
             Validators.required,
           ]),
+          paymentMethod: new FormControl('', [Validators.required]),
+          date: new FormControl(fullTime, [Validators.required]),
+          status: new FormControl(0, [Validators.required]),
+        });
+      } else {
+        this.paymentForm = new FormGroup({
+          firstname: new FormControl('', [Validators.required]),
+          lastname: new FormControl('', [Validators.required]),
+          email: new FormControl('', [Validators.required, Validators.email]),
+          address: new FormControl('', [Validators.required]),
+          phonenumber: new FormControl('', [Validators.required]),
           paymentMethod: new FormControl('', [Validators.required]),
           date: new FormControl(fullTime, [Validators.required]),
           status: new FormControl(0, [Validators.required]),
@@ -82,10 +96,14 @@ export class PagePaymentComponent {
         code: '#' + Math.floor(Math.random() * 1000000),
         products: this.cartList,
         total: this.total,
-        userId: this.user?._id,
-        userOrder: this.user?.lastname + ' ' + this.user?.firstname,
+        userId: this.user?._id || null,
+        userOrder:
+          (this.user?.firstname ?? this.paymentForm?.get('firstname')?.value) +
+          ' ' +
+          (this.user?.lastname ?? this.paymentForm?.get('lastname')?.value),
       };
       this.cartService.createOrder(order).subscribe((order: Order) => {
+        console.log(order);
         this.toastService.showToast('Đặt hàng thành công !', '#17c964');
         this.router.navigate(['/']);
       });
