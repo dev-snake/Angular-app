@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Products } from '../../../shared/interfaces/interface';
-import { DataService } from '../../../shared/service/data/data.service';
+import { Products } from '../../../../shared/interfaces/product';
+import { DataService } from '../../../../shared/service/data/data.service';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { CartApiService } from '../../../shared/service/cart/cart.api.service';
+import { CartApiService } from '../../../../shared/service/cart/cart.api.service';
 @Component({
   selector: 'app-search',
   standalone: true,
@@ -23,7 +23,7 @@ export class SearchComponent implements OnInit {
       this.filterList = products;
     });
   }
-  addToCart(product: Products, quantity: number): void {
+  addToCart(product: any, quantity: number): void {
     this.cartApi.addToCart(product, quantity);
   }
 }

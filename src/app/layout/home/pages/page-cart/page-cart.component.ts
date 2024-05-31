@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { Products } from '../../../shared/interfaces/interface';
-import { CartApiService } from '../../../shared/service/cart/cart.api.service';
+import { Products } from '../../../../shared/interfaces/product';
+import { CartApiService } from '../../../../shared/service/cart/cart.api.service';
 import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-page-cart',

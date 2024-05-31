@@ -65,11 +65,11 @@ class ProductController {
   async createOrder(req, res) {
     try {
       const { userId, email, products, total } = req.body;
-      // products.forEach(async (item) => {
-      //   const product = await productModel.findById(item._id);
-      //   product.quantity_sold += item.quantity;
-      //   product.save();
-      // });
+      products.forEach(async (item) => {
+        const product = await productModel.findById(item._id);
+        product.quantity_sold += item.quantity;
+        product.save();
+      });
       const user = await userModel.findById(userId);
       const transporter = nodemailer.createTransport({
         service: "gmail",
@@ -78,16 +78,27 @@ class ProductController {
           pass: process.env.PASSWORD_EMAIL,
         },
       });
+      const style =
+        'style="font-family: Arial, sans-serif; max-width: 600px; margin: 20px auto; padding: 20px; border: 1px solid #ccc; border-radius: 5px;"';
+      const styleTable =
+        'style="width:100% ; border:1px solid #333; text-align:center; border-radius: 5px;"';
+      const styleTh = 'style="border:1px solid #333; padding: 10px;"';
       const htmlContent = `
-      <div >
-        <h2 >Đơn hàng của bạn</h2>
-        <table border='1'>
+      <div  ${style} >
+      <h3 >Chi tiết đơn hàng</h3>
+      <p>Ngày đặt hàng: ${new Date().toLocaleString()}</p>
+      <p>Email: ${email}</p>
+      <p>Tên người nhận: ${user ? user.lastname + user.firstname : ""}</p>
+      <p>Địa chỉ: ${user ? user.address : ""}</p>
+      <p>Số điện thoại: ${user ? user.phonenumber : ""}</p>
+      <h4 >Danh sách sản phẩm</h4>
+        <table ${styleTable}>
           <thead>
             <tr>
-              <th >Tên</th>
-              <th >Số lượng</th>
-              <th >Giá</th>
-              <th >Tổng tiền</th>
+              <th ${styleTh}>Tên</th>
+              <th ${styleTh}>Số lượng</th>
+              <th ${styleTh}>Giá</th>
+              <th ${styleTh}>Tổng tiền</th>
             </tr>
           </thead>
           <tbody>
@@ -106,6 +117,7 @@ class ProductController {
           </tbody>
         </table>
         <p>Tổng tiền: ${total}</p>
+      </div>
       </div>
     `;
       const mailOptions = {

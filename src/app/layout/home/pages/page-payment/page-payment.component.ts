@@ -1,17 +1,18 @@
 import { Component } from '@angular/core';
-import { Order, Products } from '../../../shared/interfaces/interface';
-import { AuthService } from '../../../shared/service/auth/auth.service';
-import { User } from '../../../shared/interfaces/interface';
+import { Order } from '../../../../shared/interfaces/order';
+import { Products } from '../../../../shared/interfaces/product';
+import { AuthService } from '../../../../shared/service/auth/auth.service';
+import { User } from '../../../../shared/interfaces/user';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { CartApiService } from '../../../shared/service/cart/cart.api.service';
+import { CartApiService } from '../../../../shared/service/cart/cart.api.service';
 import {
   ReactiveFormsModule,
   FormGroup,
   FormControl,
   Validators,
 } from '@angular/forms';
-import { ToastService } from '../../../shared/service/toast/toast.service';
+import { ToastService } from '../../../../shared/service/toast/toast.service';
 @Component({
   selector: 'app-page-payment',
   standalone: true,
@@ -33,14 +34,14 @@ export class PagePaymentComponent {
       this.user = user.find(
         (user: User) => user.username === this.authService.getUsername()
       );
-      const day = new Date();
-      const date = day.getDate();
-      const month = day.getMonth();
-      const year = day.getFullYear();
-      const time = day.getHours();
-      const minute = day.getMinutes();
-      const second = day.getSeconds();
-      const fullTime = `${date}/${month}/${year} ${time}:${minute}:${second}`;
+      // const day = new Date();
+      // const date = day.getDate();
+      // const month = day.getMonth();
+      // const year = day.getFullYear();
+      // const time = day.getHours();
+      // const minute = day.getMinutes();
+      // const second = day.getSeconds();
+      // const fullTime = `${date}/${month}/${year} ${time}:${minute}:${second}`;
       if (this.user) {
         this.isLoggedIn = true;
         this.paymentForm = new FormGroup({
@@ -57,7 +58,7 @@ export class PagePaymentComponent {
             Validators.required,
           ]),
           paymentMethod: new FormControl('', [Validators.required]),
-          date: new FormControl(fullTime, [Validators.required]),
+          date: new FormControl(new Date(), [Validators.required]),
           status: new FormControl(0, [Validators.required]),
         });
       } else {
@@ -68,7 +69,7 @@ export class PagePaymentComponent {
           address: new FormControl('', [Validators.required]),
           phonenumber: new FormControl('', [Validators.required]),
           paymentMethod: new FormControl('', [Validators.required]),
-          date: new FormControl(fullTime, [Validators.required]),
+          date: new FormControl(new Date(), [Validators.required]),
           status: new FormControl(0, [Validators.required]),
         });
       }

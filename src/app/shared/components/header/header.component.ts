@@ -3,7 +3,7 @@ import { RouterLink, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../service/auth/auth.service';
 import { ApiService } from '../../service/api/api.service';
-import { Products } from '../../interfaces/interface';
+import { Products } from '../../interfaces/product';
 import { DataService } from '../../service/data/data.service';
 @Component({
   selector: 'app-header',

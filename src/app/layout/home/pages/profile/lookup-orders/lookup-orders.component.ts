@@ -1,10 +1,11 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { AuthService } from '../../../../shared/service/auth/auth.service';
-import { Order, User } from '../../../../shared/interfaces/interface';
+import { AuthService } from '../../../../../shared/service/auth/auth.service';
+import { User } from '../../../../../shared/interfaces/user';
 import { CommonModule } from '@angular/common';
-import { ApiService } from '../../../../shared/service/api/api.service';
-import { ToastService } from '../../../../shared/service/toast/toast.service';
+import { ApiService } from '../../../../../shared/service/api/api.service';
+import { Order } from '../../../../../shared/interfaces/order';
+import { ToastService } from '../../../../../shared/service/toast/toast.service';
 @Component({
   selector: 'app-lookup-orders',
   standalone: true,

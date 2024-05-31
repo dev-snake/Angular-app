@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../../../../shared/service/auth/auth.service';
+import { AuthService } from '../../../../../shared/service/auth/auth.service';
 import { Router } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormGroup, Validators, FormControl } from '@angular/forms';
-import { User } from '../../../../shared/interfaces/interface';
-import { ToastService } from '../../../../shared/service/toast/toast.service';
+import { User } from '../../../../../shared/interfaces/user';
+import { ToastService } from '../../../../../shared/service/toast/toast.service';
 @Component({
   selector: 'app-login',
   standalone: true,

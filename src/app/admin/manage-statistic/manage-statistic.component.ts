@@ -1,15 +1,40 @@
 import { Component, OnInit } from '@angular/core';
 import { Chart } from 'chart.js/auto';
+import { ApiService } from '../service/api/api.service';
+import { Order } from '../../shared/interfaces/order';
 @Component({
   selector: 'app-manage-statistic',
   standalone: true,
   imports: [],
   templateUrl: './manage-statistic.component.html',
-  styleUrl: './manage-statistic.component.css',
+  styleUrls: ['./manage-statistic.component.css'],
 })
 export class ManageStatisticComponent implements OnInit {
-  constructor() {}
+  constructor(private API: ApiService) {}
+
   ngOnInit(): void {
+    this.API.getOrders().subscribe((listOrder: Order[]) => {
+      const monthlyRevenue = this.calculateMonthlyRevenue(listOrder);
+      this.renderChart(monthlyRevenue);
+    });
+  }
+
+  calculateMonthlyRevenue(orders: Order[]): number[] {
+    const monthlyRevenue = new Array(12).fill(0);
+    orders.forEach((order) => {
+      console.log(order);
+      const orderDate = new Date(order.date);
+      const month = orderDate.getMonth();
+      if (!isNaN(month)) {
+        monthlyRevenue[month] += order.total;
+      } else {
+        console.error('Invalid month');
+      }
+    });
+    return monthlyRevenue;
+  }
+
+  renderChart(monthlyRevenue: number[]): void {
     const ctx = document.getElementById('myChart') as HTMLCanvasElement;
     new Chart(ctx, {
       type: 'bar',
@@ -30,8 +55,8 @@ export class ManageStatisticComponent implements OnInit {
         ],
         datasets: [
           {
-            label: 'Biểu đồ danh thu',
-            data: [65, 59, 80, 81, 56, 55, 40, 65, 59, 80, 81, 56],
+            label: 'Biểu đồ doanh thu',
+            data: monthlyRevenue,
             backgroundColor: [
               'rgba(255, 99, 132, 0.2)',
               'rgba(255, 159, 64, 0.2)',
@@ -41,10 +66,10 @@ export class ManageStatisticComponent implements OnInit {
               'rgba(153, 102, 255, 0.2)',
               'rgba(201, 203, 207, 0.2)',
               'rgb(202, 244, 66, 0.2)',
-              'rgb(181, 241, 204 , 0.2)',
-              'rgb(148, 255, 216 , 0.2)',
-              'rgb(148, 255, 216 , 0.2)',
-              'rgb(202, 244, 255 , 0.2)',
+              'rgb(181, 241, 204, 0.2)',
+              'rgb(148, 255, 216, 0.2)',
+              'rgb(148, 255, 216, 0.2)',
+              'rgb(202, 244, 255, 0.2)',
             ],
             borderColor: [
               'rgb(255, 99, 132)',

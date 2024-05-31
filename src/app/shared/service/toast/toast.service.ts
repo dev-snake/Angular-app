@@ -11,7 +11,6 @@ export class ToastService {
     messageDiv.className = `toast ${
       color === '#17c964' ? 'success' : 'error'
     } `;
-
     document.body.appendChild(messageDiv);
     setTimeout(() => {
       messageDiv.remove();

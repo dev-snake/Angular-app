@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AuthService } from '../../../../shared/service/auth/auth.service';
+import { AuthService } from '../../../../../shared/service/auth/auth.service';
 import {
   FormControl,
   ReactiveFormsModule,
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { User } from '../../../../shared/interfaces/interface';
-import { ToastService } from '../../../../shared/service/toast/toast.service';
+import { User } from '../../../../../shared/interfaces/user';
+import { ToastService } from '../../../../../shared/service/toast/toast.service';
 @Component({
   selector: 'app-personal-information',
   standalone: true,

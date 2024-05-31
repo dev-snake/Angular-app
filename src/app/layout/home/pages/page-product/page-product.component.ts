@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Products } from '../../../shared/interfaces/interface';
-import { Category } from '../../../shared/interfaces/interface';
+import { Products } from '../../../../shared/interfaces/product';
+import { Category } from '../../../../shared/interfaces/category';
 import { RouterLink } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { ApiService } from '../../../shared/service/api/api.service';
-import { ProductsComponent } from '../../products/products.component';
+import { ApiService } from '../../../../shared/service/api/api.service';
+import { ProductsComponent } from '../../../products/products.component';
 @Component({
   selector: 'app-page-product',
   standalone: true,

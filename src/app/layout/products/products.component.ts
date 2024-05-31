@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ApiService } from '../../shared/service/api/api.service';
-import { Products } from '../../shared/interfaces/interface';
+import { Products } from '../../shared/interfaces/product';
 import { RouterLink, ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 

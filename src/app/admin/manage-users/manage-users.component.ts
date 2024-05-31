@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { UserService as LOCK_AND_UNLOCK_USER } from '../service/lock-unlock-user/user.service';
 import { ApiService } from '../service/api/api.service';
-import { User } from '../../shared/interfaces/interface';
+import { User } from '../../shared/interfaces/user';
 import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-manage-users',

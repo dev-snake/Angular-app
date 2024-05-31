@@ -1,12 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { AuthService } from '../../../../shared/service/auth/auth.service';
-import {
-  User,
-  OrderHistory,
-  Products,
-} from '../../../../shared/interfaces/interface';
+import { AuthService } from '../../../../../shared/service/auth/auth.service';
+import { Products } from '../../../../../shared/interfaces/product';
+import { User } from '../../../../../shared/interfaces/user';
+import { OrderHistory } from '../../../../../shared/interfaces/order.history';
 @Component({
   selector: 'app-orders-detail',
   standalone: true,

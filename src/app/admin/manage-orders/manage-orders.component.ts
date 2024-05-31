@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ApiService } from '../service/api/api.service';
 import { RouterLink } from '@angular/router';
-import { Order } from '../../shared/interfaces/interface';
+import { Order } from '../../shared/interfaces/order';
 @Component({
   selector: 'app-manage-orders',
   standalone: true,

@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { CrudService as CRUD_SERVICE_PRODUCT } from '../service/crud-product/crud.service';
 import { CrudService as CRUD_SERVICE_CATEGORY } from '../service/crud-category/crud.service';
-import { Category, Products } from '../../shared/interfaces/interface';
+import { Category } from '../../shared/interfaces/category';
+import { Products } from '../../shared/interfaces/product';
 import { CommonModule } from '@angular/common';
 import {
   ReactiveFormsModule,

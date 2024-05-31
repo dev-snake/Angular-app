@@ -1,16 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { Products, Comment } from '../../../shared/interfaces/interface';
-import { CartApiService } from '../../../shared/service/cart/cart.api.service';
-import { ApiService } from '../../../shared/service/api/api.service';
-import { ToastService } from '../../../shared/service/toast/toast.service';
+import { Products } from '../../../../shared/interfaces/product';
+import { Comment } from '../../../../shared/interfaces/comment';
+import { CartApiService } from '../../../../shared/service/cart/cart.api.service';
+import { ApiService } from '../../../../shared/service/api/api.service';
+import { ToastService } from '../../../../shared/service/toast/toast.service';
 import {
   FormControl,
   FormGroup,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { AuthService } from '../../../shared/service/auth/auth.service';
+import { AuthService } from '../../../../shared/service/auth/auth.service';
 import { HttpParams } from '@angular/common/http';
 @Component({
   selector: 'app-page-detail',

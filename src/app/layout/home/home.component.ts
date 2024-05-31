@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../shared/service/api/api.service';
-import { Products } from '../../shared/interfaces/interface';
+import { Products } from '../../shared/interfaces/product';
 import { BannerComponent } from '../banner/banner.component';
 import { RouterLink } from '@angular/router';
 import { ProductsComponent } from '../products/products.component';
