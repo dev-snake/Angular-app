@@ -15,8 +15,10 @@
         <td class="p-4 font-semibold tracking-[1.6px] shadow">
           {{ user.username }}
         </td>
-        <td class="p-4">{{ user.lastName }} {{ user.firstName }}</td>
-        <td class="p-4">{{ user.role }}</td>
+        <td class="p-4">{{ user.lastname }} {{ user.firstname }}</td>
+        <td class="p-4">
+          {{ user.role === 0 ? "Khách hàng" : "Quản trị viên" }}
+        </td>
         <td class="p-4">{{ user.createdAt }}</td>
         <td class="p-4">
           <span
@@ -40,6 +42,7 @@
           <button
             class="bg-red-400 text-white px-4 py-2 rounded-3xl capitalize tracking-[1.6px] font-medium w-32"
             (click)="lockUser(user._id)"
+            [disabled]="user.role === 1"
           >
             <i class="bx bx-lock-alt"></i> khóa
           </button>

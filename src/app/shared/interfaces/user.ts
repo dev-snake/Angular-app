@@ -7,7 +7,7 @@ export interface User {
   firstname: string;
   lastname: string;
   address: string;
-  role: string;
+  role: number;
   orders: Order[];
   active: number;
   phonenumber: string;

@@ -7,7 +7,7 @@ const user = new Schema(
     username: { type: String },
     email: { type: String },
     password: { type: String },
-    role: { type: String, default: "user" },
+    role: { type: Number, default: 0 },
     address: { type: String, default: "" },
     orders: { type: Array, default: [] },
     active: { type: Number, default: 0 },

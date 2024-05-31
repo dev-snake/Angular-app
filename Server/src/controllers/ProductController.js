@@ -2,7 +2,6 @@ const productModel = require("../models/ProductModel");
 const orderModel = require("../models/OrderModel");
 const userModel = require("../models/UserModel");
 const nodemailer = require("nodemailer");
-const juice = require("juice");
 require("dotenv").config();
 class ProductController {
   async increaseView(req, res) {
