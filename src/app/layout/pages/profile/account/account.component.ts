@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterModule, RouterLink, Router } from '@angular/router';
-import { User } from '../../../../interface';
-import { AuthService } from '../../../../service/auth/auth.service';
+import { User } from '../../../../shared/interfaces/interface';
+import { AuthService } from '../../../../shared/service/auth/auth.service';
 import { PersonalInformationComponent } from '../personal-information/personal-information.component';
 @Component({
   selector: 'app-account',

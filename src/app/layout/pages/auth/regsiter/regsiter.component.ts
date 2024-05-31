@@ -6,10 +6,10 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { AuthService } from '../../../../service/auth/auth.service';
+import { AuthService } from '../../../../shared/service/auth/auth.service';
 import { Router } from '@angular/router';
-import { User } from '../../../../interface';
-import { ToastService } from '../../../../service/toast/toast.service';
+import { User } from '../../../../shared/interfaces/interface';
+import { ToastService } from '../../../../shared/service/toast/toast.service';
 @Component({
   selector: 'app-regsiter',
   standalone: true,

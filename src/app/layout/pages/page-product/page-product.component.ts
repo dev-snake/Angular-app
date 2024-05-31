@@ -1,16 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { Products } from '../../../interface';
-import { Category } from '../../../interface';
+import { Products } from '../../../shared/interfaces/interface';
+import { Category } from '../../../shared/interfaces/interface';
 import { RouterLink } from '@angular/router';
-import { CartApiService } from '../../../service/cart/cart.api.service';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { ApiService } from '../../../service/api/api.service';
-import { ToastService } from '../../../service/toast/toast.service';
+import { ApiService } from '../../../shared/service/api/api.service';
+import { ProductsComponent } from '../../products/products.component';
 @Component({
   selector: 'app-page-product',
   standalone: true,
-  imports: [RouterLink, CommonModule],
+  imports: [RouterLink, CommonModule, ProductsComponent],
   templateUrl: './page-product.component.html',
   styleUrl: './page-product.component.css',
 })
@@ -23,16 +22,8 @@ export class PageProductComponent implements OnInit {
   public mouse: Products[] = [];
   public mouse_pads: Products[] = [];
   public otherAccessories: Products[] = [];
-  constructor(
-    private cartService: CartApiService,
-    private route: ActivatedRoute,
-    private api: ApiService,
-    private toastService: ToastService
-  ) {}
-  addToCart(product: Products, quantity: number) {
-    this.cartService.addToCart(product, quantity);
-    this.toastService.showToast('Đã thêm vào giỏ hàng', '#17c964');
-  }
+  constructor(private route: ActivatedRoute, private api: ApiService) {}
+
   ngOnInit() {
     this.route.queryParamMap.subscribe((params) => {
       this.api.getProducts().subscribe((products: Products[]) => {

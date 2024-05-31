@@ -34,48 +34,19 @@
           Giá :
           <span class="text-red-500 font-semibold"> {{ item.price }} VNĐ</span>
         </p>
-        <button
-          class="text-white bg-[#2e86f1] w-full p-2 rounded-xl font-medium mt-2"
-          (click)="addToCart(item, 1)"
-        >
-          Thêm vào giỏ hàng
-        </button>
+        <span class="text-[#ff8a00] font-semibold"
+          >0.0 <i class="bx bxs-star text-[#ff8a00]"></i> (đánh giá)
+        </span>
       </div>
     </div>
-    } }@else { @for (item of renderList; track item._id) {
-    <div class="w-full bg-white rounded-2xl p-2">
-      <div class="relative">
-        @if(item.sale > 0){
-        <span
-          class="bg-[#FE3A30] text-white px-4 py-1 z-10 absolute tracking-[1.5px] rounded-2xl top-3"
-          >Sale</span
-        >}
-        <img
-          [src]="item.image"
-          alt=""
-          class="h-[250px] mx-auto hover:scale-90 transition-all"
-        />
-        <a [routerLink]="['/products', item._id]">
-          <p class="font-medium text-[1rem]">Tên sản phẩm : {{ item.name }}</p>
-        </a>
-        <p class="font-medium text-[1rem]">
-          Giá :
-          <span class="text-red-500 font-semibold"> {{ item.price }} VNĐ</span>
-        </p>
-        <button
-          class="text-white bg-[#2e86f1] w-full p-2 rounded-xl font-medium mt-2"
-          (click)="addToCart(item, 1)"
-        >
-          Thêm vào giỏ hàng
-        </button>
-      </div>
-    </div>
-    }}
+    } }@else {
+    <app-products></app-products>
+    }
   </div>
   <hr class="mt-4 max-xl:p-5" />
   <div class="max-xl:p-5">
     <p class="uppercase font-semibold text-xl mt-4 p-2">Bàn phím cơ</p>
-    <div class="w-full rounded-2xl p-2 grid grid-cols-layout-home gap-4">
+    <div class="grid grid-cols-layout-home gap-4 mt-4 max-sm:p-4 max-xl:p-5">
       <div
         class="relative bg-white p-4 rounded-xl"
         *ngFor="let item of mechanical_keyboard"
@@ -96,24 +67,24 @@
           Giá :
           <span class="text-red-500 font-semibold"> {{ item.price }} VNĐ</span>
         </p>
-        <button
-          class="text-white bg-[#2e86f1] w-full p-2 rounded-xl font-medium mt-2"
-          (click)="addToCart(item, 1)"
-        >
-          Thêm vào giỏ hàng
-        </button>
+        <span class="text-[#ff8a00] font-semibold"
+          >0.0 <i class="bx bxs-star text-[#ff8a00]"></i> (đánh giá)
+        </span>
       </div>
     </div>
   </div>
   <hr class="mt-4" />
   <div class="max-xl:p-5">
     <p class="uppercase font-semibold text-xl mt-4 p-2">Mouse</p>
-    <div class="w-full rounded-2xl p-2 grid grid-cols-layout-home gap-4">
+    <div class="grid grid-cols-layout-home gap-4 mt-4 max-sm:p-4 max-xl:p-5">
       <div class="relative bg-white p-4 rounded-xl" *ngFor="let item of mouse">
+        @if(item.sale > 0){
+
         <span
           class="bg-[#FE3A30] text-white px-4 py-1 z-10 absolute tracking-[1.5px] rounded-2xl top-3"
           >Sale</span
         >
+        }
         <img
           [src]="item.image"
           alt=""
@@ -126,19 +97,16 @@
           Giá :
           <span class="text-red-500 font-semibold"> {{ item.price }} VNĐ</span>
         </p>
-        <button
-          class="text-white bg-[#2e86f1] w-full p-2 rounded-xl font-medium mt-2"
-          (click)="addToCart(item, 1)"
-        >
-          Thêm vào giỏ hàng
-        </button>
+        <span class="text-[#ff8a00] font-semibold"
+          >0.0 <i class="bx bxs-star text-[#ff8a00]"></i> (đánh giá)
+        </span>
       </div>
     </div>
   </div>
   <hr class="mt-4 max-xl:p-5" />
   <div class="max-xl:p-5">
     <p class="uppercase font-semibold text-xl mt-4 p-2">Lót chuột</p>
-    <div class="w-full rounded-2xl p-2 grid grid-cols-layout-home gap-4">
+    <div class="grid grid-cols-layout-home gap-4 mt-4 max-sm:p-4 max-xl:p-5">
       <div
         class="relative bg-white p-4 rounded-xl"
         *ngFor="let item of mouse_pads"
@@ -151,6 +119,7 @@
           [src]="item.image"
           alt=""
           class="h-[250px] mx-auto hover:scale-90 transition-all"
+          loading="lazy"
         />
         <a [routerLink]="['/products', item._id]">
           <p class="font-medium text-[1rem]">Tên sản phẩm : {{ item.name }}</p>
@@ -159,12 +128,9 @@
           Giá :
           <span class="text-red-500 font-semibold"> {{ item.price }} VNĐ</span>
         </p>
-        <button
-          class="text-white bg-[#2e86f1] w-full p-2 rounded-xl font-medium mt-2"
-          (click)="addToCart(item, 1)"
-        >
-          Thêm vào giỏ hàng
-        </button>
+        <span class="text-[#ff8a00] font-semibold"
+          >0.0 <i class="bx bxs-star text-[#ff8a00]"></i> (đánh giá)
+        </span>
       </div>
     </div>
   </div>

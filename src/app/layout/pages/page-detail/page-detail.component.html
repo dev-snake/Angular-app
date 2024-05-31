@@ -10,12 +10,15 @@
       </div>
       <div class="mt-4 max-w-[600px]">
         <div>
-          <h2 class="uppercase font-semibold text-2xl">{{ product?.name }}</h2>
-          <p class="mt-4 uppercase font-semibold text-xl">
+          <p class="uppercase font-semibold text-2xl">{{ product?.name }}</p>
+          <p class="mt-4 capitalize font-semibold text-xl">
             Giá sản phẩm :
             <strong class="text-[red] font-medium"
               >{{ product?.price }} ₫</strong
             >
+          </p>
+          <p class="font-semibold text-xl capitalize">
+            Số lượt xem : {{ product?.views }}
           </p>
           <hr class="mt-4" />
           <p class="font-semibold text-xl">

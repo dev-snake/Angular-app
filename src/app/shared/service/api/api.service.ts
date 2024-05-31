@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Products, Category } from '../../interface';
+import { Products, Category } from '../../interfaces/interface';
 @Injectable({
   providedIn: 'root',
 })
@@ -39,6 +39,11 @@ export class ApiService {
     return this.http.put<Products[]>(
       `http://localhost:3000/data/${product._id}`,
       this.httpOptions
+    );
+  }
+  increaseView(productId: string): Observable<Products[]> {
+    return this.http.get<Products[]>(
+      `http://localhost:3000/increaseViews/${productId}`
     );
   }
 }

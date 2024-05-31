@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { Products, Comment } from '../../../interface';
-import { CartApiService } from '../../../service/cart/cart.api.service';
-import { ApiService } from '../../../service/api/api.service';
-import { ToastService } from '../../../service/toast/toast.service';
+import { Products, Comment } from '../../../shared/interfaces/interface';
+import { CartApiService } from '../../../shared/service/cart/cart.api.service';
+import { ApiService } from '../../../shared/service/api/api.service';
+import { ToastService } from '../../../shared/service/toast/toast.service';
 import {
   FormControl,
   FormGroup,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { AuthService } from '../../../service/auth/auth.service';
+import { AuthService } from '../../../shared/service/auth/auth.service';
 import { HttpParams } from '@angular/common/http';
 @Component({
   selector: 'app-page-detail',
@@ -38,6 +38,7 @@ export class PageDetailComponent implements OnInit {
       this.product = products.find(
         (product: Products) => product._id === productIdFromRoute
       );
+      this.apiProducts.increaseView(this.product?._id as string).subscribe();
       if (this.product) {
         this.commentList = this.product.comments;
       }

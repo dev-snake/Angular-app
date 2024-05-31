@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { User, OrderHistory } from '../../../../interface';
-import { AuthService } from '../../../../service/auth/auth.service';
+import { User, OrderHistory } from '../../../../shared/interfaces/interface';
+import { AuthService } from '../../../../shared/service/auth/auth.service';
 import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { OrdersDetailComponent } from '../orders-detail/orders-detail.component';

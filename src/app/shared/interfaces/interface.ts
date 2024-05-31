@@ -11,6 +11,7 @@ export interface Products {
   title_description_1: string;
   title_description_2: string;
   comments: Comment[];
+  views: number;
 }
 export interface Category {
   _id: string;

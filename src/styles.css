@@ -11,3 +11,22 @@ body {
   margin: 0;
   font-family: "Quicksand", sans-serif;
 }
+
+.toast {
+  position: fixed;
+  top: 5rem;
+  right: 4rem;
+  color: white;
+  padding: 10px;
+  border-radius: 1rem;
+  transition: all 0.5s ease-in-out;
+  font-weight: 500;
+}
+.toast.success {
+  background-color: #17c964;
+  font-family: "Quicksand", sans-serif;
+}
+.toast.error {
+  background-color: #ff0000;
+  font-family: "Quicksand", sans-serif;
+}

@@ -5,10 +5,23 @@ const nodemailer = require("nodemailer");
 const juice = require("juice");
 require("dotenv").config();
 class ProductController {
+  async increaseView(req, res) {
+    try {
+      const { productId } = req.params;
+      const product = await productModel.findById(productId);
+      product.views += 1;
+      await product.save();
+      console.log("productId", productId);
+      return res.status(200).json({ message: "View increased" });
+    } catch (error) {
+      console.log(error);
+      return res.status(500).json({ message: error.message });
+    }
+  }
   async getAllProducts(req, res) {
     try {
       const products = await productModel.find({});
-      res.json(products);
+      res.status(200).json(products);
     } catch (error) {
       res.status(500).json({ message: error.message });
     }

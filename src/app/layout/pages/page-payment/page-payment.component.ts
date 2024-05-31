@@ -1,17 +1,17 @@
 import { Component } from '@angular/core';
-import { Order, Products } from '../../../interface';
-import { AuthService } from '../../../service/auth/auth.service';
-import { User } from '../../../interface';
+import { Order, Products } from '../../../shared/interfaces/interface';
+import { AuthService } from '../../../shared/service/auth/auth.service';
+import { User } from '../../../shared/interfaces/interface';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { CartApiService } from '../../../service/cart/cart.api.service';
+import { CartApiService } from '../../../shared/service/cart/cart.api.service';
 import {
   ReactiveFormsModule,
   FormGroup,
   FormControl,
   Validators,
 } from '@angular/forms';
-import { ToastService } from '../../../service/toast/toast.service';
+import { ToastService } from '../../../shared/service/toast/toast.service';
 @Component({
   selector: 'app-page-payment',
   standalone: true,

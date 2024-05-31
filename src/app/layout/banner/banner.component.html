@@ -6,11 +6,17 @@
       [src]="urlImage.bannerHome"
       alt=""
       class="h-full w-full object-cover rounded-2xl"
+      loading="lazy"
     />
   </div>
   <div class="mt-4 grid sm:flex w-full gap-2 max-sm:p-4 max-md:grid">
     <div>
-      <img [src]="urlImage.bannerChild" alt="" class="rounded-2xl" />
+      <img
+        [src]="urlImage.bannerChild"
+        alt=""
+        class="rounded-2xl"
+        loading="lazy"
+      />
     </div>
     <div class="grid w-full grid-cols-auto-layout gap-4">
       <div class="bg-slate-100 rounded-2xl">
