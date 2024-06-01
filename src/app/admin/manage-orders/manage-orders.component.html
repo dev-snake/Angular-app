@@ -6,7 +6,7 @@
         <th class="p-2">Người đặt</th>
         <th class="p-2">Ngày đặt</th>
         <th class="p-2">Trạng thái</th>
-        <th class="p-2">Tổng tiền</th>
+        <th class="p-2 max-md:hidden">Tổng tiền</th>
         <th class="p-2">Actions</th>
       </tr>
     </thead>
@@ -15,7 +15,7 @@
         <td class="p-3">{{ order.code }}</td>
         <th>{{ order.userOrder }}</th>
         <td class="p-3">{{ order.date }}</td>
-        <td class="p-3">
+        <td class="p-3 max-md:hidden">
           <span
             [ngClass]="
               order.status === 0
