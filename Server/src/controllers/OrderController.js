@@ -54,5 +54,12 @@ class OrderController {
       console.log(error);
     }
   }
+  async cancelOrder(req, res) {
+    try {
+      return res.status(200).json("Order cancelled successfully");
+    } catch (error) {
+      console.log(error);
+    }
+  }
 }
 module.exports = new OrderController();

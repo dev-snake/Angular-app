@@ -12,6 +12,7 @@ import {
   FormControl,
   Validators,
 } from '@angular/forms';
+import { Discount } from '../../../../shared/interfaces/distcount';
 import { ToastService } from '../../../../shared/service/toast/toast.service';
 @Component({
   selector: 'app-page-payment',
@@ -24,6 +25,7 @@ export class PagePaymentComponent {
   public user: User | undefined;
   public isLoggedIn: boolean = false;
   public paymentForm!: FormGroup;
+  public discount: Discount = this.cartService.getDiscount();
   constructor(
     private cartService: CartApiService,
     private authService: AuthService,
@@ -88,6 +90,8 @@ export class PagePaymentComponent {
         ...this.paymentForm.value,
         code: '#' + Math.floor(Math.random() * 1000000),
         products: this.cartList,
+        discount: this.discount.rate || 0,
+        amount: this.discount.amount || 0,
         total: this.total,
         userId: this.user?._id || null,
         userOrder:
@@ -96,8 +100,8 @@ export class PagePaymentComponent {
           (this.user?.lastname ?? this.paymentForm?.get('lastname')?.value),
       };
       this.cartService.createOrder(order).subscribe((order: Order) => {
-        console.log(order);
         this.toastService.showToast('Đặt hàng thành công !', '#17c964');
+        this.cartService.deleteAllCart();
         this.router.navigate(['/']);
       });
     }

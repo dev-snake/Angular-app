@@ -63,12 +63,13 @@ class ProductController {
   }
   async createOrder(req, res) {
     try {
-      const { userId, email, products, total } = req.body;
+      const { userId, email, products, total, discount, amount } = req.body;
       products.forEach(async (item) => {
         const product = await productModel.findById(item._id);
         product.quantity_sold += item.quantity;
         product.save();
       });
+
       const user = await userModel.findById(userId);
       const transporter = nodemailer.createTransport({
         service: "gmail",
@@ -115,7 +116,9 @@ class ProductController {
               .join("")}
           </tbody>
         </table>
-        <p>Tổng tiền: ${total} đ</p>
+        <p>Giảm giá: ${discount} đ</p>
+        <p>Giá gốc: ${total} đ</p>
+        <p>Giá Sau khi giảm giá: ${amount} đ</p>
       </div>
       </div>
     `;

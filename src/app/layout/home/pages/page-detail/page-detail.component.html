@@ -37,7 +37,7 @@
             value="1"
             #quantity
           />
-          @if(product?.quantityImported <= 0){
+          @if( product?.quantityImported - product?.quantity_sold <= 0){
           <button
             class="bg-[#2e86f1] p-3 text-white rounded-xl ml-4 focus:ring"
           >

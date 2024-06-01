@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { OrderHistory } from '../../../../../shared/interfaces/order.history';
 import { User } from '../../../../../shared/interfaces/user';
 import { AuthService } from '../../../../../shared/service/auth/auth.service';
-import { Router, RouterLink } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { OrdersDetailComponent } from '../orders-detail/orders-detail.component';
+import { CartApiService } from '../../../../../shared/service/cart/cart.api.service';
 @Component({
   selector: 'app-orders-history',
   standalone: true,
@@ -16,7 +17,10 @@ export class OrdersHistoryComponent implements OnInit {
   public user: User | undefined;
   public orders: User | undefined;
   public orderHistory: OrderHistory[] | undefined;
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private cartService: CartApiService
+  ) {}
   ngOnInit(): void {
     this.authService.getUsers().subscribe((user: User[]) => {
       this.user = user.find(
@@ -30,5 +34,8 @@ export class OrdersHistoryComponent implements OnInit {
   }
   get orderHistoryList(): any[] | undefined {
     return this.orderHistory;
+  }
+  cancelOrder(order: any): void {
+    this.cartService.cancelOrder(order);
   }
 }

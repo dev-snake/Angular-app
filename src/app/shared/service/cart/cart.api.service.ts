@@ -60,4 +60,15 @@ export class CartApiService {
   getOrders(): Observable<any> {
     return this.http.get('http://localhost:3000/orders');
   }
+  deleteAllCart() {
+    this.carts = [];
+    this.saveCartToLocalStorage();
+    localStorage.removeItem('discount');
+  }
+  getDiscount() {
+    return JSON.parse(localStorage.getItem('discount') || '{}');
+  }
+  cancelOrder(order: any): Observable<any> {
+    return this.http.post('http://localhost:3000/order/cancel-order', order);
+  }
 }

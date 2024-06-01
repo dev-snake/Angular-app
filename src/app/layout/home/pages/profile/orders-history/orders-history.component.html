@@ -7,6 +7,7 @@
       <th>Ngày đặt</th>
       <th>Trạng thái</th>
       <th>Thao tác</th>
+      <th>Hủy đơn</th>
     </tr>
   </thead>
   <tbody class="text-center">
@@ -41,6 +42,12 @@
         <a [routerLink]="['/profile', item.code, 'order-detail']">
           <i class="fa-solid fa-eye bg-blue-400 p-2 rounded-xl text-white"></i
         ></a>
+      </td>
+      <td class="border-b border-slate-100 p-2">
+        <i
+          (click)="cancelOrder(item.code)"
+          class="fa-solid fa-trash bg-red-400 p-2 rounded-xl text-white cursor-pointer"
+        ></i>
       </td>
     </tr>
     }

@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Products } from '../../interfaces/product';
 import { Category } from '../../interfaces/category';
+import { Voucher } from '../../interfaces/voucher';
 @Injectable({
   providedIn: 'root',
 })
@@ -46,5 +47,8 @@ export class ApiService {
     return this.http.get<Products[]>(
       `http://localhost:3000/increaseViews/${productId}`
     );
+  }
+  getVouchers(): Observable<Voucher[]> {
+    return this.http.get<Voucher[]>('http://localhost:3000/vouchers');
   }
 }

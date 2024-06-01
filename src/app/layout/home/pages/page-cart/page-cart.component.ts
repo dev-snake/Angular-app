@@ -2,18 +2,28 @@ import { Component } from '@angular/core';
 import { Products } from '../../../../shared/interfaces/product';
 import { CartApiService } from '../../../../shared/service/cart/cart.api.service';
 import { RouterLink } from '@angular/router';
+import { VoucherComponent } from './voucher/voucher.component';
+import { ApiService } from '../../../../shared/service/api/api.service';
+import { ToastService } from '../../../../shared/service/toast/toast.service';
 @Component({
   selector: 'app-page-cart',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, VoucherComponent],
   templateUrl: './page-cart.component.html',
   styleUrl: './page-cart.component.css',
 })
 export class PageCartComponent {
+  public test: string | any = [];
   private storageKey: string = 'cart';
   public carts: Products[] = [];
   public total: number = 0;
-  constructor(private cartService: CartApiService) {
+  public discount: number = 0;
+  public discountRate: string = '';
+  constructor(
+    private cartService: CartApiService,
+    private apiService: ApiService,
+    private toastService: ToastService
+  ) {
     this.carts = this.cartService.getItems();
     this.loadCartFromLocalStorage();
     this.calculateTotal();
@@ -37,5 +47,21 @@ export class PageCartComponent {
     this.cartService.updateQuantity(_id, quantity);
     this.loadCartFromLocalStorage();
     this.calculateTotal();
+  }
+  applyCoupon(coupon: string | number) {
+    this.apiService.getVouchers().subscribe((vouchers) => {
+      const voucher = vouchers.find((v) => v.code === coupon);
+      if (voucher) {
+        this.discount =
+          this.total - (this.total * parseInt(voucher.discount)) / 100;
+        this.discountRate = voucher.discount;
+        localStorage.setItem(
+          'discount',
+          JSON.stringify({ rate: this.discountRate, amount: this.discount })
+        );
+        return;
+      }
+      this.toastService.showToast('Coupon không tìm thấy', 'error');
+    });
   }
 }

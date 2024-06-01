@@ -5,14 +5,15 @@
   >
     Thêm sản phẩm
   </button>
-  <div class="p-4">
+  <div class="md:p-4">
     <table class="w-full text-center shadow shadow-slate-100 rounded-xl">
       <thead>
         <tr>
           <th class="p-3 border-b-2">Hình ảnh</th>
           <th class="p-3 border-b-2">Tên SP</th>
           <th class="p-3 border-b-2">Đã bán</th>
-          <th class="p-3 border-b-2">Số lượng Nhập</th>
+          <th class="p-3 border-b-2">Ngày nhập</th>
+          <th class="p-3 border-b-2 max-md:hidden">Số lượng Nhập</th>
           <th class="p-3 border-b-2">Giá</th>
           <th class="p-3 border-b-2">Danh mục</th>
           <th class="p-3 border-b-2">Actions</th>
@@ -33,6 +34,7 @@
             {{ product.name }}
           </td>
           <td class="p-2 font-medium">{{ product.quantity_sold }}</td>
+          <td class="p-2 font-medium max-md:hidden">{{ product.createdAt }}</td>
           <td class="p-2 font-medium">{{ product.quantityImported }}</td>
           <td class="p-2 font-medium">{{ product.price }} đ</td>
           <td class="p-2">

@@ -13,6 +13,7 @@ const order = new Schema(
     phone: { type: String },
     email: { type: String },
     userOrder: { type: String, default: "" },
+    amount: { type: Number, default: 0 },
   },
   {
     timestamps: true,

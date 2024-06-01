@@ -1,4 +1,4 @@
-<section class="max-w-[1300px] mx-auto mt-4">
+<section class="max-w-[1300px] mx-auto mt-4 mb-80">
   <div class="w-full max-sm:p-4 sm:grid sm:grid-cols-cols2-1 sm:gap-4">
     <table class="bg-white p-4 rounded-2xl">
       <thead class="">
@@ -43,9 +43,28 @@
     </table>
     <div class="w-full max-sm:mt-4">
       <div class="bg-white p-4 rounded-2xl w-full">
-        <p class="font-medium text-xl mt-2">Tạm Tính : {{ total }} đ</p>
-        <p class="text-xl mt-2 font-medium">
-          Tổng : <strong>{{ total }} đ</strong>
+        <!-- <div class="flex items-stretch justify-between h-10 gap-4 my-4">
+          <input
+            type="text"
+            placeholder="Nhập mã voucher"
+            class="border p-2 outline-none rounded-xl basis-72 h-full"
+            #discountCode
+          />
+          <button
+            (click)="applyDiscount(discountCode.value)"
+            class="bg-blue-500 text-white p-2 rounded-xl font-medium basis-28 cursor-pointer"
+          >
+            Áp dụng
+          </button>
+        </div> -->
+        <app-voucher (applyVoucher)="applyCoupon($event)"> </app-voucher>
+        <p class="font-medium mt-2 text-[1rem]">
+          Giảm giá :
+          <span class="text-red-500"> {{ discountRate || "0%" }} </span>
+        </p>
+        <p class="font-medium mt-2 text-[1rem]">Tổng tiền : {{ total }} đ</p>
+        <p class="text-[1rem] mt-2 font-medium">
+          Giá thanh toán : <strong>{{ discount || total }} đ</strong>
         </p>
         @if(carts.length <= 0){
         <button
