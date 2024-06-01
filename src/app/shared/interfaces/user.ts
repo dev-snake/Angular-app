@@ -11,4 +11,7 @@ export interface User {
   orders: Order[];
   active: number;
   phonenumber: string;
+  success: boolean;
+  userId: string;
+  message: string;
 }

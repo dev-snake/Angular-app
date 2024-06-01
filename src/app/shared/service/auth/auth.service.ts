@@ -29,6 +29,12 @@ export class AuthService {
   isLoggedIn(): boolean {
     return JSON.parse(localStorage.getItem('isLoggedIn') || 'false');
   }
+  login(username: string, password: string): Observable<User> {
+    return this.http.post<User>(
+      `http://localhost:3000/users/login?username=${username}&password=${password}`,
+      { username, password }
+    );
+  }
   getUsers(): Observable<User[]> {
     return this.http.get<User[]>(`http://localhost:3000/users`);
   }

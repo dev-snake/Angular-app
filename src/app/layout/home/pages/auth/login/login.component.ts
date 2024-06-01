@@ -25,34 +25,81 @@ export class LoginComponent {
       password: new FormControl('', Validators.required),
     });
   }
+  // onSubmit() {
+  //   if (this.loginForm.invalid) {
+  //     return;
+  //   }
+  //   this.authService.getUsers().subscribe((users: User[]) => {
+  //     const { username, password } = this.loginForm.value;
+  //     this.userFound = false;
+  //     this.authService.login(username, password).subscribe(
+  //       (response) => {
+  //         if (response.success) {
+  //           this.userFound = true;
+  //           this.toastService.showToast('Đăng nhập thành công', '#17c964');
+  //           this.authService.saveLoginFromLocalStorage(
+  //             response.username,
+  //             response.userId
+  //           );
+  //           this.router.navigate(['/']);
+  //         } else {
+  //           this.toastService.showToast(
+  //             'Username hoặc password không đúng',
+  //             '#ff0000'
+  //           );
+  //         }
+  //       },
+  //       (error) => {
+  //         this.toastService.showToast('Đã có lỗi xảy ra', '#ff0000');
+  //         console.error(error);
+  //         return;
+  //       }
+  //     );
+
+  //     // users.forEach((user: User) => {
+  //     //   if (user.username === username && user.password === password) {
+  //     //     this.userFound = true;
+  //     //     if (user.active === 1) {
+  //     //       this.toastService.showToast(
+  //     //         'Tài khoản của bạn đã bị khóa',
+  //     //         '#ff0000'
+  //     //       );
+  //     //     } else if (user.active === 0) {
+  //     //       this.userFound = true;
+  //     //       this.authService.saveLoginFromLocalStorage(user.username, user._id);
+  //     //       this.router.navigate(['/']);
+  //     //     }
+  //     //   }
+  //     // });
+  //     if (!this.userFound) {
+  //       this.toastService.showToast(
+  //         'Username hoặc password không đúng',
+  //         '#ff0000'
+  //       );
+  //     }
+  //   });
+  // }
   onSubmit() {
     if (this.loginForm.invalid) {
       return;
     }
-    this.authService.getUsers().subscribe((users: User[]) => {
-      const { username, password } = this.loginForm.value;
-      this.userFound = false;
-      users.forEach((user: User) => {
-        if (user.username === username && user.password === password) {
-          this.userFound = true;
-          if (user.active === 1) {
-            this.toastService.showToast(
-              'Tài khoản của bạn đã bị khóa',
-              '#ff0000'
-            );
-          } else if (user.active === 0) {
-            this.userFound = true;
-            this.authService.saveLoginFromLocalStorage(user.username, user._id);
-            this.router.navigate(['/']);
-          }
+    const { username, password } = this.loginForm.value;
+    this.authService.login(username, password).subscribe(
+      (response) => {
+        if (response.success) {
+          this.toastService.showToast(response.message, '#17c964');
+          this.authService.saveLoginFromLocalStorage(
+            response.username,
+            response.userId
+          );
+          this.router.navigate(['/']);
+          return;
         }
-      });
-      if (!this.userFound) {
-        this.toastService.showToast(
-          'Username hoặc password không đúng',
-          '#ff0000'
-        );
+      },
+      (error) => {
+        this.toastService.showToast(error.error.message, '#ff0000');
+        console.log(error.message);
       }
-    });
+    );
   }
 }
