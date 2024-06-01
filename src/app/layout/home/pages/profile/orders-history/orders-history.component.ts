@@ -23,7 +23,7 @@ export class OrdersHistoryComponent implements OnInit {
         (user: User) => user.username === this.authService.getUsername()
       );
       if (this.user) {
-        this.orderHistory = this.user.orders;
+        this.orderHistory = this.user.orders.reverse();
       }
       console.log(this.orderHistory);
     });

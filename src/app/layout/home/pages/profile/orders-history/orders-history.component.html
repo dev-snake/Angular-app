@@ -2,7 +2,7 @@
 <table class="border-collapse table-auto w-full text-sm">
   <thead>
     <tr class="h-10">
-      <th>STT</th>
+      <th class="max-md:hidden">STT</th>
       <th>Mã đơn hàng</th>
       <th>Ngày đặt</th>
       <th>Trạng thái</th>
@@ -12,7 +12,9 @@
   <tbody class="text-center">
     @for(item of orderHistoryList; track $index){
     <tr class="h-10">
-      <td class="border-b border-slate-100 p-4">{{ $index + 1 }}</td>
+      <td class="border-b border-slate-100 p-4 max-md:hidden">
+        {{ $index + 1 }}
+      </td>
       <td class="border-b border-slate-100 p-4">{{ item.code }}</td>
       <td class="border-b border-slate-100 p-4">{{ item.date }}</td>
       <td class="border-b border-slate-100 p-4">

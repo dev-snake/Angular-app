@@ -13,4 +13,5 @@ export interface Products {
   title_description_2: string;
   comments: Comment[];
   views: number;
+  quantityImported: number;
 }

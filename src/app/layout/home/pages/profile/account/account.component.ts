@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterModule, RouterLink, Router } from '@angular/router';
 import { User } from '../../../../../shared/interfaces/user';
 import { AuthService } from '../../../../../shared/service/auth/auth.service';
@@ -10,7 +10,7 @@ import { PersonalInformationComponent } from '../personal-information/personal-i
   templateUrl: './account.component.html',
   styleUrl: './account.component.css',
 })
-export class AccountComponent {
+export class AccountComponent implements OnInit {
   public getUser: User | undefined;
   constructor(private authService: AuthService, private route: Router) {
     if (this.authService.isLoggedIn()) {
@@ -24,5 +24,14 @@ export class AccountComponent {
   logout(): void {
     this.route.navigate(['/']);
     return this.authService.saveLogoutFromLocalStorage();
+  }
+  ngOnInit(): void {
+    const url = this.route.url;
+    if (url.startsWith('/profile')) {
+      const isLoggedIn = this.authService.isLoggedIn();
+      if (!isLoggedIn) {
+        this.route.navigateByUrl('/');
+      }
+    }
   }
 }

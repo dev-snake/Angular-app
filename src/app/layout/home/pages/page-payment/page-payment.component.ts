@@ -34,14 +34,6 @@ export class PagePaymentComponent {
       this.user = user.find(
         (user: User) => user.username === this.authService.getUsername()
       );
-      // const day = new Date();
-      // const date = day.getDate();
-      // const month = day.getMonth();
-      // const year = day.getFullYear();
-      // const time = day.getHours();
-      // const minute = day.getMinutes();
-      // const second = day.getSeconds();
-      // const fullTime = `${date}/${month}/${year} ${time}:${minute}:${second}`;
       if (this.user) {
         this.isLoggedIn = true;
         this.paymentForm = new FormGroup({

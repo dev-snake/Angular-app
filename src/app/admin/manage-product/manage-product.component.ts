@@ -41,6 +41,7 @@ export class ManageProductComponent implements OnInit {
       description: new FormControl('', [Validators.required]),
       title_description_1: new FormControl('', [Validators.required]),
       title_description_2: new FormControl('', [Validators.required]),
+      quantityImported: new FormControl('', [Validators.required]),
     });
 
     this.productFormUpdate = new FormGroup({
@@ -51,6 +52,7 @@ export class ManageProductComponent implements OnInit {
       description: new FormControl('', [Validators.required]),
       title_description_1: new FormControl('', [Validators.required]),
       title_description_2: new FormControl('', [Validators.required]),
+      quantityImported: new FormControl('', [Validators.required]),
     });
   }
 

@@ -22,7 +22,7 @@ import { HttpParams } from '@angular/common/http';
 })
 export class PageDetailComponent implements OnInit {
   public isLogged: boolean = this.authService.isLoggedIn();
-  public product: Products | undefined;
+  public product: Products | any = {};
   public message: string = 'Đã thêm vào giỏ hàng';
   public formComment: FormGroup;
   public commentList: Comment[] = [];
@@ -36,6 +36,7 @@ export class PageDetailComponent implements OnInit {
     const routeParams = this.route.snapshot.paramMap;
     const productIdFromRoute = String(routeParams.get('productId'));
     this.apiProducts.getProducts().subscribe((products: Products[]) => {
+      console.log(products);
       this.product = products.find(
         (product: Products) => product._id === productIdFromRoute
       );

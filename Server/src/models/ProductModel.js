@@ -13,6 +13,7 @@ const product = new Schema(
     comments: { type: Array, default: [] },
     views: { type: Number, default: 0 },
     quantity_sold: { type: Number, default: 0 },
+    quantityImported: { type: Number, default: 0 },
   },
   {
     timestamps: true,

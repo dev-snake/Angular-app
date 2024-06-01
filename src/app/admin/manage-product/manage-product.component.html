@@ -9,8 +9,10 @@
     <table class="w-full text-center shadow shadow-slate-100 rounded-xl">
       <thead>
         <tr>
+          <th class="p-3 border-b-2">Hình ảnh</th>
           <th class="p-3 border-b-2">Tên SP</th>
-          <th class="p-3 border-b-2">Số lượng đã bán</th>
+          <th class="p-3 border-b-2">Đã bán</th>
+          <th class="p-3 border-b-2">Số lượng Nhập</th>
           <th class="p-3 border-b-2">Giá</th>
           <th class="p-3 border-b-2">Danh mục</th>
           <th class="p-3 border-b-2">Actions</th>
@@ -18,8 +20,20 @@
       </thead>
       <tbody>
         <tr *ngFor="let product of products">
-          <td class="p-2 font-medium">{{ product.name }}</td>
+          <td class="p-2 font-medium">
+            <img
+              [src]="product.image"
+              alt=""
+              class="max-w-10 text-center inline-block"
+            />
+          </td>
+          <td
+            class="p-2 font-medium max-w-16 text-ellipsis overflow-hidden text-nowrap"
+          >
+            {{ product.name }}
+          </td>
           <td class="p-2 font-medium">{{ product.quantity_sold }}</td>
+          <td class="p-2 font-medium">{{ product.quantityImported }}</td>
           <td class="p-2 font-medium">{{ product.price }} đ</td>
           <td class="p-2">
             {{
@@ -53,10 +67,10 @@
     </table>
   </div>
   <div
-    class="w-[600px] p-4 rounded-xl fixed left-[50%] top-[40%] transform translate-x-[-50%] translate-y-[-50%] transition-all duration-300 ease-in-out"
+    class="w-[600px] p-4 rounded-xl fixed left-[50%] top-[50%] transform translate-x-[-50%] translate-y-[-50%] transition-all duration-300 ease-in-out"
   >
     <form
-      class="w-full hidden bg-slate-200 p-5 rounded-xl transition-all duration-300 ease-in-out"
+      class="w-full hidden bg-slate-50 p-5 rounded-xl transition-all duration-300 ease-in-out"
       [formGroup]="productForm"
       (ngSubmit)="addProduct()"
       #form_add
@@ -71,9 +85,16 @@
       <label for="">Nhập giá</label>
       <input
         type="text"
-        placeholder="Nhập giá "
+        placeholder="Số lượng nhập "
         class="p-2 rounded-xl w-full mb-2 outline-none"
         formControlName="price"
+      />
+      <label for="">Số lượng nhập</label>
+      <input
+        type="text"
+        placeholder="Nhập giá "
+        class="p-2 rounded-xl w-full mb-2 outline-none"
+        formControlName="quantityImported"
       />
       <label for="">Nhập Mô tả</label>
       <input

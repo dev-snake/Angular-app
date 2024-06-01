@@ -5,7 +5,7 @@
         <th class="p-2 max-md:hidden">Username</th>
         <th class="p-2">Fullname</th>
         <th class="p-2">Role</th>
-        <th class="p-2">Date create</th>
+        <th class="p-2 max-md:hidden">Date create</th>
         <th class="p-2">State</th>
         <th class="p-2 max-md:hidden">Actions</th>
       </tr>
@@ -19,7 +19,7 @@
         <td class="p-4">
           {{ user.role === 0 ? "Khách hàng" : "Quản trị viên" }}
         </td>
-        <td class="p-4">{{ user.createdAt }}</td>
+        <td class="p-4 max-md:hidden">{{ user.createdAt }}</td>
         <td class="p-4">
           <span
             class="rounded-3xl w-36 h-9 inline-block font-medium text-center p-2 relative"

@@ -107,7 +107,7 @@ class ProductController {
               <tr>
                 <td >${item.name}</td>
                 <td >${item.quantity}</td>
-                <td >${item.price}</td>
+                <td >${item.price} đ</td>
                 <td >${item.quantity * item.price}</td>
               </tr>
             `
@@ -115,7 +115,7 @@ class ProductController {
               .join("")}
           </tbody>
         </table>
-        <p>Tổng tiền: ${total}</p>
+        <p>Tổng tiền: ${total} đ</p>
       </div>
       </div>
     `;
