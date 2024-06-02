@@ -87,13 +87,24 @@ class OrderController {
     try {
       const { id } = req.params;
       const order = await OrderModel.findOne({ code: "#" + id });
-      // if (!order) {
-      //   return res.status(400).json("Order not found");
-      // }
-      // if (order) {
-      //   order.status = 1;
-      //   await order.save();
-      // }
+      const user = await UserModel.findById(order.userId);
+      if (!user) {
+        return res.status(400).json("User not found");
+      }
+      if (user) {
+        const orderIndex = user.orders.find((order) => order.code === "#" + id);
+        orderIndex.status = 1;
+        await UserModel.findOneAndUpdate({ _id: order.userId }, user, {
+          new: true,
+        });
+      }
+      if (!order) {
+        return res.status(400).json("Order not found");
+      }
+      if (order) {
+        order.status = 1;
+        await order.save();
+      }
       console.log(order);
       return res.status(200).json("Order updated successfully");
     } catch (error) {

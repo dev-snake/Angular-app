@@ -48,6 +48,14 @@
           >
         </td>
         <td>
+          @if(order.status === 1){
+          <label class="inline-flex items-center cursor-pointer">
+            <input type="checkbox" value="" class="sr-only peer" checked />
+            <div
+              class="relative w-14 h-7 bg-slate-100 peer-focus:outline-none rounded-full peer dark:bg-slate-200 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[4px] after:bg-white after:border-white after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-green-400"
+            ></div>
+          </label>
+          }@else if (order.status === 2) { Đã hủy } @else {
           <label class="inline-flex items-center cursor-pointer">
             <input
               type="checkbox"
@@ -59,6 +67,7 @@
               class="relative w-14 h-7 bg-slate-100 peer-focus:outline-none rounded-full peer dark:bg-slate-200 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[4px] after:bg-white after:border-white after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-green-400"
             ></div>
           </label>
+          }
         </td>
         <td class="p-3 relative">
           <a
