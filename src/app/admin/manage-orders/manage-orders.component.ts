@@ -18,24 +18,30 @@ export class ManageOrdersComponent implements OnInit {
       this.orders = orders.reverse();
     });
   }
-  onCheckboxChange(event: any, code: string) {
-    if (event.target.checked) {
-      this.apiOrders.updateOrder(code).subscribe({
-        next: (response) => {
-          console.log('Order updated:', response);
-        },
-        error: (error) => {
-          console.error('Error updating order:', error);
-        },
-        complete: () => {
-          console.log('Order update complete.');
-        },
-      });
-      console.log('checked', code);
+  onCheckboxChange(event: Event, code: string) {
+    const target = event.target as HTMLInputElement;
+    if (target && target.checked !== undefined) {
+      if (target.checked) {
+        const orderCode = code.split('');
+        orderCode.shift();
+        const orderCodeString = orderCode.join('');
+        this.apiOrders.updateOrder(orderCodeString).subscribe({
+          next: (order: Order) => {
+            console.log('Order updated:', order);
+            console.log('checked');
+          },
+          error: (err: any) => {
+            console.error('API update failed:', err);
+          },
+        });
+      } else {
+        console.log('unchecked');
+      }
     } else {
-      console.log('unchecked');
+      console.error('Event target is not a checkbox or is null');
     }
   }
+
   filterSatatus(status: Event): void {
     const value = +(status.target as HTMLSelectElement).value;
     console.log('Value:', value);
