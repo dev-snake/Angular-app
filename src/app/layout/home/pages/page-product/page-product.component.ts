@@ -71,4 +71,64 @@ export class PageProductComponent implements OnInit {
       this.otherAccessories = products;
     });
   }
+  filterProductsKeyboard(event: Event) {
+    const value = +(event.target as HTMLSelectElement).value;
+    if (value === 0) {
+      this.api
+        .getProductCategoryKeyboard()
+        .subscribe((products: Products[]) => {
+          this.mechanical_keyboard = products;
+        });
+    } else if (value === 1) {
+      this.api
+        .getProductCategoryKeyboard()
+        .subscribe((products: Products[]) => {
+          this.mechanical_keyboard = products.sort((a, b) => a.price - b.price);
+        });
+    } else {
+      this.api
+        .getProductCategoryKeyboard()
+        .subscribe((products: Products[]) => {
+          this.mechanical_keyboard = products.sort((a, b) => b.price - a.price);
+        });
+    }
+  }
+  filterProductsMouse(event: Event) {
+    const value = +(event.target as HTMLSelectElement).value;
+    if (value === 0) {
+      this.api.getProductCategoryMouse().subscribe((products: Products[]) => {
+        this.mouse = products;
+      });
+    } else if (value === 1) {
+      this.api.getProductCategoryMouse().subscribe((products: Products[]) => {
+        this.mouse = products.sort((a, b) => a.price - b.price);
+      });
+    } else {
+      this.api.getProductCategoryMouse().subscribe((products: Products[]) => {
+        this.mouse = products.sort((a, b) => b.price - a.price);
+      });
+    }
+  }
+  filterProductsMousePads(event: Event) {
+    const value = +(event.target as HTMLSelectElement).value;
+    if (value === 0) {
+      this.api
+        .getProductCategoryMousePads()
+        .subscribe((products: Products[]) => {
+          this.mouse_pads = products;
+        });
+    } else if (value === 1) {
+      this.api
+        .getProductCategoryMousePads()
+        .subscribe((products: Products[]) => {
+          this.mouse_pads = products.sort((a, b) => a.price - b.price);
+        });
+    } else {
+      this.api
+        .getProductCategoryMousePads()
+        .subscribe((products: Products[]) => {
+          this.mouse_pads = products.sort((a, b) => b.price - a.price);
+        });
+    }
+  }
 }
