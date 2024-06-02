@@ -52,6 +52,12 @@ export class DashboardComponent implements OnInit {
     },
     {
       id: 7,
+      title: 'Vouchers',
+      icon: 'fa-solid fa-ticket p-1 rounded-sm',
+      url: 'manage-vouchers',
+    },
+    {
+      id: 8,
       title: 'Đăng xuất',
       icon: 'bx bx-log-out inline-block p-1 rounded-sm',
       url: '/logout',

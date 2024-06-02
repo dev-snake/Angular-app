@@ -7,6 +7,7 @@ import { ManageOrdersComponent } from './manage-orders/manage-orders.component';
 import { ManageCategoryComponent } from './manage-category/manage-category.component';
 import { OrderDetailComponent } from './order-detail/order-detail.component';
 import { ManageStatisticComponent } from './manage-statistic/manage-statistic.component';
+import { ManageVoucherComponent } from './manage-voucher/manage-voucher.component';
 const routes: Routes = [
   {
     path: '',
@@ -19,6 +20,10 @@ const routes: Routes = [
       {
         path: 'manage-orders/:id/order-detail',
         component: OrderDetailComponent,
+      },
+      {
+        path: 'manage-vouchers',
+        component: ManageVoucherComponent,
       },
       {
         path: 'manage-statistic',

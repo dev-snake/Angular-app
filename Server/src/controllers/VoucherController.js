@@ -10,7 +10,18 @@ class VoucherController {
   }
   async create(req, res) {
     try {
-      return res.json({ message: "Voucher Controller" });
+      const newVoucher = req.body;
+      await voucherModel.create(newVoucher);
+      return res.json({ message: "Voucher Created" });
+    } catch (error) {
+      return res.status(400).json({ message: error.message });
+    }
+  }
+  async delete(req, res) {
+    try {
+      const { id } = req.params;
+      await voucherModel.findByIdAndDelete(id);
+      return res.json({ message: "Voucher Deleted" });
     } catch (error) {
       return res.status(400).json({ message: error.message });
     }

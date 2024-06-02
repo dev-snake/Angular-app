@@ -5,4 +5,5 @@ export interface Voucher {
   description: string;
   expiredDate: string;
   status: number;
+  createdAt: string;
 }

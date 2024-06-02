@@ -1,0 +1,117 @@
+<div>
+  <div class="p-4">
+    <div class="flex justify-between items-center h-10">
+      <div class="flex items-center gap-4 p-2 bg-slate-50 basis-72 rounded-md">
+        <input
+          type="text"
+          placeholder="Tìm kiếm mã voucher"
+          class="p-2 outline-none border basis-72 rounded-sm h-full"
+          (input)="searchVoucher($event)"
+        />
+        |
+        <i class="bx bx-search p-2 cursor-pointer"></i>
+      </div>
+      <button
+        class="p-2 bg-blue-500 text-white rounded-xl font-medium h-full"
+        (click)="openModal()"
+      >
+        Tạo Voucher
+      </button>
+    </div>
+  </div>
+  <table class="w-full text-center mt-4 relative">
+    <thead>
+      <tr>
+        <th class="p-2">Mã Voucher</th>
+        <th class="p-2">Ngày tạo</th>
+        <th class="p-2">Ngày Hết hạn</th>
+        <th class="p-2">% Giảm giá</th>
+        <th class="p-2">Trạng thái</th>
+        <th class="p-2">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let voucher of vouchers">
+        <td class="p-3">
+          {{ voucher.code }}
+          <i
+            class="bx bx-copy bg-slate-100 p-2 rounded-2xl cursor-pointer"
+            (click)="copyCode(voucher.code)"
+          ></i>
+        </td>
+        <td
+          class="p-3 max-w-[1px] overflow-hidden text-nowrap overflow-ellipsis"
+        >
+          {{ voucher.createdAt }}
+        </td>
+        <td class="p-3 text-nowrap overflow-hidden">
+          {{ voucher.expiredDate }}
+        </td>
+        <td class="p-3">{{ voucher.discount }}</td>
+        <td class="p-3">
+          <span
+            class="p-2 rounded-full font-semibold"
+            [ngClass]="{
+              'text-green-500 bg-green-100': voucher.status === 1,
+              'text-red-500': voucher.status === 0
+            }"
+            >{{ voucher.status === 1 ? "Active" : " expired Date" }}</span
+          >
+        </td>
+        <td class="p-3">
+          <i
+            class="fa-solid fa-trash bg-red-400 p-2 rounded-xl text-white cursor-pointer"
+            (click)="deleteVoucher(voucher._id)"
+          ></i>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <form
+    class="max-w-[300px] bg-slate-100 p-5 rounded-xl transition-all duration-300 ease-in-out absolute left-[50%] top-[30%] transform translate-x-[-50%] translate-y-[-50%] hidden"
+    [formGroup]="formAddVoucher"
+    (ngSubmit)="addVoucher()"
+    #formVoucher
+  >
+    <label for="">Thêm voucher</label>
+    <div class="flex items-stretch h-10 gap-2">
+      <input
+        type="text"
+        class="p-2 rounded-xl w-full mb-2 outline-none h-10"
+        placeholder="voucher code"
+        formControlName="code"
+      />
+      <button
+        (click)="generateCode()"
+        class="p-2 rounded-xl capitalize bg-blue-400 text-white font-semibold"
+      >
+        random
+      </button>
+    </div>
+    <label for="">Ngày hết hạn</label>
+    <input
+      type="date"
+      class="p-2 rounded-xl w-full mb-2 outline-none h-10"
+      placeholder="voucher code"
+      formControlName="expiredDate"
+    />
+    <label for="" class="block">% Giảm giá</label>
+    <select
+      name=""
+      id=""
+      class="w-full h-10 p-2 rounded-md"
+      formControlName="discount"
+    >
+      <option value="">Chọn phần trăm giảm giá</option>
+      <option [value]="value" *ngFor="let value of discount">
+        {{ value }}
+      </option>
+    </select>
+    <button
+      class="p-2 bg-blue-400 text-white rounded-xl w-full cursor-pointer mt-4 font-semibold"
+      type="submit"
+    >
+      Thêm voucher
+    </button>
+  </form>
+</div>
