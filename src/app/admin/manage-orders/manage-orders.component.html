@@ -22,6 +22,8 @@
                 ? 'bg-yellow-100 text-orange-500 p-2 rounded-2xl font-semibold'
                 : order.status === 1
                 ? 'bg-green-100 text-green-500 p-2 rounded-2xl font-semibold'
+                : order.status === 2
+                ? 'bg-red-100 text-red-500 p-2 rounded-2xl font-semibold'
                 : 'bg-blue-100 text-blue-500 p-2 rounded-2xl font-semibold'
             "
             >{{
@@ -29,6 +31,8 @@
                 ? "Đang chờ xử lí"
                 : order.status === 1
                 ? "Đã xác nhận"
+                : order.status === 2
+                ? "Đã hủy"
                 : "Đang Vận chuyển"
             }}</span
           >

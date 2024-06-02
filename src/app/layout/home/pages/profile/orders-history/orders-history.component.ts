@@ -35,7 +35,14 @@ export class OrdersHistoryComponent implements OnInit {
   get orderHistoryList(): any[] | undefined {
     return this.orderHistory;
   }
-  cancelOrder(order: any): void {
-    this.cartService.cancelOrder(order);
+  cancelOrder(orderId: string): void {
+    const comfirmOrder = confirm(
+      'Bạn có chắc chắn muốn hủy đơn hàng này không?'
+    );
+    if (comfirmOrder) {
+      const code = orderId.split('#')[1];
+      console.log(code);
+      this.cartService.cancelOrder(code).subscribe();
+    }
   }
 }

@@ -68,7 +68,10 @@ export class CartApiService {
   getDiscount() {
     return JSON.parse(localStorage.getItem('discount') || '{}');
   }
-  cancelOrder(order: any): Observable<any> {
-    return this.http.post('http://localhost:3000/order/cancel-order', order);
+  cancelOrder(orderId: any): Observable<any> {
+    return this.http.post(
+      `http://localhost:3000/order/cancel-order?orderId=${orderId}`,
+      orderId
+    );
   }
 }

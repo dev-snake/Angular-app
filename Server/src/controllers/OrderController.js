@@ -56,9 +56,31 @@ class OrderController {
   }
   async cancelOrder(req, res) {
     try {
+      const { orderId } = req.query;
+      const order = await OrderModel.findOne({ code: "#" + orderId });
+      const { userId } = order;
+      const user = await UserModel.findById(userId);
+      if (!user) {
+        return res.status(400).json("User not found");
+      }
+      if (user) {
+        const orderIndex = user.orders.find(
+          (order) => order.code === "#" + orderId
+        );
+        orderIndex.status = 2;
+        await UserModel.findOneAndUpdate({ _id: userId }, user, { new: true });
+      }
+      if (!order) {
+        return res.status(400).json("Order not found");
+      }
+      if (order) {
+        order.status = 2;
+        await order.save();
+      }
       return res.status(200).json("Order cancelled successfully");
     } catch (error) {
       console.log(error);
+      return res.status(400).json({ error: error.message });
     }
   }
 }

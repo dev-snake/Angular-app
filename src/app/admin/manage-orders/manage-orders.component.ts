@@ -15,7 +15,7 @@ export class ManageOrdersComponent implements OnInit {
   constructor(private apiOrders: ApiService) {}
   ngOnInit() {
     this.apiOrders.getOrders().subscribe((orders: Order[]) => {
-      this.orders = orders;
+      this.orders = orders.reverse();
     });
   }
 }

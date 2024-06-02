@@ -14,7 +14,8 @@ export class ManageStatisticComponent implements OnInit {
 
   ngOnInit(): void {
     this.API.getOrders().subscribe((listOrder: Order[]) => {
-      const monthlyRevenue = this.calculateMonthlyRevenue(listOrder);
+      const orders = listOrder.filter((order) => order.status !== 2);
+      const monthlyRevenue = this.calculateMonthlyRevenue(orders);
       this.renderChart(monthlyRevenue);
     });
   }

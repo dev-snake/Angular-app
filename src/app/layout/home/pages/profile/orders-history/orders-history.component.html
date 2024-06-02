@@ -23,17 +23,21 @@
           class="p-2 rounded-2xl font-semibold truncate"
           [ngClass]="
             item.status === 0
-              ? 'bg-yellow-100 text-orange-500 '
+              ? 'bg-yellow-100 text-orange-500'
               : item.status === 1
               ? 'bg-green-100 text-green-400'
+              : item.status === 2
+              ? 'bg-red-100 text-red-500'
               : 'bg-blue-100 text-blue-500'
           "
         >
           {{
             item.status === 0
-              ? "Đang chờ xử lí"
+              ? "Đang Chờ xử lí"
               : item.status === 1
               ? "Đã xác nhận"
+              : item.status === 2
+              ? "Đã hủy"
               : "Đang vận chuyển"
           }}</span
         >
@@ -44,10 +48,11 @@
         ></a>
       </td>
       <td class="border-b border-slate-100 p-2">
-        <i
+        <button
           (click)="cancelOrder(item.code)"
           class="fa-solid fa-trash bg-red-400 p-2 rounded-xl text-white cursor-pointer"
-        ></i>
+          [disabled]="item.status === 1 || item.status === 2"
+        ></button>
       </td>
     </tr>
     }
