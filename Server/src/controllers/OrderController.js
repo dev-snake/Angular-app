@@ -83,5 +83,23 @@ class OrderController {
       return res.status(400).json({ error: error.message });
     }
   }
+  async updateOrder(req, res) {
+    try {
+      const { id } = req.params;
+      const order = await OrderModel.findOne({ code: id });
+      // if (!order) {
+      //   return res.status(400).json("Order not found");
+      // }
+      // if (order) {
+      //   order.status = 1;
+      //   await order.save();
+      // }
+      console.log(id);
+      return res.status(200).json("Order updated successfully");
+    } catch (error) {
+      console.log(error);
+      res.status(400).json({ error: error.message });
+    }
+  }
 }
 module.exports = new OrderController();

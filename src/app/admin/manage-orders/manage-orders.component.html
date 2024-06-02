@@ -1,4 +1,14 @@
 <div>
+  <select
+    class="p-2 border rounded float-right mr-6 outline-none"
+    (change)="filterSatatus($event)"
+  >
+    <option value="99">Tất cả</option>
+    <option value="0">Đang chờ xử lí</option>
+    <option value="1">Đã xác nhận</option>
+    <option value="2">Đã hủy</option>
+    <option value="3">Đang vận chuyển</option>
+  </select>
   <table class="w-full text-center mt-4 relative">
     <thead>
       <tr>
@@ -6,7 +16,7 @@
         <th class="p-2">Người đặt</th>
         <th class="p-2">Ngày đặt</th>
         <th class="p-2">Trạng thái</th>
-        <th class="p-2 max-md:hidden">Tổng tiền</th>
+        <th class="p-2">Xác nhận</th>
         <th class="p-2">Actions</th>
       </tr>
     </thead>
@@ -37,7 +47,19 @@
             }}</span
           >
         </td>
-        <td class="p-3">{{ order.total }} đ</td>
+        <td>
+          <label class="inline-flex items-center cursor-pointer">
+            <input
+              type="checkbox"
+              value=""
+              class="sr-only peer"
+              (change)="onCheckboxChange($event, order.code)"
+            />
+            <div
+              class="relative w-14 h-7 bg-slate-100 peer-focus:outline-none rounded-full peer dark:bg-slate-200 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[4px] after:bg-white after:border-white after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-green-400"
+            ></div>
+          </label>
+        </td>
         <td class="p-3 relative">
           <a
             [routerLink]="['/admin/manage-orders/', order.code, 'order-detail']"

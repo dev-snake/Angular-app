@@ -47,7 +47,10 @@
           >
         </p>
       </div>
-      <div class="flex justify-between" *ngIf="orderDetails.status !== 2">
+      <div
+        class="flex justify-between"
+        *ngIf="orderDetails?.status !== 2 && orderDetails?.status !== 1"
+      >
         <p class="uppercase font-semibold">Thay đổi trạng thái đơn hàng :</p>
         <select
           class="p-2 rounded-2xl outline-none bg-slate-100"
