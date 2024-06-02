@@ -40,7 +40,7 @@ export class ApiService {
   updateProduct(product: Products): Observable<Products[]> {
     return this.http.put<Products[]>(
       `http://localhost:3000/data/${product._id}`,
-      this.httpOptions
+      product
     );
   }
   increaseView(productId: string): Observable<Products[]> {

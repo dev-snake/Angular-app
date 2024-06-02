@@ -5,18 +5,14 @@ import { Comment } from '../../../../shared/interfaces/comment';
 import { CartApiService } from '../../../../shared/service/cart/cart.api.service';
 import { ApiService } from '../../../../shared/service/api/api.service';
 import { ToastService } from '../../../../shared/service/toast/toast.service';
-import {
-  FormControl,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { CommentsComponent } from './comments/comments.component';
+import { FeedbackComponent } from './feedback/feedback.component';
+
 import { AuthService } from '../../../../shared/service/auth/auth.service';
-import { HttpParams } from '@angular/common/http';
 @Component({
   selector: 'app-page-detail',
   standalone: true,
-  imports: [ReactiveFormsModule, RouterLink],
+  imports: [RouterLink, CommentsComponent, FeedbackComponent],
   templateUrl: './page-detail.component.html',
   styleUrl: './page-detail.component.css',
 })
@@ -24,7 +20,6 @@ export class PageDetailComponent implements OnInit {
   public isLogged: boolean = this.authService.isLoggedIn();
   public product: Products | any = {};
   public message: string = 'Đã thêm vào giỏ hàng';
-  public formComment: FormGroup;
   public commentList: Comment[] = [];
   constructor(
     private route: ActivatedRoute,
@@ -36,7 +31,6 @@ export class PageDetailComponent implements OnInit {
     const routeParams = this.route.snapshot.paramMap;
     const productIdFromRoute = String(routeParams.get('productId'));
     this.apiProducts.getProducts().subscribe((products: Products[]) => {
-      console.log(products);
       this.product = products.find(
         (product: Products) => product._id === productIdFromRoute
       );
@@ -44,19 +38,6 @@ export class PageDetailComponent implements OnInit {
       if (this.product) {
         this.commentList = this.product.comments;
       }
-    });
-    const day = new Date();
-    const date = day.getDate();
-    const month = day.getMonth();
-    const year = day.getFullYear();
-    const time = day.getHours();
-    const minute = day.getMinutes();
-    const second = day.getSeconds();
-    const fullTime = `${date}/${month}/${year} ${time}:0${minute}:${second}`;
-    this.formComment = new FormGroup({
-      username_customer: new FormControl(this.authService.getUsername()),
-      content: new FormControl('', [Validators.required]),
-      date: new FormControl(fullTime),
     });
   }
 
@@ -68,17 +49,19 @@ export class PageDetailComponent implements OnInit {
     this.cartService.addToCart(product, quantity);
     this.toastService.showToast('Đã thêm vào giỏ hàng', '#17c964');
   }
-  onSubmit() {
-    const getUrl = new HttpParams().set('productId', this.product?._id || '');
-    const productId = getUrl.get('productId');
+  addComment(comment: string) {
     this.apiProducts.getProducts().subscribe((products: Products[]) => {
       this.product = products.find(
-        (product: Products) => product._id === productId
+        (product: Products) => product._id === this.product._id
       );
       if (this.product) {
-        this.product?.comments.push(this.formComment.value);
+        this.product.comments.push({
+          username_customer: this.authService.getUsername(),
+          content: comment,
+          date: new Date().toLocaleString(),
+        });
         this.apiProducts.updateProduct(this.product).subscribe((res) => {
-          this.commentList = this.product?.comments || [];
+          this.commentList = this.product.comments;
         });
       }
     });
