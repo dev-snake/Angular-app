@@ -46,26 +46,10 @@
         (addCategoryButton)="addCategory($event)"
       ></app-add-category>
     </div>
-    <form
-      [formGroup]="formEditCategory"
-      class="w-full hidden bg-slate-200 p-5 rounded-xl transition-all duration-300 ease-in-out"
-      #editCategoryForm
-      (ngSubmit)="editCategorySubmit()"
-    >
-      <label for="">Tên Danh muc</label>
-      <input
-        type="text"
-        class="p-2 rounded-xl w-full mb-2 outline-none"
-        placeholder="Nhập tên sản phẩm"
-        formControlName="category_name"
-      />
-
-      <button
-        class="p-2 bg-blue-400 text-white rounded-xl w-full cursor-pointer mt-4 font-semibold"
-        type="submit"
-      >
-        Cập nhật danh mục
-      </button>
-    </form>
+    <div #editCategoryForm class="hidden">
+      <app-edit-category
+        (EditFormSubmit)="editCategorySubmit($event)"
+      ></app-edit-category>
+    </div>
   </div>
 </div>

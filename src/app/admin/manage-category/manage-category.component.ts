@@ -6,35 +6,25 @@ import { Category } from '../../shared/interfaces/category';
 import { Products } from '../../shared/interfaces/product';
 import { CommonModule } from '@angular/common';
 import { ToastService } from '../../shared/service/toast/toast.service';
-import {
-  ReactiveFormsModule,
-  FormControl,
-  Validators,
-  FormGroup,
-} from '@angular/forms';
+import { EditCategoryComponent } from './edit-category/edit-category.component';
+import { FormGroup, FormControl } from '@angular/forms';
 @Component({
   selector: 'app-manage-category',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, AddCategoryComponent],
+  imports: [CommonModule, AddCategoryComponent, EditCategoryComponent],
   templateUrl: './manage-category.component.html',
   styleUrl: './manage-category.component.css',
 })
 export class ManageCategoryComponent implements OnInit {
   @ViewChild('categoryForm') categoryForm: ElementRef | undefined;
   @ViewChild('editCategoryForm') editCategoryForm: ElementRef | undefined;
-  dataCategories: Category[] | undefined;
-  currentCategoryId: number | null = null;
-  formEditCategory: FormGroup;
-
+  public dataCategories: Category[] | undefined;
+  public currentCategoryId: number | null = null;
   constructor(
     private CRUD_PRODUCT: CRUD_SERVICE_PRODUCT,
     private CRUD_CATEGORY: CRUD_SERVICE_CATEGORY,
     private toastService: ToastService
-  ) {
-    this.formEditCategory = new FormGroup({
-      category_name: new FormControl('', [Validators.required]),
-    });
-  }
+  ) {}
   ngOnInit(): void {
     this.getCategories();
   }
@@ -58,6 +48,7 @@ export class ManageCategoryComponent implements OnInit {
     );
   }
   editCategory(category_id: number) {
+    console.log(category_id);
     this.currentCategoryId = category_id;
     this.editCategoryForm?.nativeElement.classList.toggle('hidden');
     this.categoryForm?.nativeElement.classList.add('hidden');
@@ -65,20 +56,17 @@ export class ManageCategoryComponent implements OnInit {
       const category = categories.find((category: Category) => {
         return category.category_id === category_id;
       });
-      this.formEditCategory.setValue({
-        category_name: category?.category_name,
-      });
     });
   }
-  editCategorySubmit() {
+  editCategorySubmit(form: FormGroup) {
     this.CRUD_CATEGORY.updateCategory(
       this.currentCategoryId!,
-      this.formEditCategory.value
+      form.value
     ).subscribe((category: Category) => {
       this.currentCategoryId = null;
       this.getCategories();
       this.editCategoryForm?.nativeElement.classList.toggle('hidden');
-      this.formEditCategory.reset();
+      form.reset();
     });
   }
   deleteCategory(category_id: number) {
