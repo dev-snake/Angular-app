@@ -1,7 +1,7 @@
 const productModel = require("../models/ProductModel");
-const orderModel = require("../models/OrderModel");
 const userModel = require("../models/UserModel");
 const nodemailer = require("nodemailer");
+const voucherModel = require("../models/VoucherModel");
 require("dotenv").config();
 class ProductController {
   async increaseView(req, res) {
@@ -63,13 +63,21 @@ class ProductController {
   }
   async createOrder(req, res) {
     try {
-      const { userId, email, products, total, discount, amount } = req.body;
+      const { userId, email, products, total, discount, amount, voucherCode } =
+        req.body;
       products.forEach(async (item) => {
         const product = await productModel.findById(item._id);
         product.quantity_sold += item.quantity;
         product.save();
       });
-
+      const voucher = await voucherModel.findOne({ code: voucherCode });
+      if (!voucher) {
+        return res.status(400).json({ message: "Voucher not found" });
+      }
+      if (voucher) {
+        voucher.quantityUsed += 1;
+        await voucher.save();
+      }
       const user = await userModel.findById(userId);
       const transporter = nodemailer.createTransport({
         service: "gmail",
@@ -139,7 +147,8 @@ class ProductController {
         user.orders.push(req.body);
         await user.save();
       }
-      await orderModel(req.body).save();
+      // await orderModel(req.body).save();
+      console.log(req.body);
       return res.status(201).json("ordered Successfully");
     } catch (error) {
       return res.status(400).json({ message: error.message });

@@ -24,6 +24,7 @@ export class AddVoucherComponent {
       code: new FormControl('', [Validators.required]),
       discount: new FormControl('', [Validators.required]),
       expiredDate: new FormControl('', [Validators.required]),
+      limitQuantity: new FormControl('', [Validators.required]),
     });
     for (let i = 10; i <= 100; i += 10) {
       this.discount.push(i.toString() + '%');

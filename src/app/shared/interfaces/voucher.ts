@@ -6,4 +6,6 @@ export interface Voucher {
   expiredDate: string;
   status: number;
   createdAt: string;
+  limitQuantity: number;
+  quantityUsed: number;
 }

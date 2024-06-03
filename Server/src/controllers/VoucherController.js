@@ -1,4 +1,4 @@
-const voucherModel = require("../models/voucherModel");
+const voucherModel = require("../models/VoucherModel");
 class VoucherController {
   async index(req, res) {
     try {

@@ -5,6 +5,7 @@ import { RouterLink } from '@angular/router';
 import { VoucherComponent } from './voucher/voucher.component';
 import { ApiService } from '../../../../shared/service/api/api.service';
 import { ToastService } from '../../../../shared/service/toast/toast.service';
+import { Voucher } from '../../../../shared/interfaces/voucher';
 @Component({
   selector: 'app-page-cart',
   standalone: true,
@@ -19,6 +20,7 @@ export class PageCartComponent {
   public total: number = 0;
   public discount: number = 0;
   public discountRate: string = '';
+
   constructor(
     private cartService: CartApiService,
     private apiService: ApiService,
@@ -49,19 +51,31 @@ export class PageCartComponent {
     this.calculateTotal();
   }
   applyCoupon(coupon: string | number) {
+    if (coupon === '') {
+      this.toastService.showToast('Vui lòng nhập mã giảm giá', 'error');
+      return;
+    }
     this.apiService.getVouchers().subscribe((vouchers) => {
-      const voucher = vouchers.find((v) => v.code === coupon);
-      if (voucher) {
+      const voucher: any = vouchers.find((v) => v.code === coupon);
+
+      console.log(voucher.quantityUsed, voucher.limitQuantity);
+      if (voucher.quantityUsed >= voucher.limitQuantity) {
+        this.toastService.showToast('Coupon đã hết lượt sử dụng', 'error');
+        return;
+      } else {
         this.discount =
           this.total - (this.total * parseInt(voucher.discount)) / 100;
         this.discountRate = voucher.discount;
         localStorage.setItem(
           'discount',
-          JSON.stringify({ rate: this.discountRate, amount: this.discount })
+          JSON.stringify({
+            rate: this.discountRate,
+            amount: this.discount,
+            code: coupon,
+          })
         );
         return;
       }
-      this.toastService.showToast('Coupon không tìm thấy', 'error');
     });
   }
 }

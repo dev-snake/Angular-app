@@ -26,6 +26,7 @@ export class PagePaymentComponent {
   public isLoggedIn: boolean = false;
   public paymentForm!: FormGroup;
   public discount: Discount = this.cartService.getDiscount();
+  public voucherCode: string = '';
   constructor(
     private cartService: CartApiService,
     private authService: AuthService,
@@ -90,6 +91,7 @@ export class PagePaymentComponent {
         ...this.paymentForm.value,
         code: '#' + Math.floor(Math.random() * 1000000),
         products: this.cartList,
+        voucherCode: this.discount.code || '',
         discount: this.discount.rate || 0,
         amount: this.discount.amount || 0,
         total: this.total,
