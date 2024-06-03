@@ -57,8 +57,10 @@ export class PageCartComponent {
     }
     this.apiService.getVouchers().subscribe((vouchers) => {
       const voucher: any = vouchers.find((v) => v.code === coupon);
-
-      console.log(voucher.quantityUsed, voucher.limitQuantity);
+      if (!voucher) {
+        this.toastService.showToast('Mã giảm giá không tồn tại', 'error');
+        return;
+      }
       if (voucher.quantityUsed >= voucher.limitQuantity) {
         this.toastService.showToast('Coupon đã hết lượt sử dụng', 'error');
         return;

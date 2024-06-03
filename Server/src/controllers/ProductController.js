@@ -147,8 +147,7 @@ class ProductController {
         user.orders.push(req.body);
         await user.save();
       }
-      // await orderModel(req.body).save();
-      console.log(req.body);
+      await orderModel(req.body).save();
       return res.status(201).json("ordered Successfully");
     } catch (error) {
       return res.status(400).json({ message: error.message });

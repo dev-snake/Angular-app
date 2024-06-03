@@ -55,9 +55,14 @@
             class="p-2 rounded-full font-semibold"
             [ngClass]="{
               'text-green-500 bg-green-100': voucher.status === 1,
-              'text-red-500': voucher.status === 0
+              'text-red-500 bg-red-100':
+                voucher.limitQuantity === voucher.quantityUsed
             }"
-            >{{ voucher.status === 1 ? "Active" : " expired Date" }}</span
+            >{{
+              voucher.limitQuantity === voucher.quantityUsed
+                ? "Hết mã"
+                : "Còn mã"
+            }}</span
           >
         </td>
         <td class="p-3">
