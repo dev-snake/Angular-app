@@ -28,11 +28,24 @@
     }
   </div>
   <div class="rounded-xl mt-4">
-    @for (item of commentList; track $index) {
-    <div class="bg-white p-2 rounded-xl mt-2">
+    <div
+      class="bg-white p-2 rounded-xl mt-2"
+      *ngFor="let item of displayedComments"
+    >
       <p class="font-bold text-[1rem] py-1">{{ item.username_customer }}</p>
       <p>content: {{ item.content }}</p>
     </div>
-    }
+    <div class="flex justify-center">
+      <p *ngIf="displayedComments.length === 0" class="text-center mt-4">
+        Chưa có bình luận nào !
+      </p>
+      <button
+        *ngIf="displayedComments.length < commentList.length"
+        (click)="showMoreComments()"
+        class="bg-blue-400 p-2 rounded-xl mt-4 text-white cursor-pointer"
+      >
+        Xem thêm
+      </button>
+    </div>
   </div>
 </form>
