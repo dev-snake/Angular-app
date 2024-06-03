@@ -14,4 +14,5 @@ export interface User {
   success: boolean;
   userId: string;
   message: string;
+  point: number;
 }

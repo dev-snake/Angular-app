@@ -142,6 +142,11 @@ class ProductController {
         }
       });
       if (user) {
+        const quantityProducts = products.reduce(
+          (acc, index) => acc + index.quantity,
+          0
+        );
+        user.point += quantityProducts * 10;
         user.orders.push(req.body);
         await user.save();
       }
