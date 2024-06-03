@@ -20,7 +20,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let product of products">
+        <tr *ngFor="let product of displayedProducts">
           <td class="p-2 font-medium">
             <img
               [src]="product.image"
@@ -67,6 +67,17 @@
         </tr>
       </tbody>
     </table>
+    <div
+      *ngIf="displayedProducts.length < products.length"
+      class="flex justify-center mt-4"
+    >
+      <button
+        class="p-2 bg-blue-400 text-white rounded-xl"
+        (click)="loadMoreProducts()"
+      >
+        xem thêm
+      </button>
+    </div>
   </div>
   <div
     class="w-[600px] p-4 rounded-xl fixed left-[50%] top-[50%] transform translate-x-[-50%] translate-y-[-50%] transition-all duration-300 ease-in-out"

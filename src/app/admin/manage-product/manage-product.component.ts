@@ -26,10 +26,13 @@ import { AddProductComponent } from './add-product/add-product.component';
 export class ManageProductComponent implements OnInit {
   @ViewChild('form_add') form_add!: ElementRef;
   @ViewChild('form_edit') form_edit!: ElementRef;
-  public products: any[] = [];
+  public products: Products[] = [];
   public categories: any;
   public productFormUpdate: FormGroup;
   public currentProductId: number | null = null;
+  public pagesize: number = 5;
+  public currentPage: number = 1;
+  public displayedProducts: any[] = [];
   constructor(
     private CRUD_PRODUCT: CRUD_SERVICE_PRODUCT,
     private CRUD_CATEGORY: CRUD_SERVICE_CATEGORY
@@ -47,8 +50,9 @@ export class ManageProductComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getProducts();
+    this.loadPage();
     this.getCategories();
+    this.getProducts();
   }
 
   getProducts() {
@@ -56,7 +60,16 @@ export class ManageProductComponent implements OnInit {
       this.products = products.reverse();
     });
   }
-
+  loadPage() {
+    const endIndex = this.currentPage * this.pagesize;
+    this.CRUD_PRODUCT.getProducts().subscribe((productList) => {
+      this.displayedProducts = productList.reverse().slice(0, endIndex);
+    });
+  }
+  loadMoreProducts() {
+    this.currentPage++;
+    this.loadPage();
+  }
   getCategories() {
     this.CRUD_CATEGORY.getCategories().subscribe((categories) => {
       this.categories = categories;
