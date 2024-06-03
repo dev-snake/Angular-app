@@ -7,8 +7,9 @@ import { ApiService } from '../../../../shared/service/api/api.service';
 import { ToastService } from '../../../../shared/service/toast/toast.service';
 import { CommentsComponent } from './comments/comments.component';
 import { FeedbackComponent } from './feedback/feedback.component';
-
+import { FeedbackService } from '../../../../shared/service/feedback/feedback.service';
 import { AuthService } from '../../../../shared/service/auth/auth.service';
+import { Feedback } from '../../../../shared/interfaces/feedback';
 @Component({
   selector: 'app-page-detail',
   standalone: true,
@@ -26,7 +27,8 @@ export class PageDetailComponent implements OnInit {
     private cartService: CartApiService,
     private authService: AuthService,
     private apiProducts: ApiService,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private feedbackService: FeedbackService
   ) {
     const routeParams = this.route.snapshot.paramMap;
     const productIdFromRoute = String(routeParams.get('productId'));
@@ -64,6 +66,20 @@ export class PageDetailComponent implements OnInit {
           this.commentList = this.product.comments;
         });
       }
+    });
+  }
+  feedbackClick(feedback: any) {
+    const routeParams = this.route.snapshot.paramMap;
+    const productIdFromRoute = String(routeParams.get('productId'));
+    const newFeedback = {
+      ...feedback,
+      productId: productIdFromRoute,
+      userId: this.authService.getUserId(),
+      date: new Date().toLocaleString(),
+    };
+    console.log(newFeedback);
+    this.feedbackService.addFeedback(newFeedback).subscribe((res) => {
+      this.toastService.showToast('Đã gửi phản hồi thành công !', '#17c964');
     });
   }
   ngOnInit(): void {}

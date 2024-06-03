@@ -10,8 +10,7 @@ class VoucherController {
   }
   async create(req, res) {
     try {
-      const newVoucher = req.body;
-      await voucherModel.create(newVoucher);
+      await voucherModel.create(req.body);
       return res.json({ message: "Voucher Created" });
     } catch (error) {
       return res.status(400).json({ message: error.message });

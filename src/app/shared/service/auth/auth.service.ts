@@ -26,6 +26,9 @@ export class AuthService {
   getUsername() {
     return localStorage.getItem('username_customer');
   }
+  getUserId() {
+    return localStorage.getItem('user_id');
+  }
   isLoggedIn(): boolean {
     return JSON.parse(localStorage.getItem('isLoggedIn') || 'false');
   }

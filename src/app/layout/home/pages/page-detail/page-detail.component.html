@@ -54,7 +54,7 @@
         </div>
       </div>
     </div>
-    <app-feedback></app-feedback>
+    <app-feedback (feedback)="feedbackClick($event)"></app-feedback>
     <app-comments
       (comment)="addComment($event)"
       [product]="product"
