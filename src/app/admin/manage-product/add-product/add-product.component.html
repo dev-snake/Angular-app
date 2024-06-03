@@ -1,0 +1,73 @@
+<form
+  class="w-full bg-slate-50 p-5 rounded-xl transition-all duration-300 ease-in-out"
+  [formGroup]="productForm"
+  (ngSubmit)="addProduct()"
+>
+  <label for="">Tên sản phẩm</label>
+  <input
+    type="text"
+    class="p-2 rounded-xl w-full mb-2 outline-none"
+    placeholder="Nhập tên sản phẩm"
+    formControlName="name"
+  />
+  <label for="">Nhập giá</label>
+  <input
+    type="text"
+    placeholder="Số lượng nhập "
+    class="p-2 rounded-xl w-full mb-2 outline-none"
+    formControlName="price"
+  />
+  <label for="">Số lượng nhập</label>
+  <input
+    type="text"
+    placeholder="Nhập giá "
+    class="p-2 rounded-xl w-full mb-2 outline-none"
+    formControlName="quantityImported"
+  />
+  <label for="">Nhập Mô tả</label>
+  <input
+    type="text"
+    placeholder="Nhập Mô tả "
+    class="p-2 rounded-xl w-full mb-2 outline-none"
+    formControlName="description"
+  />
+  <label for="">Nhập tiêu đề 1</label>
+  <input
+    type="text"
+    placeholder="Nhập Tiêu đề 1 "
+    class="p-2 rounded-xl w-full mb-2 outline-none"
+    formControlName="title_description_1"
+  />
+  <label for="">Nhập tiêu đề 2</label>
+  <input
+    type="text"
+    placeholder="Nhập Tiêu đề 2"
+    class="p-2 rounded-xl w-full mb-2 outline-none"
+    formControlName="title_description_2"
+  />
+  <label for="">Chọn danh mục</label>
+  <select
+    name=""
+    id=""
+    class="p-2 rounded-xl w-full mb-2 outline-none"
+    formControlName="category"
+  >
+    <option value="">Chọn danh mục</option>
+    <option *ngFor="let item of categories" [value]="item.category_id">
+      {{ item.category_name }}
+    </option>
+  </select>
+  <label for="">Hình ảnh</label>
+  <input
+    type="text"
+    class="p-2 rounded-xl w-full mb-2 outline-none"
+    placeholder="Nhập hình ảnh"
+    formControlName="image"
+  />
+  <button
+    class="p-2 bg-blue-400 text-white rounded-xl w-full cursor-pointer mt-4 font-semibold"
+    type="submit"
+  >
+    Thêm sản phẩm
+  </button>
+</form>
