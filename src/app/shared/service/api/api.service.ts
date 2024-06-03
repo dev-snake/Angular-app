@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Products } from '../../interfaces/product';
 import { Category } from '../../interfaces/category';
 import { Voucher } from '../../interfaces/voucher';
+import { Feedback } from '../../interfaces/feedback';
 @Injectable({
   providedIn: 'root',
 })
@@ -50,5 +51,8 @@ export class ApiService {
   }
   getVouchers(): Observable<Voucher[]> {
     return this.http.get<Voucher[]>('http://localhost:3000/vouchers');
+  }
+  getFeedbacks(): Observable<Feedback[]> {
+    return this.http.get<Feedback[]>('http://localhost:3000/feedbacks');
   }
 }

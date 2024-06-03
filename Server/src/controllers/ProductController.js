@@ -2,6 +2,7 @@ const productModel = require("../models/ProductModel");
 const userModel = require("../models/UserModel");
 const nodemailer = require("nodemailer");
 const voucherModel = require("../models/VoucherModel");
+const orderModel = require("../models/OrderModel");
 require("dotenv").config();
 class ProductController {
   async increaseView(req, res) {
@@ -63,7 +64,7 @@ class ProductController {
   }
   async createOrder(req, res) {
     try {
-      const { userId, email, products, total, discount, amount, voucherCode } =
+      const { userId, email, products, total, voucherCode, discount, amount } =
         req.body;
       products.forEach(async (item) => {
         const product = await productModel.findById(item._id);
@@ -71,9 +72,6 @@ class ProductController {
         product.save();
       });
       const voucher = await voucherModel.findOne({ code: voucherCode });
-      if (!voucher) {
-        return res.status(400).json({ message: "Voucher not found" });
-      }
       if (voucher) {
         voucher.quantityUsed += 1;
         await voucher.save();
@@ -124,9 +122,9 @@ class ProductController {
               .join("")}
           </tbody>
         </table>
-        <p>Giảm giá: ${discount} đ</p>
+        <p>Giảm giá: ${discount ?? "Không có giảm giá"} </p>
         <p>Giá gốc: ${total} đ</p>
-        <p>Giá Sau khi giảm giá: ${amount} đ</p>
+        <p>Giá Sau khi giảm giá: ${amount || total} đ</p>
       </div>
       </div>
     `;
@@ -147,7 +145,11 @@ class ProductController {
         user.orders.push(req.body);
         await user.save();
       }
-      await orderModel(req.body).save();
+      await orderModel({
+        discount: discount?.body || "",
+        amount: amount?.body || total,
+        ...req.body,
+      }).save();
       return res.status(201).json("ordered Successfully");
     } catch (error) {
       return res.status(400).json({ message: error.message });

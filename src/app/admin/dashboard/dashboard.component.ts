@@ -21,7 +21,7 @@ export class DashboardComponent implements OnInit {
     private toastService: ToastService,
     private dataService: DataService
   ) {}
-  changeActive(value: number) {
+  public changeActive(value: number) {
     this.activeItemId = value;
   }
   ngOnInit(): void {

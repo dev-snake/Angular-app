@@ -1,7 +1,13 @@
 const FeedbackModel = require("../models/FeedbackModel");
 class FeedbackController {
   async index(req, res) {
-    res.send("Feedbacks");
+    try {
+      const feedbacks = await FeedbackModel.find({});
+      return res.status(200).json(feedbacks);
+    } catch (error) {
+      console.log(error);
+      res.status(500).send("Error in fetching feedback");
+    }
   }
   async create(req, res) {
     try {

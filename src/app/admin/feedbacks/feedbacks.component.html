@@ -1,1 +1,35 @@
-<p>feedbacks works!</p>
+<div>
+  <table class="w-full text-center mt-4 relative">
+    <thead>
+      <tr>
+        <th class="p-2">Feedback</th>
+        <th class="p-2">Độ hài lòng</th>
+        <th class="p-2">Ngày</th>
+        <th class="p-2">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let feedback of feedbacks">
+        <td class="p-3">{{ feedback.feedback }}</td>
+        <td class="p-3">
+          {{
+            feedback.levelOfSatisfaction === 1
+              ? "Rất Tệ"
+              : feedback.levelOfSatisfaction === 2
+              ? "Tệ"
+              : feedback.levelOfSatisfaction === 3
+              ? "Bình Thường"
+              : feedback.levelOfSatisfaction === 4
+              ? "Tốt"
+              : "Rất tốt"
+          }}
+        </td>
+        <td class="p-3">{{ feedback.date }}</td>
+
+        <td class="p-3">
+          <i class="fa-solid fa-eye bg-blue-400 p-2 rounded-xl text-white"></i>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

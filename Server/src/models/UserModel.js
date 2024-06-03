@@ -14,6 +14,7 @@ const user = new Schema(
     dateOfBirth: { type: String, default: "" },
     sex: { type: String, default: "" },
     phonenumber: { type: String, default: "" },
+    point: { type: Number, default: 0 },
   },
   {
     timestamps: true,

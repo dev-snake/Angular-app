@@ -92,8 +92,8 @@ export class PagePaymentComponent {
         code: '#' + Math.floor(Math.random() * 1000000),
         products: this.cartList,
         voucherCode: this.discount.code || '',
-        discount: this.discount.rate || 0,
-        amount: this.discount.amount || 0,
+        discount: this.discount.rate,
+        amount: this.discount.amount,
         total: this.total,
         userId: this.user?._id || null,
         userOrder:

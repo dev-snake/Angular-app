@@ -129,6 +129,8 @@
             ? "Đang xử lí"
             : lookupOrderInfor?.status === 1
             ? "Đã xác nhận"
+            : lookupOrderInfor?.status === 2
+            ? "Đã huỷ"
             : "Đang vận chuyển"
         }}
       </p>

@@ -5,7 +5,7 @@ const order = new Schema(
     userId: { type: String },
     products: { type: Array, default: [] },
     status: { type: Number, default: 0 },
-    total: { type: Number, default: 0 },
+    total: { type: Number },
     date: { type: String, default: "" },
     code: { type: String },
     paymentMethod: { type: String },
@@ -13,7 +13,7 @@ const order = new Schema(
     phone: { type: String },
     email: { type: String },
     userOrder: { type: String, default: "" },
-    amount: { type: Number, default: 0 },
+    amount: { type: Number },
   },
   {
     timestamps: true,
