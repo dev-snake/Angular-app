@@ -8,6 +8,7 @@ import { ManageCategoryComponent } from './manage-category/manage-category.compo
 import { OrderDetailComponent } from './order-detail/order-detail.component';
 import { ManageStatisticComponent } from './manage-statistic/manage-statistic.component';
 import { ManageVoucherComponent } from './manage-voucher/manage-voucher.component';
+import { FeedbacksComponent } from './feedbacks/feedbacks.component';
 const routes: Routes = [
   {
     path: '',
@@ -28,6 +29,10 @@ const routes: Routes = [
       {
         path: 'manage-statistic',
         component: ManageStatisticComponent,
+      },
+      {
+        path: 'feedbacks',
+        component: FeedbacksComponent,
       },
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
     ],
