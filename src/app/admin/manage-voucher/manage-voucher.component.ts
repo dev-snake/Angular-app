@@ -35,7 +35,7 @@ export class ManageVoucherComponent implements OnInit {
   }
   copyCode(code: string) {
     navigator.clipboard.writeText(code);
-    this.toastService.showToast('Đã sao chép mã giảm giá', '#17c964');
+    this.toastService.showToast('Đã sao chép mã giảm giá', 'success');
   }
   openModal() {
     this.formVoucher.nativeElement.classList.toggle('hidden');
@@ -50,7 +50,7 @@ export class ManageVoucherComponent implements OnInit {
     this.apiService
       .createVoucher(voucher.value)
       .subscribe((vouchers: Voucher) => {
-        this.toastService.showToast('Voucher đã thêm thành công', '#17c964');
+        this.toastService.showToast('Voucher đã thêm thành công', 'success');
         this.formVoucher.nativeElement.classList.add('hidden');
         voucher.reset();
         this.getVouchers();
@@ -60,7 +60,7 @@ export class ManageVoucherComponent implements OnInit {
     const confirmDelete = confirm('Bạn có chắc chắn muốn xóa voucher này?');
     if (confirmDelete) {
       this.apiService.deleteVoucher(_id).subscribe((vouchers: Voucher) => {
-        this.toastService.showToast('Voucher đã xóa thành công', '#17c964');
+        this.toastService.showToast('Voucher đã xóa thành công', 'success');
         this.getVouchers();
       });
     }

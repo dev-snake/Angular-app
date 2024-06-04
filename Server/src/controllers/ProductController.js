@@ -142,6 +142,12 @@ class ProductController {
         }
       });
       if (user) {
+        const indexVoucher = user.myVoucher.findIndex(
+          (voucher) => voucher.code === voucherCode
+        );
+        if (indexVoucher !== -1) {
+          user.myVoucher.splice(indexVoucher, 1);
+        }
         const quantityProducts = products.reduce(
           (acc, index) => acc + index.quantity,
           0
