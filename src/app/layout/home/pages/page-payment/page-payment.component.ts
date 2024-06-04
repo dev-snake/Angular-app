@@ -102,7 +102,7 @@ export class PagePaymentComponent {
           (this.user?.lastname ?? this.paymentForm?.get('lastname')?.value),
       };
       this.cartService.createOrder(order).subscribe((order: Order) => {
-        this.toastService.showToast('Đặt hàng thành công !', '#17c964');
+        this.toastService.showToast('Đặt hàng thành công !', 'success');
         this.cartService.deleteAllCart();
         this.router.navigate(['/']);
       });

@@ -1,0 +1,20 @@
+<div>
+  <p class="text-[1rem] font-medium pt-4">Voucher của tôi</p>
+  <div class="flex gap-4 flex-wrap">
+    <div
+      class="bg-blue-50 inline-block p-2 rounded-2xl max-w-32 gap-4"
+      *ngFor="let voucher of vouchers; let i = index"
+    >
+      <img [src]="voucher.image" alt="" class="rounded-2xl" />
+      <div class="mt-2">
+        <input type="password" [value]="voucher.code" class="w-full" disabled />
+        <button
+          class="bg-blue-500 text-white w-full px-2 py-1 rounded-xl mt-2"
+          (click)="copyCode(voucher.code)"
+        >
+          Copy
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -9,5 +9,8 @@ const voucherSchema = new Schema({
   limitQuantity: { type: Number },
   createdAt: { type: String, default: new Date().toLocaleString() },
   quantityUsed: { type: Number, default: 0 },
+  image: { type: String, default: "" },
+  exchangeValue: { type: Number, default: 100 },
+  quantityExchanged: { type: Number, default: 0 },
 });
 module.exports = mongoose.model("voucher", voucherSchema);

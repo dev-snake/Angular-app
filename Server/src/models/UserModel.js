@@ -15,6 +15,7 @@ const user = new Schema(
     sex: { type: String, default: "" },
     phonenumber: { type: String, default: "" },
     point: { type: Number, default: 0 },
+    myVoucher: { type: Array, default: [] },
   },
   {
     timestamps: true,

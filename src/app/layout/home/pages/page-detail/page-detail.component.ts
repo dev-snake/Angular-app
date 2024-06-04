@@ -45,11 +45,11 @@ export class PageDetailComponent implements OnInit {
 
   addToCart(product: Products, quantity: number) {
     if (quantity < 1) {
-      this.toastService.showToast('Thêm tối thiểu một sản phẩm ', '#ff0000');
+      this.toastService.showToast('Thêm tối thiểu một sản phẩm ', 'error');
       return;
     }
     this.cartService.addToCart(product, quantity);
-    this.toastService.showToast('Đã thêm vào giỏ hàng', '#17c964');
+    this.toastService.showToast('Đã thêm vào giỏ hàng', 'success');
   }
   addComment(comment: string) {
     this.apiProducts.getProducts().subscribe((products: Products[]) => {
@@ -79,7 +79,7 @@ export class PageDetailComponent implements OnInit {
     };
     console.log(newFeedback);
     this.feedbackService.addFeedback(newFeedback).subscribe((res) => {
-      this.toastService.showToast('Đã gửi phản hồi thành công !', '#17c964');
+      this.toastService.showToast('Đã gửi phản hồi thành công !', 'success');
     });
   }
   ngOnInit(): void {}

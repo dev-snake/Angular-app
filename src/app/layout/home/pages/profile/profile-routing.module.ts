@@ -3,9 +3,10 @@ import { RouterModule, Routes } from '@angular/router';
 import { AccountComponent } from './account/account.component';
 import { OrdersHistoryComponent } from './orders-history/orders-history.component';
 import { PersonalInformationComponent } from './personal-information/personal-information.component';
-import { ChangePasswordComponent } from './change-password/change-password.component';
 import { OrdersDetailComponent } from './orders-detail/orders-detail.component';
 import { LookupOrdersComponent } from './lookup-orders/lookup-orders.component';
+import { ExchangePointComponent } from './exchange-point/exchange-point.component';
+import { MyVoucherComponent } from './exchange-point/my-voucher/my-voucher.component';
 const routes: Routes = [
   {
     path: '',
@@ -20,8 +21,8 @@ const routes: Routes = [
         component: PersonalInformationComponent,
       },
       {
-        path: 'change-password',
-        component: ChangePasswordComponent,
+        path: 'exchange-point',
+        component: ExchangePointComponent,
       },
       {
         path: ':id/order-detail',
@@ -30,6 +31,10 @@ const routes: Routes = [
       {
         path: 'lookup-orders',
         component: LookupOrdersComponent,
+      },
+      {
+        path: 'my-voucher',
+        component: MyVoucherComponent,
       },
     ],
   },

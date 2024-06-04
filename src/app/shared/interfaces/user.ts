@@ -15,4 +15,5 @@ export interface User {
   userId: string;
   message: string;
   point: number;
+  myVoucher: string[];
 }

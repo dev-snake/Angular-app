@@ -87,7 +87,7 @@ export class LoginComponent {
     this.authService.login(username, password).subscribe(
       (response) => {
         if (response.success) {
-          this.toastService.showToast(response.message, '#17c964');
+          this.toastService.showToast(response.message, 'success');
           this.authService.saveLoginFromLocalStorage(
             response.username,
             response.userId
@@ -97,7 +97,7 @@ export class LoginComponent {
         }
       },
       (error) => {
-        this.toastService.showToast(error.error.message, '#ff0000');
+        this.toastService.showToast(error.error.message, 'error');
         console.log(error.message);
       }
     );

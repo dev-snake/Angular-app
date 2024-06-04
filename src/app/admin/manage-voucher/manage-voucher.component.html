@@ -23,10 +23,10 @@
     <thead>
       <tr>
         <th class="p-2">Mã Voucher</th>
-        <!-- <th class="p-2">Ngày tạo</th> -->
         <th class="p-2">Ngày Hết hạn</th>
         <th class="p-2">Giới hạn</th>
         <th class="p-2">Đã dùng</th>
+        <th class="p-2">Đã đổi</th>
         <th class="p-2">% Giảm giá</th>
         <th class="p-2">Trạng thái</th>
         <th class="p-2">Actions</th>
@@ -49,6 +49,9 @@
         </td>
         <td class="p-3">{{ voucher.limitQuantity }}</td>
         <td class="p-3">{{ voucher.quantityUsed }}</td>
+        <td class="p-3">
+          {{ voucher.quantityExchanged }}
+        </td>
         <td class="p-3">{{ voucher.discount }}</td>
         <td class="p-3">
           <span

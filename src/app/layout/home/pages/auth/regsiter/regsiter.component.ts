@@ -44,7 +44,7 @@ export class RegsiterComponent {
 
   onSubmit() {
     if (this.registerForm.invalid) {
-      this.toastService.showToast(this.message, '#ff0000');
+      this.toastService.showToast(this.message, 'error');
       return;
     }
     this.auth.getUsers().subscribe((users: User[]) => {
@@ -53,11 +53,11 @@ export class RegsiterComponent {
         (exist: User) => exist.username === username || exist.email === email
       );
       if (checkExits) {
-        this.toastService.showToast(this.messageExist, '#ff0000');
+        this.toastService.showToast(this.messageExist, 'error');
         return;
       }
       this.auth.register(this.registerForm.value).subscribe((users: User) => {
-        this.toastService.showToast(this.messageSuccess, '#17c964');
+        this.toastService.showToast(this.messageSuccess, 'success');
         this.router.navigate(['/login']);
         return;
       });

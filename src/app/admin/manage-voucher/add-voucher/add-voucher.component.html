@@ -1,5 +1,5 @@
 <form
-  class="max-w-[300px] bg-slate-100 p-5 rounded-xl transition-all duration-300 ease-in-out absolute left-[50%] top-[30%] transform translate-x-[-50%] translate-y-[-50%]"
+  class="max-w-[300px] bg-slate-100 p-5 rounded-xl transition-all duration-300 ease-in-out absolute left-[50%] top-[40%] transform translate-x-[-50%] translate-y-[-50%]"
   [formGroup]="formAddVoucher"
   (ngSubmit)="addVoucher()"
 >
@@ -31,6 +31,12 @@
     class="p-2 rounded-xl w-full mb-2 outline-none h-10"
     formControlName="limitQuantity"
   />
+  <!-- <label for="">Hình ảnh</label>
+  <input
+    type="text"
+    class="p-2 rounded-xl w-full mb-2 outline-none h-10"
+    formControlName="image"
+  /> -->
   <label for="" class="block">% Giảm giá</label>
   <select class="w-full h-10 p-2 rounded-md" formControlName="discount">
     <option value="">Chọn phần trăm giảm giá</option>

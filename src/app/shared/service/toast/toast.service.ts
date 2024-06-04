@@ -9,7 +9,7 @@ export class ToastService {
     const messageDiv = document.createElement('div');
     messageDiv.textContent = message;
     messageDiv.className = `toast ${
-      color === '#17c964' ? 'success' : 'error'
+      color === 'success' ? 'success' : 'error'
     } `;
     document.body.appendChild(messageDiv);
     setTimeout(() => {

@@ -8,4 +8,7 @@ export interface Voucher {
   createdAt: string;
   limitQuantity: number;
   quantityUsed: number;
+  image: string;
+  exchangeValue: number;
+  quantityExchanged: number;
 }
