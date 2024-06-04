@@ -20,7 +20,6 @@ export class PageCartComponent {
   public total: number = 0;
   public discount: number = 0;
   public discountRate: string = '';
-
   constructor(
     private cartService: CartApiService,
     private apiService: ApiService,

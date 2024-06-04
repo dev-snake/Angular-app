@@ -148,6 +148,10 @@ class ProductController {
         if (indexVoucher !== -1) {
           user.myVoucher.splice(indexVoucher, 1);
         }
+        user.voucherUsed.push({
+          code: voucherCode,
+          date: new Date().toLocaleString(),
+        });
         const quantityProducts = products.reduce(
           (acc, index) => acc + index.quantity,
           0

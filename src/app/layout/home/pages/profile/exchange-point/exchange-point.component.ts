@@ -49,12 +49,15 @@ export class ExchangePointComponent {
     this.loadVoucherData();
   }
   exchangePoint(voucherId: string, exchangeValue: number) {
+    const confirmExchange = confirm('Bạn có chắc chắn muốn đổi voucher này?');
     const pointOfUser: number | any = this.user?.point;
     const voucherOfUser: any = this.user?.myVoucher;
-    console.log(this.vouchers);
     const checkExistVoucher = voucherOfUser?.includes(
       voucherOfUser.find((voucher: Voucher) => voucher._id === voucherId)
     );
+    if (!confirmExchange) {
+      return;
+    }
     const voucher = this.vouchers.find(
       (voucher: Voucher) => voucher._id === voucherId
     );

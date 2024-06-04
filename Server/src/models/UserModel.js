@@ -16,6 +16,7 @@ const user = new Schema(
     phonenumber: { type: String, default: "" },
     point: { type: Number, default: 0 },
     myVoucher: { type: Array, default: [] },
+    voucherUsed: { type: Array, default: [] },
   },
   {
     timestamps: true,
