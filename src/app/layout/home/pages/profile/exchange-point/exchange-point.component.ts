@@ -51,9 +51,17 @@ export class ExchangePointComponent {
   exchangePoint(voucherId: string, exchangeValue: number) {
     const pointOfUser: number | any = this.user?.point;
     const voucherOfUser: any = this.user?.myVoucher;
+    console.log(this.vouchers);
     const checkExistVoucher = voucherOfUser?.includes(
       voucherOfUser.find((voucher: Voucher) => voucher._id === voucherId)
     );
+    const voucher = this.vouchers.find(
+      (voucher: Voucher) => voucher._id === voucherId
+    );
+    if (voucher?.quantityExchanged === voucher?.limitQuantity) {
+      this.toastService.showToast('Voucher đã hết', 'error');
+      return;
+    }
     if (checkExistVoucher) {
       this.toastService.showToast('Bạn đã đổi voucher này rồi', 'error');
       return;

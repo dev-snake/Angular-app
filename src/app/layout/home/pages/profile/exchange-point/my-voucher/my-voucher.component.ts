@@ -11,9 +11,7 @@ import { ToastService } from '../../../../../../shared/service/toast/toast.servi
 })
 export class MyVoucherComponent {
   @Input() vouchers: Voucher[] = [];
-  constructor(private toastService: ToastService) {
-    console.log(this.vouchers);
-  }
+  constructor(private toastService: ToastService) {}
   copyCode(code: string) {
     navigator.clipboard.writeText(code);
     this.toastService.showToast('Đã sao chép mã', 'success');
